@@ -37,10 +37,40 @@ Para facervos socios da ANPA podedes acceder ó enlace inferior:
 
 Calquera dúbida, coma sempre, podedes escribirnos a anpaensinorabadeira@gmail.com
 
-<div class="pdf-container">
-    <iframe src="/docs/59_rabadeira_diptico_25-26.pdf" width="100%" height="600px" style="border: none;"></iframe>
+<div class="doc-cards">
+  <div class="doc-card">
+    <div class="doc-card__main">
+      <div class="doc-card__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+        </svg>
+      </div>
+      <div class="doc-card__info">
+        <h3 class="doc-card__title">Díptico Informativo Madrugadores 2025-2026</h3>
+        <p class="doc-card__meta"><span class="doc-card__badge">PDF</span> Normas, horarios e tarifas do servizo</p>
+      </div>
+    </div>
+    <div class="doc-card__actions">
+      <a href="/docs/59_rabadeira_diptico_25-26.pdf" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn--primary">Abrir PDF</a>
+      <a href="/docs/59_rabadeira_diptico_25-26.pdf" download class="doc-btn doc-btn--secondary">Descargar</a>
+    </div>
+  </div>
+
+  <div class="doc-card">
+    <div class="doc-card__main">
+      <div class="doc-card__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+        </svg>
+      </div>
+      <div class="doc-card__info">
+        <h3 class="doc-card__title">Menú de Almorzos (Jardanay)</h3>
+        <p class="doc-card__meta"><span class="doc-card__badge">PDF</span> Composición nutricional e menús</p>
+      </div>
+    </div>
+    <div class="doc-card__actions">
+      <a href="/docs/desayunos_jardanay_3trim23_general-.pdf" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn--primary">Abrir PDF</a>
+      <a href="/docs/desayunos_jardanay_3trim23_general-.pdf" download class="doc-btn doc-btn--secondary">Descargar</a>
+    </div>
+  </div>
 </div>
-
-[9_Rabadeira_Díptico_25-26](/docs/59_rabadeira_diptico_25-26.pdf)
-
-[desayunos_jardanay_3trim23_general-](/docs/desayunos_jardanay_3trim23_general-.pdf)
