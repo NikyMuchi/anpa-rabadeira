@@ -33,9 +33,9 @@ A última hora de recepción de alumnado con almorzo será ás 8:30, e ás 8:40 
 
 Para facervos socios da ANPA podedes acceder ó enlace inferior:
 
-[https://forms.gle/dUnBLxSe5cRLyLS79](https://forms.gle/dUnBLxSe5cRLyLS79)
+<p><a href="https://forms.gle/dUnBLxSe5cRLyLS79" target="_blank" rel="noopener noreferrer" class="btn-action">Alta de socio/a ANPA</a></p>
 
-Calquera dúbida, coma sempre, podedes escribirnos a anpaensinorabadeira@gmail.com
+Calquera dúbida, coma sempre, podedes escribirnos a <a href="mailto:anpaensinorabadeira@gmail.com">anpaensinorabadeira@gmail.com</a>.
 
 <div class="doc-cards">
   <div class="doc-card">

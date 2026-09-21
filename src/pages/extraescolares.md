@@ -13,9 +13,31 @@ Adxuntamos a proposta de actividades extraescolares para o vindeiro curso. Coma 
 
 Continuamos cun esquema similar ao do curso pasado, incorporando Arte e Ioga, atendendo á demanda de actividades na enquisa de extraescolares.
 
-![Horario extraescolares 2025-2026 (Luns e Martes)](/img/extraescolares-horario-1.png)
+<div class="schedule-card">
+  <div class="schedule-card__header">
+    <h3 class="schedule-card__title">Horario Luns e Martes (2025-2026)</h3>
+    <a href="/img/extraescolares-horario-1.png" target="_blank" rel="noopener noreferrer" class="schedule-card__action">Ver horario completo</a>
+  </div>
+  <div class="schedule-card__scroll">
+    <a href="/img/extraescolares-horario-1.png" target="_blank" rel="noopener noreferrer">
+      <img src="/img/extraescolares-horario-1.png" alt="Horario extraescolares 2025-2026 (Luns e Martes)" class="schedule-card__img">
+    </a>
+  </div>
+  <span class="schedule-card__hint">Despraza en horizontal para ver todas as columnas ou pulsa para ampliar.</span>
+</div>
 
-![Horario extraescolares 2025-2026 (Mércores a Venres)](/img/extraescolares-horario-2.png)
+<div class="schedule-card">
+  <div class="schedule-card__header">
+    <h3 class="schedule-card__title">Horario Mércores a Venres (2025-2026)</h3>
+    <a href="/img/extraescolares-horario-2.png" target="_blank" rel="noopener noreferrer" class="schedule-card__action">Ver horario completo</a>
+  </div>
+  <div class="schedule-card__scroll">
+    <a href="/img/extraescolares-horario-2.png" target="_blank" rel="noopener noreferrer">
+      <img src="/img/extraescolares-horario-2.png" alt="Horario extraescolares 2025-2026 (Mércores a Venres)" class="schedule-card__img">
+    </a>
+  </div>
+  <span class="schedule-card__hint">Despraza en horizontal para ver todas as columnas ou pulsa para ampliar.</span>
+</div>
 
 Colgamos neste mesmo enlace as vías de inscrición nestas actividades. Esperamos que esta oferta sexa do voso interese e que o alumnado as desfrute. Por favor, lembrade que a inscrición ten que realizarse sempre antes do día 20 do mes anterior, ao igual que as baixas ou modificacións.
 
@@ -23,47 +45,47 @@ Colgamos neste mesmo enlace as vías de inscrición nestas actividades. Esperamo
 
 **Judo**
 
-[https://judohercules.playoffinformatica.com/preinscripcion/6/RABADEIRA/](https://judohercules.playoffinformatica.com/preinscripcion/6/RABADEIRA/)
+<p><a href="https://judohercules.playoffinformatica.com/preinscripcion/6/RABADEIRA/" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Judo)</a></p>
 
 **Sadanza**
 
-[https://docs.google.com/forms/d/e/1FAIpQLSdgAzGTkobH-dVqtLe-Er7TADlxJFxpnTUbLCYEDJqsp6iz0A/viewform](https://docs.google.com/forms/d/e/1FAIpQLSdgAzGTkobH-dVqtLe-Er7TADlxJFxpnTUbLCYEDJqsp6iz0A/viewform) (danza)
+<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdgAzGTkobH-dVqtLe-Er7TADlxJFxpnTUbLCYEDJqsp6iz0A/viewform" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Danza)</a></p>
 
-[https://docs.google.com/forms/d/e/1FAIpQLSdB0wl1AjRTF4izP1ZQ_FlbdIWdm67FVNkCtweoa1PtjhUj7g/viewform](https://docs.google.com/forms/d/e/1FAIpQLSdB0wl1AjRTF4izP1ZQ_FlbdIWdm67FVNkCtweoa1PtjhUj7g/viewform) (multideporte)
+<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdB0wl1AjRTF4izP1ZQ_FlbdIWdm67FVNkCtweoa1PtjhUj7g/viewform" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Multideporte)</a></p>
 
 **Hockey**
 
-[https://hockeyoleiros.com/extraescolar-rabadeira/](https://hockeyoleiros.com/extraescolar-rabadeira/)
+<p><a href="https://hockeyoleiros.com/extraescolar-rabadeira/" target="_blank" rel="noopener noreferrer" class="btn-action">Información e inscrición (Hockey)</a></p>
 
 **Ximnasia Rítmica**
 
-[https://docs.google.com/forms/d/e/1FAIpQLSffQJs0iWP81_wP-yJ8tPEqDw9n7dShr218_FWF_ODe52kTig/viewform?usp=dialog](https://docs.google.com/forms/d/e/1FAIpQLSffQJs0iWP81_wP-yJ8tPEqDw9n7dShr218_FWF_ODe52kTig/viewform?usp=dialog)
+<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSffQJs0iWP81_wP-yJ8tPEqDw9n7dShr218_FWF_ODe52kTig/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Ximnasia Rítmica)</a></p>
 
 **Baloncesto**
 
-[https://forms.gle/KLW3CqxSajgjTbin7](https://forms.gle/KLW3CqxSajgjTbin7)
+<p><a href="https://forms.gle/KLW3CqxSajgjTbin7" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Baloncesto)</a></p>
 
 **Inglés** (remitir a portobellow11@yahoo.es)
 
-[FICHA DE INSCRIPCION RABADEIRA CURSO 2025-2026](/docs/ficha-de-inscripcion-rabadeira-curso-2025-2026.pdf)
+<p><a href="/docs/ficha-de-inscripcion-rabadeira-curso-2025-2026.pdf" target="_blank" rel="noopener noreferrer" class="btn-action">Ficha de inscrición (PDF)</a></p>
 
 **Música** (Música e Movemento/Teatro Musical)
 
-[https://forms.gle/AquS7C9UWRKFPMTH8](https://forms.gle/AquS7C9UWRKFPMTH8)
+<p><a href="https://forms.gle/AquS7C9UWRKFPMTH8" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Música)</a></p>
 
 **Ioga**
 
-[https://forms.gle/5zNNz9vtMXf1wGgx5](https://forms.gle/5zNNz9vtMXf1wGgx5)
+<p><a href="https://forms.gle/5zNNz9vtMXf1wGgx5" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Ioga)</a></p>
 
 **Robótica**
 
-[https://forms.gle/CNiwGaMydVoFETrv9](https://forms.gle/CNiwGaMydVoFETrv9)
+<p><a href="https://forms.gle/CNiwGaMydVoFETrv9" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Robótica)</a></p>
 
 **Arte**
 
-[https://docs.google.com/forms/u/0/d/1_iyS1j7YgLYz_j392tYLe4zzT7MqBLEGj6JLFxJCPYs/edit?fromCopy=true&ct=2](https://docs.google.com/forms/u/0/d/1_iyS1j7YgLYz_j392tYLe4zzT7MqBLEGj6JLFxJCPYs/edit?fromCopy=true&ct=2)
+<p><a href="https://docs.google.com/forms/u/0/d/1_iyS1j7YgLYz_j392tYLe4zzT7MqBLEGj6JLFxJCPYs/edit?fromCopy=true&ct=2" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Arte)</a></p>
 
-[NOSARTE CEIP RABADEIRA](/docs/nosarte-ceip-rabadeira-1.pdf)
+<p><a href="/docs/nosarte-ceip-rabadeira-1.pdf" target="_blank" rel="noopener noreferrer" class="btn-action">Información Nosarte (PDF)</a></p>
 
 É necesaria a alta coma socio da ANPA. As tarifas son **22 euros/2 horas á semana** agás (polos custos extra):
 
