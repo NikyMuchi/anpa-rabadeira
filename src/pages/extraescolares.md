@@ -45,47 +45,45 @@ Colgamos neste mesmo enlace as vías de inscrición nestas actividades. Esperamo
 
 **Judo**
 
-<p><a href="https://judohercules.playoffinformatica.com/preinscripcion/6/RABADEIRA/" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Judo)</a></p>
+<p class="activity-btn"><a href="https://judohercules.playoffinformatica.com/preinscripcion/6/RABADEIRA/" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
 
 **Sadanza**
 
-<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdgAzGTkobH-dVqtLe-Er7TADlxJFxpnTUbLCYEDJqsp6iz0A/viewform" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Danza)</a></p>
-
-<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdB0wl1AjRTF4izP1ZQ_FlbdIWdm67FVNkCtweoa1PtjhUj7g/viewform" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Multideporte)</a></p>
+<p class="activity-btn"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdgAzGTkobH-dVqtLe-Er7TADlxJFxpnTUbLCYEDJqsp6iz0A/viewform" target="_blank" rel="noopener noreferrer" class="btn-action">Danza</a></p>
+<p class="activity-btn"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdB0wl1AjRTF4izP1ZQ_FlbdIWdm67FVNkCtweoa1PtjhUj7g/viewform" target="_blank" rel="noopener noreferrer" class="btn-action">Multideporte</a></p>
 
 **Hockey**
 
-<p><a href="https://hockeyoleiros.com/extraescolar-rabadeira/" target="_blank" rel="noopener noreferrer" class="btn-action">Información e inscrición (Hockey)</a></p>
+<p class="activity-btn"><a href="https://hockeyoleiros.com/extraescolar-rabadeira/" target="_blank" rel="noopener noreferrer" class="btn-action">Información e inscrición</a></p>
 
 **Ximnasia Rítmica**
 
-<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSffQJs0iWP81_wP-yJ8tPEqDw9n7dShr218_FWF_ODe52kTig/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Ximnasia Rítmica)</a></p>
+<p class="activity-btn"><a href="https://docs.google.com/forms/d/e/1FAIpQLSffQJs0iWP81_wP-yJ8tPEqDw9n7dShr218_FWF_ODe52kTig/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
 
 **Baloncesto**
 
-<p><a href="https://forms.gle/KLW3CqxSajgjTbin7" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Baloncesto)</a></p>
+<p class="activity-btn"><a href="https://forms.gle/KLW3CqxSajgjTbin7" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
 
 **Inglés** (remitir a portobellow11@yahoo.es)
 
-<p><a href="/docs/ficha-de-inscripcion-rabadeira-curso-2025-2026.pdf" target="_blank" rel="noopener noreferrer" class="btn-action">Ficha de inscrición (PDF)</a></p>
+<p class="activity-btn"><a href="/docs/ficha-de-inscripcion-rabadeira-curso-2025-2026.pdf" target="_blank" rel="noopener noreferrer" class="btn-action">Ficha de inscrición (PDF)</a></p>
 
 **Música** (Música e Movemento/Teatro Musical)
 
-<p><a href="https://forms.gle/AquS7C9UWRKFPMTH8" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Música)</a></p>
+<p class="activity-btn"><a href="https://forms.gle/AquS7C9UWRKFPMTH8" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
 
 **Ioga**
 
-<p><a href="https://forms.gle/5zNNz9vtMXf1wGgx5" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Ioga)</a></p>
+<p class="activity-btn"><a href="https://forms.gle/5zNNz9vtMXf1wGgx5" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
 
 **Robótica**
 
-<p><a href="https://forms.gle/CNiwGaMydVoFETrv9" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Robótica)</a></p>
+<p class="activity-btn"><a href="https://forms.gle/CNiwGaMydVoFETrv9" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
 
 **Arte**
 
-<p><a href="https://docs.google.com/forms/u/0/d/1_iyS1j7YgLYz_j392tYLe4zzT7MqBLEGj6JLFxJCPYs/edit?fromCopy=true&ct=2" target="_blank" rel="noopener noreferrer" class="btn-action">Formulario de inscrición (Arte)</a></p>
-
-<p><a href="/docs/nosarte-ceip-rabadeira-1.pdf" target="_blank" rel="noopener noreferrer" class="btn-action">Información Nosarte (PDF)</a></p>
+<p class="activity-btn"><a href="https://docs.google.com/forms/u/0/d/1_iyS1j7YgLYz_j392tYLe4zzT7MqBLEGj6JLFxJCPYs/edit?fromCopy=true&ct=2" target="_blank" rel="noopener noreferrer" class="btn-action">Inscrición</a></p>
+<p class="activity-btn"><a href="/docs/nosarte-ceip-rabadeira-1.pdf" target="_blank" rel="noopener noreferrer" class="btn-action">Información Nosarte (PDF)</a></p>
 
 É necesaria a alta coma socio da ANPA. As tarifas son **22 euros/2 horas á semana** agás (polos custos extra):
 
