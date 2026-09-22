@@ -4,18 +4,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector(".main-nav");
 
     if (toggle && nav) {
-        toggle.addEventListener("click", () => {
-            nav.classList.toggle("is-open");
-            const expanded = toggle.getAttribute("aria-expanded") === "true";
-            toggle.setAttribute("aria-expanded", String(!expanded));
+        const setNavState = (isOpen) => {
+            nav.classList.toggle("is-open", isOpen);
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            toggle.setAttribute("aria-label", isOpen ? "Pechar menú" : "Abrir menú");
+            document.body.classList.toggle("nav-open", isOpen);
+        };
+
+        toggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = nav.classList.contains("is-open");
+            setNavState(!isOpen);
         });
 
         // Close nav on link click (mobile)
         nav.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", () => {
-                nav.classList.remove("is-open");
-                toggle.setAttribute("aria-expanded", "false");
+                setNavState(false);
             });
+        });
+
+        // Close nav on Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && nav.classList.contains("is-open")) {
+                setNavState(false);
+                toggle.focus();
+            }
+        });
+
+        // Close nav when clicking outside
+        document.addEventListener("click", (e) => {
+            if (nav.classList.contains("is-open")) {
+                const header = document.querySelector(".site-header");
+                if (header && !header.contains(e.target)) {
+                    setNavState(false);
+                }
+            }
+        });
+
+        // Reset if resized to desktop
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900 && nav.classList.contains("is-open")) {
+                setNavState(false);
+            }
         });
     }
 });

@@ -9,13 +9,11 @@ showInNav: true
 iconColor: "blue"
 ---
 
-Para todas aquelas familias que dirixéronse ao ANPA coas dúbidas sobre os trámites para facer o pagamento, os adxuntamos as diferentes vias nas que poderes facelo sen ter que ir ao centro. Tamén tendes instruccións detalladas na web do centro:
-
-[http://www.edu.xunta.gal/centros/ceiprabadeira/node/268](http://www.edu.xunta.gal/centros/ceiprabadeira/node/268)
+Para todas aquelas familias que dirixéronse ao ANPA coas dúbidas sobre os trámites para facer o pagamento, os adxuntamos as diferentes vias nas que poderes facelo sen ter que ir ao centro. Tamén tendes [instruccións detalladas na web do centro](http://www.edu.xunta.gal/centros/ceiprabadeira/node/268).
 
 ## PAGO COMEDOR A TRAVÉS DE ATRIGA (AXENCIA TRIBUTARIA DE GALICIA)
 
-Un deles é a través da Axencia Tributaria de Galicia: [https://ovt.atriga.gal](https://ovt.atriga.gal)
+Un deles é a través da Axencia Tributaria de Galicia: [Portal tributario ATRIGA](https://ovt.atriga.gal).
 
 No apartado de CIDADÁNS, premes iniciar taxa
 
