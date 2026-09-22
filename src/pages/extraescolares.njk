@@ -1,0 +1,141 @@
+---
+title: "Actividades Extraescolares 2026-2027"
+permalink: /extraescolares/
+layout: layouts/page.njk
+icon: "⚽"
+navLabel: "Extraescolares"
+navOrder: 2
+showInNav: true
+iconColor: "gold"
+---
+
+<p>{{ extraescolares.intro }}</p>
+
+<p>{{ extraescolares.subintro }}</p>
+
+{# ===== CADRO DE HORARIOS OFICIAL ===== #}
+<div class="schedule-card">
+  <div class="schedule-card__header">
+    <h3 class="schedule-card__title">Horario Xeral Extraescolares ({{ extraescolares.academic_year }})</h3>
+    <a href="{{ extraescolares.schedule_image }}" target="_blank" rel="noopener noreferrer" class="schedule-card__action">Ver horario completo</a>
+  </div>
+  <div class="schedule-card__scroll">
+    <a href="{{ extraescolares.schedule_image }}" target="_blank" rel="noopener noreferrer">
+      <img src="{{ extraescolares.schedule_image }}" alt="Horario xeral de actividades extraescolares {{ extraescolares.academic_year }}" class="schedule-card__img">
+    </a>
+  </div>
+  <span class="schedule-card__hint">Despraza en horizontal para ver todas as columnas ou pulsa para ampliar.</span>
+</div>
+
+<p>{{ extraescolares.deadlines_note }}</p>
+
+{# ===== ALTA DE SOCIO E MATRÍCULA ===== #}
+<div class="callout-box">
+  <h3>{{ extraescolares.membership.title }}</h3>
+  <p>{{ extraescolares.membership.non_member_note }}</p>
+  <div class="callout-box__actions">
+    <a href="{{ extraescolares.membership.join_url }}" target="_blank" rel="noopener noreferrer" class="btn-action">{{ extraescolares.membership.join_label }}</a>
+    <a href="{{ extraescolares.membership.non_member_url }}" target="_blank" rel="noopener noreferrer" class="btn-action">{{ extraescolares.membership.non_member_label }}</a>
+  </div>
+</div>
+
+{# ===== LISTADO DE ACTIVIDADES ===== #}
+<h2>Listado de actividades e inscricións</h2>
+
+<div class="activity-cards">
+  {% for act in extraescolares.activities %}
+  <article class="activity-card" id="act-{{ act.id }}">
+    <div class="activity-card__header">
+      <h3 class="activity-card__title">{{ act.name }}</h3>
+      {% if act.status == 'full' %}
+        <span class="status-badge status-badge--full">Completa</span>
+      {% elif act.status == 'partial' %}
+        <span class="status-badge status-badge--partial">Parcialmente completa</span>
+      {% endif %}
+    </div>
+    <div class="activity-card__details">
+      <span class="activity-card__detail-item"><strong>Etapa:</strong> {{ act.stage }}</span>
+      <span class="activity-card__detail-item"><strong>Prezo:</strong> {{ act.price }}</span>
+      {% if act.provider %}
+      <span class="activity-card__detail-item"><strong>Imparte:</strong> {{ act.provider }}</span>
+      {% endif %}
+    </div>
+    {% if act.status_note %}
+    <p class="activity-card__note{% if act.status == 'full' %} activity-card__note--full{% elif act.status == 'partial' %} activity-card__note--partial{% endif %}">
+      {{ act.status_note }}
+    </p>
+    {% endif %}
+    {% if act.status != 'full' and act.registration_url %}
+    <div>
+      <a href="{{ act.registration_url }}" target="_blank" rel="noopener noreferrer" class="btn-action">
+        {{ act.button_label or 'Inscrición' }}
+      </a>
+    </div>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+
+{# ===== CADRO DE TARIFAS ===== #}
+<h2>Cadro de tarifas e cotas ({{ extraescolares.academic_year }})</h2>
+<p>É necesaria a alta como socio/a da ANPA para acceder a estas tarifas. As actividades de carácter xeral teñen un prezo de <strong>22 € / 2 horas semanais</strong>, agás aquelas con custos específicos de material ou monitores homologados.</p>
+
+<div class="pricing-table-container">
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th scope="col">Actividade</th>
+        <th scope="col">Horas</th>
+        <th scope="col">Cota mensual</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in extraescolares.pricing_table %}
+      <tr>
+        <td><strong>{{ item.name }}</strong></td>
+        <td>{{ item.hours }}</td>
+        <td>{{ item.price }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{# ===== CONDICIÓNS XERAIS E CONVIVENCIA ===== #}
+<h2>Condicións xerais e réxime de convivencia</h2>
+
+<details class="conditions-accordion">
+  <summary>Condicións xerais do servizo de actividades extraescolares</summary>
+  <div class="conditions-accordion__content">
+    <ol>
+      {% for cond in extraescolares.general_conditions %}
+      <li><strong>{{ cond.title }}:</strong> {{ cond.text }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+</details>
+
+<details class="conditions-accordion">
+  <summary>{{ extraescolares.coexistence_articles.title }}</summary>
+  <div class="conditions-accordion__content">
+    <h4>{{ extraescolares.coexistence_articles.article_65.title }}</h4>
+    <p>{{ extraescolares.coexistence_articles.article_65.intro }}</p>
+    <ul>
+      {% for point in extraescolares.coexistence_articles.article_65.points %}
+      <li>{{ point }}</li>
+      {% endfor %}
+    </ul>
+
+    <h4>{{ extraescolares.coexistence_articles.article_66.title }}</h4>
+    <p>{{ extraescolares.coexistence_articles.article_66.intro }}</p>
+    <ul>
+      {% for point in extraescolares.coexistence_articles.article_66.points %}
+      <li>{{ point }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</details>
+
+<p>
+  <img src="/img/extraescolares-corresponsables.jpg" alt="Plan Corresponsables - Xunta de Galicia">
+</p>
