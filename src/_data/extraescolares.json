@@ -1,0 +1,375 @@
+{
+  "academic_year": "2026-2027",
+  "schedule_image": "/img/extraescolares-horario-2026-2027.jpg",
+  "intro": "Adxuntamos a proposta de actividades extraescolares para o vindeiro curso. Coma sempre, a súa realización estará suxeita a acadar o número mínimo de alumnado.",
+  "subintro": "Continuamos cun esquema similar ao do curso pasado, incorporando Minichef, Mentes curiosas, Scaperoom, Taekwondo, Parkour, Multiaventura e Tecnoloxías innovadoras. Tamén se engade Multideporte en primaria e Arte divídese entre infantil e primaria e pasa a impartirse de luns a xoves.",
+  "deadlines_note": "Por favor, lembrade que para calquera cambio durante o curso, a inscrición ten que realizarse sempre antes do día 20 do mes anterior, ao igual que as baixas ou modificacións.",
+  "membership": {
+    "title": "Alta de socio/a e cotas de matrícula",
+    "join_label": "Alta de socio/a da ANPA",
+    "join_url": "https://forms.gle/MZB5547i4KpXBrDB8",
+    "non_member_note": "Os que desexen inscribirse e non sexan socios/as da ANPA deberán aboar unha matrícula de 10€ por cada neno/a e por cada actividade ao comezo do curso.",
+    "non_member_label": "Abono de matrícula non socios (10€)",
+    "non_member_url": "https://forms.gle/xRpcmyaqVNLHQnRf7"
+  },
+  "activities": [
+    {
+      "id": "baile-moderno",
+      "name": "Baile moderno",
+      "stage": "Infantil e Primaria",
+      "price": "22€ / mes",
+      "provider": "Sadanza",
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/cwrwMYrVDUxiJ2Fy5",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "multideporte",
+      "name": "Multideporte",
+      "stage": "Infantil e Primaria",
+      "price": "22€ / mes",
+      "provider": "Sadanza",
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/SRvKehgrV9LL1dsa7",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "ioga",
+      "name": "Ioga",
+      "stage": "Primaria",
+      "price": "25€ / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/6fD4XP9bpecyWwVR7",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "baloncesto",
+      "name": "Baloncesto",
+      "stage": "Primaria",
+      "price": "22€ / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/LpKYBUKXQm1esWcC9",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "arte",
+      "name": "Arte",
+      "stage": "Infantil e Primaria",
+      "price": "32€ / mes (+ 40€ material)",
+      "provider": null,
+      "status": "full",
+      "status_label": "Completa",
+      "status_note": "Actividade completa. Non admite máis alumnado.",
+      "registration_type": null,
+      "registration_url": null,
+      "button_label": null
+    },
+    {
+      "id": "multiaventura",
+      "name": "Multiaventura",
+      "stage": "Infantil e Primaria",
+      "price": "22€ (2h) // 20€ (1h) / mes",
+      "provider": null,
+      "status": "partial",
+      "status_label": "Parcialmente completa",
+      "status_note": "A quenda de Luns e Mércores de 15:00 a 16:00 está completa. Resto de quendas dispoñibles.",
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/82hVWJJ9vUJu2zKD6",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "teatro-musical",
+      "name": "Teatro musical",
+      "stage": "Primaria",
+      "price": "25€ / mes",
+      "provider": null,
+      "status": "full",
+      "status_label": "Completa",
+      "status_note": "Actividade completa. Non admite máis alumnado.",
+      "registration_type": null,
+      "registration_url": null,
+      "button_label": null
+    },
+    {
+      "id": "musica-movemento",
+      "name": "Música e movemento",
+      "stage": "Infantil",
+      "price": "25€ / mes",
+      "provider": null,
+      "status": "full",
+      "status_label": "Completa",
+      "status_note": "Actividade completa. Non admite máis alumnado.",
+      "registration_type": null,
+      "registration_url": null,
+      "button_label": null
+    },
+    {
+      "id": "tecnoloxias-innovadoras",
+      "name": "Tecnoloxías Innovadoras",
+      "stage": "Infantil e Primaria",
+      "price": "35€ (2h) // 27€ (1h) / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/7unePgMtZAnXGHJX6",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "judo",
+      "name": "Judo",
+      "stage": "Infantil e Primaria",
+      "price": "28€ / mes",
+      "provider": "Judo Hércules",
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSehDHrLxJSKu_8ze7ctFO_f1wC0nfohQLXJuhOfzLGE0hgYVw/viewform",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "ximnasia-ritmica",
+      "name": "Ximnasia rítmica",
+      "stage": "Infantil e Primaria",
+      "price": "20€ (2h) // 12€ (1h) / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSeFW-jbrHgKxBoHJ5QHyuXtxEtNG9D_PoBNdF5d8-UbWJ8nNQ/viewform?usp=dialog",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "ingles",
+      "name": "Inglés",
+      "stage": "Infantil e Primaria",
+      "price": "25€ / mes",
+      "provider": "Portobello",
+      "status": "available",
+      "status_label": null,
+      "status_note": "Descargar a ficha en PDF e remitir cumprimentada a portobellow11@yahoo.es",
+      "registration_type": "pdf",
+      "registration_url": "/docs/ficha-inscricion-ingles-2026-2027.pdf",
+      "contact_email": "portobellow11@yahoo.es",
+      "button_label": "Ficha de inscrición (PDF)"
+    },
+    {
+      "id": "taekwondo",
+      "name": "Taekwondo",
+      "stage": "Infantil e Primaria",
+      "price": "22,50€ (2h) // 17,50€ (1h) / mes",
+      "provider": null,
+      "status": "full",
+      "status_label": "Completa",
+      "status_note": "Actividade completa. Non admite máis alumnado.",
+      "registration_type": null,
+      "registration_url": null,
+      "button_label": null
+    },
+    {
+      "id": "parkour",
+      "name": "Parkour",
+      "stage": "Infantil e Primaria",
+      "price": "22,50€ (2h) // 17,50€ (1h) / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSeA9T4_0dK6HkKEIny_6oj-FMS01qLmPM94TPCwf5D2WRbPBw/viewform",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "hockey",
+      "name": "Hockey",
+      "stage": "Infantil e Primaria",
+      "price": "22€ / mes",
+      "provider": "Club Hockey Oleiros",
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "external_url",
+      "registration_url": "https://hockeyoleiros.com/extraescolar-rabadeira/",
+      "button_label": "Información e inscrición"
+    },
+    {
+      "id": "minichef",
+      "name": "Minichef",
+      "stage": "Infantil e Primaria",
+      "price": "23€ / mes",
+      "provider": null,
+      "status": "full",
+      "status_label": "Completa",
+      "status_note": "Actividade completa. Non admite máis alumnado.",
+      "registration_type": null,
+      "registration_url": null,
+      "button_label": null
+    },
+    {
+      "id": "scape-room",
+      "name": "Scape room",
+      "stage": "Primaria",
+      "price": "22€ / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/82hVWJJ9vUJu2zKD6",
+      "button_label": "Inscrición"
+    },
+    {
+      "id": "mentes-curiosas",
+      "name": "Mentes curiosas",
+      "stage": "Infantil",
+      "price": "22€ / mes",
+      "provider": null,
+      "status": "available",
+      "status_label": null,
+      "status_note": null,
+      "registration_type": "google_form",
+      "registration_url": "https://forms.gle/82hVWJJ9vUJu2zKD6",
+      "button_label": "Inscrición"
+    }
+  ],
+  "pricing_table": [
+    { "name": "Baile moderno", "hours": "2h", "price": "22€" },
+    { "name": "Multideporte", "hours": "2h", "price": "22€" },
+    { "name": "Ioga", "hours": "2h", "price": "25€" },
+    { "name": "Baloncesto", "hours": "2h", "price": "22€" },
+    { "name": "Arte", "hours": "2h", "price": "32€ + 40€ material (un só pago ao comezo do curso)" },
+    { "name": "Multiaventura", "hours": "2h // 1h", "price": "22€ (2 horas) // 20€ (1 hora)" },
+    { "name": "Teatro musical", "hours": "2h", "price": "25€" },
+    { "name": "Música e movemento", "hours": "2h", "price": "25€" },
+    { "name": "Tecnoloxías Innovadoras", "hours": "2h // 1h", "price": "35€ (2 horas) // 27€ (1 hora)" },
+    { "name": "Judo", "hours": "2h", "price": "28€" },
+    { "name": "Ximnasia rítmica", "hours": "2h // 1h", "price": "20€ (2 horas) // 12€ (1 hora)" },
+    { "name": "Inglés", "hours": "2h", "price": "25€" },
+    { "name": "Taekwondo", "hours": "2h // 1h", "price": "22,50€ (2 horas) // 17,50€ (1 hora)" },
+    { "name": "Parkour", "hours": "2h // 1h", "price": "22,50€ (2 horas) // 17,50€ (1 hora)" },
+    { "name": "Hockey", "hours": "2h", "price": "22€" },
+    { "name": "Minichef", "hours": "1,5h", "price": "23€" },
+    { "name": "Scape room", "hours": "1,5h", "price": "22€" },
+    { "name": "Mentes curiosas", "hours": "1,5h", "price": "22€" }
+  ],
+  "general_conditions": [
+    {
+      "number": 1,
+      "title": "Socio/a da ANPA",
+      "text": "No caso de non ser socio/a da ANPA, deberá aboarse unha matrícula de 10 € por cada neno/a e por cada actividade na que se inscriba."
+    },
+    {
+      "number": 2,
+      "title": "Número de socio/a",
+      "text": "Dende este ano cada familia socia contará cun número de socio."
+    },
+    {
+      "number": 3,
+      "title": "Seguro de accidentes",
+      "text": "Todos os participantes nas actividades extraescolares estarán cubertos polo seguro de accidentes correspondente segundo as condicións establecidas pola organización. A ANPA farase cargo da súa xestión. No caso de non ser socio/a da ANPA,伯rá aboarse unha matrícula de 10 € por cada neno/a e por cada actividade na que se inscriba."
+    },
+    {
+      "number": 4,
+      "title": "Autorización para a entrega e recollida dos menores",
+      "text": "As familias deberán indicar as persoas autorizadas para a entrega e recollida do menor ao remate da actividade. Por motivos de seguridade, só se entregará o menor ás persoas previamente autorizadas."
+    },
+    {
+      "number": 5,
+      "title": "Autorización de uso de imaxe",
+      "text": "Co fin de dar difusión ás actividades realizadas ao longo do curso, solicítase autorización para o uso de fotografías e vídeos nos que poida aparecer o alumnado participante. En ningún caso as imaxes serán utilizadas con fins comerciais nin cedidas a terceiros alleos á organización. Deberá indicar á empresa se autoriza ou non o uso da imaxe do menor."
+    },
+    {
+      "number": 6,
+      "title": "Incorporación á actividade",
+      "text": "Deberá indicarse á empresa cando se incorporará o alumno ou alumna á actividade: desde o primeiro día de inicio da actividade ou nunha data posterior."
+    },
+    {
+      "number": 7,
+      "title": "Forma de pagamento",
+      "text": "O método de pagamento será independente da ANPA e cada empresa establecerá o seu propio sistema de cobro."
+    },
+    {
+      "number": 8,
+      "title": "Pagamentos e impagos",
+      "text": "A cota mensual deberá estar aboada antes do día 5 de cada mes. No caso de acumular dúas mensualidades sen pagar, e tras ter sido informada previamente a familia da situación, o alumno ou alumna non poderá continuar asistindo á actividade, cedendo a súa praza á primeira persoa da lista de espera. Non se poderá formalizar a inscrición nas actividades do vindeiro curso no caso de existir cotas, recibos ou calquera outro pagamento pendente correspondente ao presente curso."
+    },
+    {
+      "number": 9,
+      "title": "Procedencia do alumnado",
+      "text": "Deberá indicar á empresa dende onde se incorporará o menor á actividade: servizo de comedor ou desde a casa. As familias non poderán acceder ao interior do centro para a entrega dos menores. Unha persoa responsable da actividade recollerá ao alumnado na porta de Educación Infantil no horario establecido."
+    },
+    {
+      "number": 10,
+      "title": "Saída das actividades extraescolares",
+      "text": "A recollida dos menores deberá realizarse á hora acordada de saída. No caso de que transcorran 15 minutos desde esa hora sen que fosen recollidos e non sexa posible contactar cos pais, nais, titores legais ou persoas autorizadas, poñerase a situación en coñecemento da Garda Civil para que adopte as medidas oportunas e se faga cargo dos menores. Queda terminantemente prohibido que os menores abandonen as instalacións ou regresen aos seus domicilios sen a compañía dun adulto autorizado, mesmo cando exista autorización expresa dos pais, nais ou titores legais."
+    },
+    {
+      "number": 11,
+      "title": "Solicitude de baixa",
+      "text": "As baixas deberán comunicarse por escrito á empresa antes do día 20 do mes anterior ao que se desexe facer efectiva a baixa. As solicitudes recibidas con posterioridade a esa data poderán implicar o cobro da mensualidade seguinte."
+    },
+    {
+      "number": 12,
+      "title": "Necesidades específicas de apoio",
+      "text": "Presenta o alumno ou alumna algunha necesidade específica, condición médica, alerxia ou circunstancia que deba ser coñecida polo persoal responsable da actividade? En caso afirmativo deberá informar á empresa correspondente que lle pedirá a información necesaria para o bo funcionamento da actividade."
+    },
+    {
+      "number": 13,
+      "title": "Outros datos de interese",
+      "text": "En caso de separación, divorcio ou outras situacións familiares que afecten á custodia ou recollida do menor,伯rá achegarse a documentación legal correspondente á empresa."
+    },
+    {
+      "number": 14,
+      "title": "Normas de convivencia das actividades extraescolares",
+      "text": "O alumnado participante deberá respectar as mesmas normas de convivencia, respecto e comportamento establecidas polo centro educativo. Réxime disciplinario: tres faltas leves equivalerán a unha falta grave; a acumulación de tres faltas graves suporá a suspensión temporal do servizo durante unha semana; no caso de que a conduta persista ou se produzan novas incidencias graves, a organización poderá acordar a expulsión definitiva do alumno ou alumna da actividade. A inscrición nas actividades extraescolares implica a aceptación destas normas e condicións."
+    }
+  ],
+  "coexistence_articles": {
+    "title": "Marco Legal de Convivencia (Lei 4/2011)",
+    "article_65": {
+      "title": "Artigo 65. Condutas gravemente prexudiciais para a convivencia",
+      "intro": "Considéranse condutas gravemente prexudiciais para a convivencia nos centros docentes:",
+      "points": [
+        "a) As agresións físicas ou psíquicas, as inxurias e as ofensas graves, as ameazas e as coaccións contra os demais membros da comunidade educativa.",
+        "b) Os actos de discriminación grave contra membros da comunidade educativa por razón de nacemento, raza, sexo, orientación sexual, capacidade económica, nivel social, conviccións políticas, morais ou relixiosas, discapacidades físicas, sensoriais ou psíquicas, ou calquera outra condición ou circunstancia persoal ou social.",
+        "c) Os actos individuais ou colectivos de desafío á autoridade do profesorado e ao persoal de administración e de servizos que constitúan unha indisciplina grave.",
+        "d) A gravación, a manipulación e a difusión por calquera medio de imaxes ou informacións que atenten contra o dereito á honra, á dignidade da persoa, á intimidade persoal e familiar e á propia imaxe dos demais membros da comunidade educativa.",
+        "e) As actuacións que constitúan acoso escolar.",
+        "f) A suplantación de personalidade en actos da vida docente e a falsificación, alteración ou substracción de documentos académicos.",
+        "g) Os danos graves causados de forma intencionada ou por neglixencia grave ás instalacións e aos materiais dos centros docentes, incluídos os equipos informáticos e o software, ou aos bens doutros membros da comunidade educativa ou de terceiros, así como a súa subtracción.",
+        "h) Os actos inxustificados que perturben gravemente o normal desenvolvemento das actividades do centro, incluídas as de carácter complementario e extraescolar.",
+        "i) As actuacións gravemente prexudiciais para a saúde e a integridade persoal dos membros da comunidade educativa do centro, ou a incitación a elas.",
+        "j) Portar calquera obxecto, substancia ou produto gravemente perigoso para a saúde ou a integridade persoal de calquera membro da comunidade educativa.",
+        "k) A reiteración, nun mesmo curso escolar, de condutas leves contrarias á convivencia.",
+        "l) O incumprimento das sancións impostas."
+      ]
+    },
+    "article_66": {
+      "title": "Artigo 66. Condutas leves contrarias á convivencia",
+      "intro": "Considéranse condutas leves contrarias á convivencia:",
+      "points": [
+        "a) As condutas tipificadas como agresión, inxuria ou ofensa, os actos de discriminación, de indisciplina, os danos ou actos inxustificados que non alcancen a gravidade requirida no artigo anterior.",
+        "b) Portar calquera obxecto, substancia ou produto expresamente prohibido polas normas do centro perigoso para a saúde ou integridade persoal ou que perturbe o normal desenvolvemento das actividades docentes, complementarias ou extraescolares.",
+        "c) As faltas reiteradas de puntualidade.",
+        "d) A reiterada asistencia ao centro sen o material e equipamento preciso para participar activamente no desenvolvemento das clases."
+      ]
+    }
+  }
+}

@@ -102,3 +102,65 @@ collections:
         hint: "Contido da páxina. Pode usar negriña, listas, enlaces, imaxes e HTML."
     editor:
       preview: false
+
+  # ===== XESTIÓN EXTRAESCOLARES =====
+  - name: "extraescolares"
+    label: "⚽ Actividades Extraescolares"
+    delete: false
+    files:
+      - name: "config_extraescolares"
+        label: "Xestión de Extraescolares"
+        file: "src/_data/extraescolares.json"
+        description: "Xestión de curso, horario oficial en imaxe, actividades e ligazóns"
+        fields:
+          - label: "Curso académico"
+            name: "academic_year"
+            widget: "string"
+            hint: "Ex: 2026-2027. O título do horario xérase automaticamente a partir deste campo."
+          - label: "Imaxe do Horario Completo"
+            name: "schedule_image"
+            widget: "image"
+            hint: "Suba ou substitúa a imaxe oficial completa do cadro de horarios (JPG ou PNG)"
+          - label: "Texto de introdución"
+            name: "intro"
+            widget: "text"
+            required: false
+          - label: "Texto de novidades"
+            name: "subintro"
+            widget: "text"
+            required: false
+          - label: "Aviso de prazos e baixas"
+            name: "deadlines_note"
+            widget: "text"
+            required: false
+          - label: "Socios e Matrícula"
+            name: "membership"
+            widget: "object"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Texto de alta de socio", name: "join_label", widget: "string" }
+              - { label: "Ligazón alta de socio", name: "join_url", widget: "string" }
+              - { label: "Nota para non socios", name: "non_member_note", widget: "text" }
+              - { label: "Texto matrícula non socios", name: "non_member_label", widget: "string" }
+              - { label: "Ligazón matrícula non socios", name: "non_member_url", widget: "string" }
+          - label: "Listado de Actividades"
+            name: "activities"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.stage}} ({{fields.price}})"
+            fields:
+              - { label: "Identificador", name: "id", widget: "string" }
+              - { label: "Nome da actividade", name: "name", widget: "string" }
+              - { label: "Etapa educativa", name: "stage", widget: "string" }
+              - { label: "Prezo / mes", name: "price", widget: "string" }
+              - { label: "Entidade / Monitor", name: "provider", widget: "string", required: false }
+              - label: "Estado"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Normal (dispoñible segundo formulario)", value: "available" }
+                  - { label: "🔴 Completa", value: "full" }
+                  - { label: "🟡 Parcialmente completa", value: "partial" }
+                default: "available"
+              - { label: "Aviso de estado ou descrición curta", name: "status_note", widget: "string", required: false }
+              - { label: "Ligazón de inscrición ou información", name: "registration_url", widget: "string", required: false }
+              - { label: "Texto do botón", name: "button_label", widget: "string", required: false }

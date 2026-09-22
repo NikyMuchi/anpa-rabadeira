@@ -1362,6 +1362,273 @@ a:hover {
   }
 }
 
+/* ---------- Status Badges ---------- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 3px 8px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.status-badge--open {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.status-badge--full {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.status-badge--partial {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+/* ---------- Activity Cards Grid / List ---------- */
+.activity-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin-block: var(--sp-6);
+}
+
+.activity-card {
+  background: var(--clr-white);
+  border: 1px solid var(--clr-gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4) var(--sp-5);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+
+.activity-card:hover {
+  border-color: var(--clr-primary-300);
+  box-shadow: var(--shadow-md);
+}
+
+.activity-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.activity-card__title {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--clr-gray-900);
+  margin: 0;
+}
+
+.activity-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--clr-gray-600);
+  line-height: 1.4;
+}
+
+.activity-card__detail-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.activity-card__note {
+  font-size: var(--fs-xs);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  background: var(--clr-gray-50);
+  border-left: 3px solid var(--clr-gray-300);
+  color: var(--clr-gray-700);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.activity-card__note--full {
+  background: #fef2f2;
+  border-left-color: #ef4444;
+  color: #991b1b;
+}
+
+.activity-card__note--partial {
+  background: #fffbeb;
+  border-left-color: #f59e0b;
+  color: #92400e;
+}
+
+/* Callout box for Membership & Non-Member Fees */
+.callout-box {
+  background: #f8fafc;
+  border: 1px solid var(--clr-primary-200);
+  border-left: 4px solid var(--clr-primary-500);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-4) var(--sp-5);
+  margin-block: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.callout-box h3 {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--clr-primary-900);
+  margin: 0;
+}
+
+.callout-box p {
+  font-size: var(--fs-sm);
+  color: var(--clr-gray-700);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.callout-box__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+@media (min-width: 600px) {
+  .callout-box__actions {
+    flex-direction: row;
+  }
+  .callout-box__actions .btn-action {
+    flex: 1;
+    width: auto;
+  }
+}
+
+/* Pricing table */
+.pricing-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-block: var(--sp-6);
+  border: 1px solid var(--clr-gray-200);
+  border-radius: var(--radius-sm);
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  text-align: left;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--clr-gray-200);
+}
+
+.pricing-table th {
+  background: var(--clr-primary-100);
+  color: var(--clr-primary-900);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.pricing-table tr:nth-child(even) td {
+  background: var(--clr-gray-50);
+}
+
+.pricing-table tr:hover td {
+  background: #f1f5f9;
+}
+
+.pricing-table td strong {
+  color: var(--clr-gray-900);
+}
+
+/* Conditions & Coexistence Accordion */
+.conditions-accordion {
+  border: 1px solid var(--clr-gray-200);
+  border-radius: var(--radius-md);
+  margin-block: var(--sp-4);
+  background: var(--clr-white);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.conditions-accordion summary {
+  padding: var(--sp-4) var(--sp-5);
+  font-family: var(--ff-heading);
+  font-weight: 700;
+  font-size: var(--fs-base);
+  color: var(--clr-gray-900);
+  cursor: pointer;
+  background: var(--clr-gray-50);
+  transition: background-color var(--duration) var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.conditions-accordion summary:hover {
+  background: var(--clr-primary-100);
+  color: var(--clr-primary-900);
+}
+
+.conditions-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.conditions-accordion summary::after {
+  content: "▾";
+  font-size: 1.1rem;
+  transition: transform var(--duration) var(--ease);
+}
+
+.conditions-accordion[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.conditions-accordion__content {
+  padding: var(--sp-5);
+  font-size: var(--fs-sm);
+  color: var(--clr-gray-700);
+  line-height: 1.6;
+}
+
+.conditions-accordion__content ol {
+  padding-left: var(--sp-5);
+  margin-bottom: var(--sp-4);
+}
+
+.conditions-accordion__content li {
+  margin-bottom: var(--sp-3);
+}
+
+.conditions-accordion__content h4 {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--clr-primary-800);
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-2);
+}
+
 /* Activity item in Extraescolares */
 .activity-item {
   background: var(--clr-white);

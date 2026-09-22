@@ -25,13 +25,13 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("pages", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/pages/*.md");
+    return collectionApi.getFilteredByGlob(["src/pages/*.md", "src/pages/*.njk"]);
   });
 
   // navPages: pages visible in nav & quick-access, sorted by navOrder
   eleventyConfig.addCollection("navPages", function (collectionApi) {
     return collectionApi
-      .getFilteredByGlob("src/pages/*.md")
+      .getFilteredByGlob(["src/pages/*.md", "src/pages/*.njk"])
       .filter((p) => p.data.showInNav !== false)
       .sort((a, b) => (a.data.navOrder || 99) - (b.data.navOrder || 99));
   });
