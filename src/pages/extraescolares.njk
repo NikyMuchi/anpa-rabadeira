@@ -109,7 +109,48 @@ iconColor: "gold"
   <div class="conditions-accordion__content">
     <ol>
       {% for cond in extraescolares.general_conditions %}
-      <li><strong>{{ cond.title }}:</strong> {{ cond.text }}</li>
+      <li>
+        <strong>{{ cond.title }}:</strong>
+        {% if cond.paragraphs %}
+          {% for p in cond.paragraphs %}
+            {% if loop.first %}
+              {{ p }}
+            {% else %}
+              <p class="conditions-subtext">{{ p }}</p>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          {{ cond.text }}
+        {% endif %}
+
+        {% if cond.options %}
+        <ul class="conditions-options">
+          {% for opt in cond.options %}
+          <li>{{ opt }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if cond.extra_text %}
+        <p class="conditions-extra-text">{{ cond.extra_text }}</p>
+        {% endif %}
+
+        {% if cond.subheading %}
+        <p class="conditions-subheading"><strong>{{ cond.subheading }}</strong></p>
+        {% endif %}
+
+        {% if cond.sub_items %}
+        <ul class="conditions-sub-items">
+          {% for item in cond.sub_items %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if cond.statement %}
+        <p class="conditions-statement"><strong>{{ cond.statement }}</strong></p>
+        {% endif %}
+      </li>
       {% endfor %}
     </ol>
   </div>

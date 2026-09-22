@@ -1608,7 +1608,7 @@ a:hover {
 .conditions-accordion__content {
   padding: var(--sp-5);
   font-size: var(--fs-sm);
-  color: var(--clr-gray-700);
+  color: #526277;
   line-height: 1.6;
 }
 
@@ -1617,17 +1617,84 @@ a:hover {
   margin-bottom: var(--sp-4);
 }
 
+.conditions-accordion__content ol > li::marker {
+  color: #2F6BBD;
+  font-weight: 700;
+}
+
 .conditions-accordion__content li {
   margin-bottom: var(--sp-3);
+  color: #526277;
+}
+
+.conditions-accordion__content ol > li > strong:first-child {
+  color: #172033;
+  font-weight: 700;
 }
 
 .conditions-accordion__content h4 {
   font-size: var(--fs-base);
   font-weight: 700;
-  color: var(--clr-primary-800);
+  color: #172033;
   margin-top: var(--sp-5);
   margin-bottom: var(--sp-2);
 }
+
+.conditions-subtext {
+  margin-top: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  color: #526277;
+}
+
+.conditions-options {
+  list-style: none;
+  padding-left: var(--sp-3);
+  margin-block: var(--sp-2);
+}
+
+.conditions-options li {
+  margin-bottom: var(--sp-1);
+  color: #526277;
+}
+
+.conditions-extra-text {
+  margin-block: var(--sp-2);
+  color: #526277;
+}
+
+.conditions-subheading {
+  margin-top: var(--sp-3);
+  margin-bottom: var(--sp-1);
+  color: #172033;
+}
+
+.conditions-subheading strong {
+  color: #172033;
+}
+
+.conditions-sub-items {
+  list-style: disc;
+  padding-left: var(--sp-5);
+  margin-block: var(--sp-2);
+}
+
+.conditions-sub-items li {
+  margin-bottom: var(--sp-1);
+  color: #526277;
+}
+
+.conditions-statement {
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  background: #f8fafc;
+  border-left: 3px solid var(--clr-primary-600);
+  border-radius: var(--radius-sm);
+  color: var(--clr-primary-900);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
 
 /* Activity item in Extraescolares */
 .activity-item {
