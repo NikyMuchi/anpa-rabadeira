@@ -1190,6 +1190,10 @@ a:hover {
   margin: 0;
 }
 
+.heading-year {
+  white-space: nowrap;
+}
+
 .schedule-card__action {
   display: inline-flex;
   align-items: center;
@@ -1532,12 +1536,19 @@ a:hover {
   border-collapse: collapse;
   font-size: var(--fs-sm);
   text-align: left;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .pricing-table th,
 .pricing-table td {
   padding: var(--sp-3) var(--sp-4);
   border-bottom: 1px solid var(--clr-gray-200);
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  vertical-align: middle;
 }
 
 .pricing-table th {
@@ -1550,6 +1561,25 @@ a:hover {
   white-space: nowrap;
 }
 
+/* Explicit column width management */
+.pricing-table th:first-child,
+.pricing-table td:first-child {
+  width: 44%;
+  min-width: 125px;
+}
+
+.pricing-table th:nth-child(2),
+.pricing-table td:nth-child(2) {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.pricing-table th:nth-child(3),
+.pricing-table td:nth-child(3) {
+  width: 55%;
+}
+
 .pricing-table tr:nth-child(even) td {
   background: var(--clr-gray-50);
 }
@@ -1560,6 +1590,27 @@ a:hover {
 
 .pricing-table td strong {
   color: var(--clr-gray-900);
+  display: inline;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* Responsive adjustments for mobile viewports */
+@media (max-width: 640px) {
+  .pricing-table {
+    font-size: 0.8125rem;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: var(--sp-2) var(--sp-2);
+  }
+
+  .pricing-table th:first-child,
+  .pricing-table td:first-child {
+    min-width: 118px;
+  }
 }
 
 /* Conditions & Coexistence Accordion */
