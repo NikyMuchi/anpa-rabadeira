@@ -250,95 +250,225 @@
     }
   ],
   "pricing_table": [
-    { "name": "Baile moderno", "hours": "2h", "price": "22€" },
-    { "name": "Multideporte", "hours": "2h", "price": "22€" },
-    { "name": "Ioga", "hours": "2h", "price": "25€" },
-    { "name": "Baloncesto", "hours": "2h", "price": "22€" },
-    { "name": "Arte", "hours": "2h", "price": "32€ + 40€ material (un só pago ao comezo do curso)" },
-    { "name": "Multiaventura", "hours": "2h // 1h", "price": "22€ (2 horas) // 20€ (1 hora)" },
-    { "name": "Teatro musical", "hours": "2h", "price": "25€" },
-    { "name": "Música e movemento", "hours": "2h", "price": "25€" },
-    { "name": "Tecnoloxías Innovadoras", "hours": "2h // 1h", "price": "35€ (2 horas) // 27€ (1 hora)" },
-    { "name": "Judo", "hours": "2h", "price": "28€" },
-    { "name": "Ximnasia rítmica", "hours": "2h // 1h", "price": "20€ (2 horas) // 12€ (1 hora)" },
-    { "name": "Inglés", "hours": "2h", "price": "25€" },
-    { "name": "Taekwondo", "hours": "2h // 1h", "price": "22,50€ (2 horas) // 17,50€ (1 hora)" },
-    { "name": "Parkour", "hours": "2h // 1h", "price": "22,50€ (2 horas) // 17,50€ (1 hora)" },
-    { "name": "Hockey", "hours": "2h", "price": "22€" },
-    { "name": "Minichef", "hours": "1,5h", "price": "23€" },
-    { "name": "Scape room", "hours": "1,5h", "price": "22€" },
-    { "name": "Mentes curiosas", "hours": "1,5h", "price": "22€" }
+    {
+      "name": "Baile moderno",
+      "hours": "2h",
+      "price": "22€"
+    },
+    {
+      "name": "Multideporte",
+      "hours": "2h",
+      "price": "22€"
+    },
+    {
+      "name": "Ioga",
+      "hours": "2h",
+      "price": "25€"
+    },
+    {
+      "name": "Baloncesto",
+      "hours": "2h",
+      "price": "22€"
+    },
+    {
+      "name": "Arte",
+      "hours": "2h",
+      "price": "32€ + 40€ material (un só pago ao comezo do curso)"
+    },
+    {
+      "name": "Multiaventura",
+      "hours": "2h // 1h",
+      "price": "22€ (2 horas) // 20€ (1 hora)"
+    },
+    {
+      "name": "Teatro musical",
+      "hours": "2h",
+      "price": "25€"
+    },
+    {
+      "name": "Música e movemento",
+      "hours": "2h",
+      "price": "25€"
+    },
+    {
+      "name": "Tecnoloxías Innovadoras",
+      "hours": "2h // 1h",
+      "price": "35€ (2 horas) // 27€ (1 hora)"
+    },
+    {
+      "name": "Judo",
+      "hours": "2h",
+      "price": "28€"
+    },
+    {
+      "name": "Ximnasia rítmica",
+      "hours": "2h // 1h",
+      "price": "20€ (2 horas) // 12€ (1 hora)"
+    },
+    {
+      "name": "Inglés",
+      "hours": "2h",
+      "price": "25€"
+    },
+    {
+      "name": "Taekwondo",
+      "hours": "2h // 1h",
+      "price": "22,50€ (2 horas) // 17,50€ (1 hora)"
+    },
+    {
+      "name": "Parkour",
+      "hours": "2h // 1h",
+      "price": "22,50€ (2 horas) // 17,50€ (1 hora)"
+    },
+    {
+      "name": "Hockey",
+      "hours": "2h",
+      "price": "22€"
+    },
+    {
+      "name": "Minichef",
+      "hours": "1,5h",
+      "price": "23€"
+    },
+    {
+      "name": "Scape room",
+      "hours": "1,5h",
+      "price": "22€"
+    },
+    {
+      "name": "Mentes curiosas",
+      "hours": "1,5h",
+      "price": "22€"
+    }
   ],
   "general_conditions": [
     {
       "number": 1,
       "title": "Socio/a da ANPA",
-      "text": "No caso de non ser socio/a da ANPA, deberá aboarse unha matrícula de 10 € por cada neno/a e por cada actividade na que se inscriba."
+      "paragraphs": [
+        "No caso de non ser socio/a da ANPA, deberá aboarse unha matrícula de 10 € por cada neno/a e por cada actividade na que se inscriba."
+      ]
     },
     {
       "number": 2,
       "title": "Número de socio/a",
-      "text": "Dende este ano cada familia socia contará cun número de socio."
+      "paragraphs": [
+        "Dende este ano cada familia socia contará con un número de socio."
+      ]
     },
     {
       "number": 3,
       "title": "Seguro de accidentes",
-      "text": "Todos os participantes nas actividades extraescolares estarán cubertos polo seguro de accidentes correspondente segundo as condicións establecidas pola organización. A ANPA farase cargo da súa xestión. No caso de non ser socio/a da ANPA,伯rá aboarse unha matrícula de 10 € por cada neno/a e por cada actividade na que se inscriba."
+      "paragraphs": [
+        "Todos os participantes nas actividades extraescolares estarán cubertos polo seguro de accidentes correspondente segundo as condicións establecidas pola organización. A ANPA farase cargo da súa xestión.",
+        "No caso de non ser socio/a da ANPA, deberá aboarse unha matrícula de 10 € por cada neno/a e por cada actividade na que se inscriba."
+      ]
     },
     {
       "number": 4,
       "title": "Autorización para a entrega e recollida dos menores",
-      "text": "As familias deberán indicar as persoas autorizadas para a entrega e recollida do menor ao remate da actividade. Por motivos de seguridade, só se entregará o menor ás persoas previamente autorizadas."
+      "paragraphs": [
+        "As familias deberán indicar as persoas autorizadas para a entrega e recollida do menor ao remate da actividade.",
+        "Por motivos de seguridade, só se entregará o menor ás persoas previamente autorizadas."
+      ]
     },
     {
       "number": 5,
       "title": "Autorización de uso de imaxe",
-      "text": "Co fin de dar difusión ás actividades realizadas ao longo do curso, solicítase autorización para o uso de fotografías e vídeos nos que poida aparecer o alumnado participante. En ningún caso as imaxes serán utilizadas con fins comerciais nin cedidas a terceiros alleos á organización. Deberá indicar á empresa se autoriza ou non o uso da imaxe do menor."
+      "paragraphs": [
+        "Co fin de dar difusión ás actividades realizadas ao longo do curso, solicítase autorización para o uso de fotografías e vídeos nos que poida aparecer o alumnado participante. En ningún caso as imaxes serán utilizadas con fins comerciais nin cedidas a terceiros alleos á organización.",
+        "Deberá indicar á empresa se:"
+      ],
+      "options": [
+        "☐ Autorizo o uso da imaxe do menor.",
+        "☐ Non autorizo o uso da imaxe do menor."
+      ]
     },
     {
       "number": 6,
       "title": "Incorporación á actividade",
-      "text": "Deberá indicarse á empresa cando se incorporará o alumno ou alumna á actividade: desde o primeiro día de inicio da actividade ou nunha data posterior."
+      "paragraphs": [
+        "Deberá indicarse á empresa cando se incorporará o alumno ou alumna á actividade:"
+      ],
+      "options": [
+        "☐ Desde o primeiro día de inicio da actividade.",
+        "☐ Nunha data posterior."
+      ],
+      "extra_text": "Data de incorporación: ____ / ____ / ______"
     },
     {
       "number": 7,
       "title": "Forma de pagamento",
-      "text": "O método de pagamento será independente da ANPA e cada empresa establecerá o seu propio sistema de cobro."
+      "paragraphs": [
+        "O método de pagamento será independente da ANPA e cada empresa establecerá o seu propio sistema de cobro."
+      ]
     },
     {
       "number": 8,
       "title": "Pagamentos e impagos",
-      "text": "A cota mensual deberá estar aboada antes do día 5 de cada mes. No caso de acumular dúas mensualidades sen pagar, e tras ter sido informada previamente a familia da situación, o alumno ou alumna non poderá continuar asistindo á actividade, cedendo a súa praza á primeira persoa da lista de espera. Non se poderá formalizar a inscrición nas actividades do vindeiro curso no caso de existir cotas, recibos ou calquera outro pagamento pendente correspondente ao presente curso."
+      "paragraphs": [
+        "A cota mensual deberá estar aboada antes do día 5 de cada mes.",
+        "No caso de acumular dúas mensualidades sen pagar, e tras ter sido informada previamente a familia da situación, o alumno ou alumna non poderá continuar asistindo á actividade, cedendo a súa praza á primeira persoa da lista de espera.",
+        "Non se poderá formalizar a inscrición nas actividades do vindeiro curso no caso de existir cotas, recibos ou calquera outro pagamento pendente correspondente ao presente curso."
+      ]
     },
     {
       "number": 9,
       "title": "Procedencia do alumnado",
-      "text": "Deberá indicar á empresa dende onde se incorporará o menor á actividade: servizo de comedor ou desde a casa. As familias non poderán acceder ao interior do centro para a entrega dos menores. Unha persoa responsable da actividade recollerá ao alumnado na porta de Educación Infantil no horario establecido."
+      "paragraphs": [
+        "Deberá indicar á empresa dende onde se incorporará o menor á actividade:"
+      ],
+      "options": [
+        "☐ Servizo de comedor.",
+        "☐ Desde a casa."
+      ],
+      "extra_text": "As familias non poderán acceder ao interior do centro para a entrega dos menores. Unha persoa responsable da actividade recollerá ao alumnado na porta de Educación Infantil no horario establecido."
     },
     {
       "number": 10,
       "title": "Saída das actividades extraescolares",
-      "text": "A recollida dos menores deberá realizarse á hora acordada de saída. No caso de que transcorran 15 minutos desde esa hora sen que fosen recollidos e non sexa posible contactar cos pais, nais, titores legais ou persoas autorizadas, poñerase a situación en coñecemento da Garda Civil para que adopte as medidas oportunas e se faga cargo dos menores. Queda terminantemente prohibido que os menores abandonen as instalacións ou regresen aos seus domicilios sen a compañía dun adulto autorizado, mesmo cando exista autorización expresa dos pais, nais ou titores legais."
+      "paragraphs": [
+        "A recollida dos menores deberá realizarse á hora acordada de saída. No caso de que transcorran 15 minutos desde esa hora sen que fosen recollidos e non sexa posible contactar cos pais, nais, titores legais ou persoas autorizadas, poñerase a situación en coñecemento da Garda Civil para que adopte as medidas oportunas e se faga cargo dos menores.",
+        "Queda terminantemente prohibido que os menores abandonen as instalacións ou regresen aos seus domicilios sen a compañía dun adulto autorizado, mesmo cando exista autorización expresa dos pais, nais ou titores legais."
+      ]
     },
     {
       "number": 11,
       "title": "Solicitude de baixa",
-      "text": "As baixas deberán comunicarse por escrito á empresa antes do día 20 do mes anterior ao que se desexe facer efectiva a baixa. As solicitudes recibidas con posterioridade a esa data poderán implicar o cobro da mensualidade seguinte."
+      "paragraphs": [
+        "As baixas deberán comunicarse por escrito á empresa antes do día 20 do mes anterior ao que se desexe facer efectiva a baixa.",
+        "As solicitudes recibidas con posterioridade a esa data poderán implicar o cobro da mensualidade seguinte."
+      ]
     },
     {
       "number": 12,
       "title": "Necesidades específicas de apoio",
-      "text": "Presenta o alumno ou alumna algunha necesidade específica, condición médica, alerxia ou circunstancia que deba ser coñecida polo persoal responsable da actividade? En caso afirmativo deberá informar á empresa correspondente que lle pedirá a información necesaria para o bo funcionamento da actividade."
+      "paragraphs": [
+        "Presenta o alumno ou alumna algunha necesidade específica, condición médica, alerxia ou circunstancia que deba ser coñecida polo persoal responsable da actividade?",
+        "En caso afirmativo deberá informar á empresa correspondente que lle pedirá a información necesaria para o bo funcionamento da actividade."
+      ]
     },
     {
       "number": 13,
       "title": "Outros datos de interese",
-      "text": "En caso de separación, divorcio ou outras situacións familiares que afecten á custodia ou recollida do menor,伯rá achegarse a documentación legal correspondente á empresa."
+      "paragraphs": [
+        "En caso de separación, divorcio ou outras situacións familiares que afecten á custodia ou recollida do menor, deberá achegarse a documentación legal correspondente.",
+        "En caso afirmativo deberá enviar a información e documentación correspondente á empresa."
+      ]
     },
     {
       "number": 14,
       "title": "Normas de convivencia das actividades extraescolares",
-      "text": "O alumnado participante deberá respectar as mesmas normas de convivencia, respecto e comportamento establecidas polo centro educativo. Réxime disciplinario: tres faltas leves equivalerán a unha falta grave; a acumulación de tres faltas graves suporá a suspensión temporal do servizo durante unha semana; no caso de que a conduta persista ou se produzan novas incidencias graves, a organización poderá acordar a expulsión definitiva do alumno ou alumna da actividade. A inscrición nas actividades extraescolares implica a aceptación destas normas e condicións."
+      "paragraphs": [
+        "O alumnado participante deberá respectar as mesmas normas de convivencia, respecto e comportamento establecidas polo centro educativo."
+      ],
+      "subheading": "O réxime disciplinario:",
+      "sub_items": [
+        "Tres faltas leves equivalerán a unha falta grave.",
+        "A acumulación de tres faltas graves suporá a suspensión temporal do servizo durante unha semana.",
+        "No caso de que a conduta persista ou se produzan novas incidencias graves, a organización poderá acordar a expulsión definitiva do alumno ou alumna da actividade."
+      ],
+      "statement": "A INSCRICIÓN NAS ACTIVIDADES EXTRAESCOLARES IMPLICA A ACEPTACIÓN DESTAS NORMAS E CONDICIÓNS."
     }
   ],
   "coexistence_articles": {
@@ -356,7 +486,7 @@
         "g) Os danos graves causados de forma intencionada ou por neglixencia grave ás instalacións e aos materiais dos centros docentes, incluídos os equipos informáticos e o software, ou aos bens doutros membros da comunidade educativa ou de terceiros, así como a súa subtracción.",
         "h) Os actos inxustificados que perturben gravemente o normal desenvolvemento das actividades do centro, incluídas as de carácter complementario e extraescolar.",
         "i) As actuacións gravemente prexudiciais para a saúde e a integridade persoal dos membros da comunidade educativa do centro, ou a incitación a elas.",
-        "j) Portar calquera obxecto, substancia ou produto gravemente perigoso para a saúde ou a integridade persoal de calquera membro da comunidade educativa.",
+        "j) Portar calquera obxecto, substancia ou produto gravemente perigoso para a saúde ou a integridade persoal de calquera membro da comunidade educativa. En todo caso, reputarase indisciplina grave a resistencia ou a negativa a entregar os obxectos a que se refire o punto terceiro do artigo 11 da Lei 4/2011, do 30 de xuño, de convivencia e participación da comunidade educativa cando se é requirido para iso polo profesorado.",
         "k) A reiteración, nun mesmo curso escolar, de condutas leves contrarias á convivencia.",
         "l) O incumprimento das sancións impostas."
       ]
@@ -365,8 +495,8 @@
       "title": "Artigo 66. Condutas leves contrarias á convivencia",
       "intro": "Considéranse condutas leves contrarias á convivencia:",
       "points": [
-        "a) As condutas tipificadas como agresión, inxuria ou ofensa, os actos de discriminación, de indisciplina, os danos ou actos inxustificados que non alcancen a gravidade requirida no artigo anterior.",
-        "b) Portar calquera obxecto, substancia ou produto expresamente prohibido polas normas do centro perigoso para a saúde ou integridade persoal ou que perturbe o normal desenvolvemento das actividades docentes, complementarias ou extraescolares.",
+        "a) As condutas tipificadas como agresión, inxuria ou ofensa do apartado a), os actos de discriminación do apartado b), os actos de indisciplina do apartado c), os danos do apartado g), os actos inxustificados do apartado h) e as actuacións prexudiciais descritas no apartado i) do artigo anterior que non alcancen a gravidade requirida no devandito precepto.",
+        "b) Portar calquera obxecto, substancia ou produto expresamente prohibido polas normas do centro perigoso para a saúde ou a integridade persoal do alumnado ou dos demais membros da comunidade educativa ou que perturbe o normal desenvolvemento das actividades docentes, complementarias ou extraescolares, cando non constitúa conduta gravemente prexudicial para a convivencia de acordo co apartado l) do artigo anterior.",
         "c) As faltas reiteradas de puntualidade.",
         "d) A reiterada asistencia ao centro sen o material e equipamento preciso para participar activamente no desenvolvemento das clases."
       ]
