@@ -1,49 +1,173 @@
 ---
 layout: layouts/base.njk
 title: "ANPA Ensino Rabadeira — CEIP Rabadeira"
-description: "Asociación de Nais e Pais de Alumnos do CEIP Rabadeira. Actividades, extraescolares, servizos e novas."
+description: "Asociación de Nais e Pais de Alumnos do CEIP Rabadeira (Oleiros). Servizo de madrugadores, actividades extraescolares, xestión de comedor e novas para as familias."
 ---
 
 {# ===== HERO ===== #}
-<section class="hero">
-  <div class="container hero__content">
-    <div class="hero__badge">
-      <span class="hero__badge__dot"></span>
+<section class="home-hero">
+  <div class="container home-hero__inner">
+    <div class="home-hero__badge">
+      <span class="home-hero__badge-dot" aria-hidden="true"></span>
       CEIP Rabadeira · Oleiros
     </div>
-    <h1>
-      ANPA <span class="hero__accent">Ensino</span><br>
-      Rabadeira
+    <h1 class="home-hero__title">
+      ANPA Ensino <span class="home-hero__accent">Rabadeira</span>
     </h1>
-    <p>Traballando xuntos pola educación, o benestar e a diversión das nosas fillas e fillos.</p>
-    <a href="mailto:{{ site.email }}" class="hero__email">
-      {{ site.email }}
-    </a>
+    <p class="home-hero__lead">
+      Benvidas e benvidos á comunidade de familias do CEIP Rabadeira. Traballamos xuntos para enriquecer a vida escolar, organizar servizos esenciais e apoiar a toda a comunidade educativa.
+    </p>
+    <div class="home-hero__actions">
+      <a href="/inscripcion/" class="btn btn--primary">
+        <span class="btn__icon" aria-hidden="true">📝</span> Inscrición de socios
+      </a>
+      <a href="/extraescolares/" class="btn btn--secondary">
+        <span class="btn__icon" aria-hidden="true">⚽</span> Actividades Extraescolares
+      </a>
+    </div>
+    <div class="home-hero__pillars">
+      <div class="home-hero__pillar">
+        <span aria-hidden="true">🌅</span> Servizo de Madrugadores dende as 7:30 h
+      </div>
+      <div class="home-hero__pillar">
+        <span aria-hidden="true">⚽</span> 18 Actividades Extraescolares
+      </div>
+      <div class="home-hero__pillar">
+        <span aria-hidden="true">🏛️</span> Participación no Consello Escolar
+      </div>
+    </div>
   </div>
 </section>
 
-{# ===== ACCESO RÁPIDO ===== #}
-<section class="quick-access container">
-  <h2>Acceso rápido</h2>
-  <div class="quick-grid">
-    {%- for pg in collections.navPages %}
-    <a href="{{ pg.data.permalink }}" class="quick-card">
-      <div class="quick-card__icon quick-card__icon--{{ pg.data.iconColor or 'blue' }}">{{ pg.data.icon or '📄' }}</div>
-      <span class="quick-card__label">{{ pg.data.title }}</span>
-    </a>
-    {%- endfor %}
+{# ===== AVISO IMPORTANTE (COMPONENTE REUTILIZABLE) ===== #}
+{% if notice and notice.active %}
+<aside class="home-notice container" role="region" aria-label="Aviso importante">
+  <div class="notice-banner">
+    <span class="notice-banner__icon" aria-hidden="true">{{ notice.icon or '📢' }}</span>
+    <div class="notice-banner__content">
+      <h2 class="notice-banner__title">{{ notice.title }}</h2>
+      <p class="notice-banner__text">{{ notice.text | safe }}</p>
+    </div>
+  </div>
+</aside>
+{% endif %}
+
+{# ===== SERVIZOS PRINCIPAIS PARA AS FAMILIAS ===== #}
+<section class="home-section container" aria-labelledby="services-title">
+  <div class="home-section__header">
+    <span class="home-section__badge">Servizos clave</span>
+    <h2 id="services-title" class="home-section__title">Servizos para as familias</h2>
+    <p class="home-section__lead">
+      Xestión e coordinación dos servizos principais do centro para facilitar a conciliación familiar e o desenvolvemento integral do alumnado.
+    </p>
+  </div>
+
+  <div class="service-cards-grid">
+    {# Tarxeta 1: Extraescolares #}
+    <article class="service-card service-card--gold">
+      <div class="service-card__top">
+        <div class="service-card__icon service-card__icon--gold" aria-hidden="true">⚽</div>
+        <span class="service-card__pill">Curso 2026-2027</span>
+      </div>
+      <h3 class="service-card__title">Actividades Extraescolares</h3>
+      <p class="service-card__desc">
+        Ampla oferta deportiva, artística e formativa con 18 actividades estruturadas por etapas (Infantil e Primaria) e prezos especiais para socios/as.
+      </p>
+      <a href="/extraescolares/" class="service-card__action">
+        Ver actividades e horarios <span aria-hidden="true">→</span>
+      </a>
+    </article>
+
+    {# Tarxeta 2: Madrugadores #}
+    <article class="service-card service-card--green">
+      <div class="service-card__top">
+        <div class="service-card__icon service-card__icon--green" aria-hidden="true">🌅</div>
+        <span class="service-card__pill">Conciliación</span>
+      </div>
+      <h3 class="service-card__title">Servizo de Madrugadores</h3>
+      <p class="service-card__desc">
+        Acollida temperá dende as 7:30 h con opción de almorzo saudable supervisado, xestionado en colaboración con Jardanay para usuarios fixos e esporádicos.
+      </p>
+      <a href="/madrugadores/" class="service-card__action">
+        Tarifas e funcionamento <span aria-hidden="true">→</span>
+      </a>
+    </article>
+
+    {# Tarxeta 3: Comedor #}
+    <article class="service-card service-card--blue">
+      <div class="service-card__top">
+        <div class="service-card__icon service-card__icon--blue" aria-hidden="true">🍽️</div>
+        <span class="service-card__pill">Xestión telemática</span>
+      </div>
+      <h3 class="service-card__title">Pago do Comedor</h3>
+      <p class="service-card__desc">
+        Guía paso a paso para a tramitación do pagamento das taxas do comedor escolar a través do portal tributario de ATRIGA sen desprazamentos.
+      </p>
+      <a href="/comedor/" class="service-card__action">
+        Instrucións de pago <span aria-hidden="true">→</span>
+      </a>
+    </article>
+  </div>
+</section>
+
+{# ===== XESTIÓNS E RECURSOS ÚTILES ===== #}
+<section class="home-section home-section--subtle" aria-labelledby="resources-title">
+  <div class="container">
+    <div class="home-section__header">
+      <span class="home-section__badge">Recursos e trámites</span>
+      <h2 id="resources-title" class="home-section__title">Xestións e información útil</h2>
+      <p class="home-section__lead">
+        Accesos directos para facerse socio/a, consultar a documentación institucional ou coñecer a representación no Consello Escolar.
+      </p>
+    </div>
+
+    <div class="resource-cards-grid">
+      <a href="/inscripcion/" class="resource-card">
+        <div class="resource-card__icon" aria-hidden="true">📝</div>
+        <div class="resource-card__content">
+          <h3 class="resource-card__title">Alta e cota de socios</h3>
+          <p class="resource-card__desc">Formulario de inscrición anual na ANPA para acceder a todas as vantaxes e prezos reducidos.</p>
+          <span class="resource-card__link">Facer inscrición <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a href="/memoria/" class="resource-card">
+        <div class="resource-card__icon" aria-hidden="true">📊</div>
+        <div class="resource-card__content">
+          <h3 class="resource-card__title">Memoria de actividades</h3>
+          <p class="resource-card__desc">Resumo anual de actividades, balance económico e xestión transparente da asociación.</p>
+          <span class="resource-card__link">Consultar memoria <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a href="/consello-escolar/" class="resource-card">
+        <div class="resource-card__icon" aria-hidden="true">🏛️</div>
+        <div class="resource-card__content">
+          <h3 class="resource-card__title">Consello Escolar</h3>
+          <p class="resource-card__desc">Representación das familias e novas dos órganos de goberno e participación do centro.</p>
+          <span class="resource-card__link">Máis información <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
 {# ===== ÚLTIMAS NOVAS ===== #}
-<section class="section container">
+<section class="home-section container" aria-labelledby="news-title">
   <div class="section__header">
-    <h2 class="section__title">Últimas novas</h2>
+    <h2 id="news-title" class="section__title">Últimas novas</h2>
   </div>
 
   <div class="posts-grid">
     {%- for post in collections.posts | limit(6) %}
     <article class="post-card">
+      {% if post.data.image %}
+      <div class="post-card__img-wrapper">
+        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-card__img" loading="lazy">
+      </div>
+      {% else %}
+      <div class="post-card__header--no-img"></div>
+      {% endif %}
       <div class="post-card__body">
         {% if post.data.category %}
         <span class="post-card__category">{{ post.data.category }}</span>
@@ -53,11 +177,50 @@ description: "Asociación de Nais e Pais de Alumnos do CEIP Rabadeira. Actividad
         </h3>
         <p class="post-card__excerpt">{{ post.content | excerpt }}</p>
         <div class="post-card__meta">
-          <span class="post-card__date">📅 {{ post.date | dataGalega }}</span>
-          <a href="{{ post.url }}" class="post-card__read">Ler máis →</a>
+          <time class="post-card__date" datetime="{{ post.date | isoDate }}">📅 {{ post.date | dataGalega }}</time>
+          <a href="{{ post.url }}" class="post-card__read" aria-label="Ler máis sobre {{ post.data.title }}">Ler máis <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </article>
     {%- endfor %}
+  </div>
+</section>
+
+{# ===== CONTACTO E AXUDA ===== #}
+<section class="home-section container" aria-label="Contacto e axuda">
+  <div class="home-contact-box">
+    <div class="home-contact-box__inner">
+      <div>
+        <span class="home-contact-box__badge">Comunidade e soporte</span>
+        <h2 class="home-contact-box__title">Tes algunha dúbida ou proposta?</h2>
+        <p class="home-contact-box__text">
+          A directiva da ANPA está á disposición de todas as familias do CEIP Rabadeira. Se tes calquera consulta sobre servizos, actividades ou queres colaborar, ponte en contacto connosco.
+        </p>
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="mailto:{{ site.email }}" class="btn btn--primary">
+            <span class="btn__icon" aria-hidden="true">✉️</span> Escribir correo
+          </a>
+          <a href="/inscripcion/" class="btn btn--secondary">
+            <span class="btn__icon" aria-hidden="true">📝</span> Facerse socio/a
+          </a>
+        </div>
+      </div>
+      <div class="home-contact-box__info">
+        <a href="mailto:{{ site.email }}" class="contact-pill" aria-label="Enviar correo a {{ site.email }}">
+          <span class="contact-pill__icon" aria-hidden="true">📧</span>
+          <div class="contact-pill__content">
+            <span class="contact-pill__label">Correo electrónico</span>
+            <span class="contact-pill__value">{{ site.email }}</span>
+          </div>
+        </a>
+        <div class="contact-pill">
+          <span class="contact-pill__icon" aria-hidden="true">🏫</span>
+          <div class="contact-pill__content">
+            <span class="contact-pill__label">Centro educativo</span>
+            <span class="contact-pill__value">CEIP Rabadeira · Oleiros</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
