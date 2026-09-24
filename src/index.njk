@@ -1,63 +1,138 @@
 ---
 layout: layouts/base.njk
 title: "ANPA Ensino Rabadeira — CEIP Rabadeira"
-description: "Asociación de Nais e Pais de Alumnos do CEIP Rabadeira. Actividades, extraescolares, servizos e novas."
+description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Información sobre servizos, actividades extraescolares e novas para as familias."
 ---
 
 {# ===== HERO ===== #}
-<section class="hero">
-  <div class="container hero__content">
-    <div class="hero__badge">
-      <span class="hero__badge__dot"></span>
-      CEIP Rabadeira · Oleiros
+<section class="home-hero" aria-label="Benvida á ANPA Ensino Rabadeira">
+  <div class="home-hero__container">
+    <div class="home-hero__content">
+      <h1 class="home-hero__title">Benvidas e benvidos á ANPA Ensino Rabadeira</h1>
+      <p class="home-hero__lead">
+        Somos a asociación de nais e pais do CEIP Rabadeira. Traballamos xuntos para apoiar as familias, colaborar co centro e dinamizar a comunidade escolar.
+      </p>
+      <div class="home-hero__actions">
+        <a href="/extraescolares/" class="home-btn home-btn--teal">Ver extraescolares</a>
+        <a href="mailto:{{ site.email }}" class="home-btn home-btn--outline">Contacta coa ANPA</a>
+      </div>
     </div>
-    <h1>
-      ANPA <span class="hero__accent">Ensino</span><br>
-      Rabadeira
-    </h1>
-    <p>Traballando xuntos pola educación, o benestar e a diversión das nosas fillas e fillos.</p>
-    <a href="mailto:{{ site.email }}" class="hero__email">
-      {{ site.email }}
-    </a>
+    <div class="home-hero__media">
+      <img src="/img/hero-anpa-comunidade.webp" alt="" class="home-hero__img" width="1600" height="534" loading="eager" decoding="async">
+    </div>
   </div>
 </section>
 
-{# ===== ACCESO RÁPIDO ===== #}
-<section class="quick-access container">
-  <h2>Acceso rápido</h2>
-  <div class="quick-grid">
-    {%- for pg in collections.navPages %}
-    <a href="{{ pg.data.permalink }}" class="quick-card">
-      <div class="quick-card__icon quick-card__icon--{{ pg.data.iconColor or 'blue' }}">{{ pg.data.icon or '📄' }}</div>
-      <span class="quick-card__label">{{ pg.data.title }}</span>
-    </a>
-    {%- endfor %}
+{# ===== COMUNIDADE INTRO ===== #}
+<section class="home-intro" aria-label="Sobre a ANPA">
+  <div class="home-intro__inner">
+    <p class="home-intro__text">
+      Un espazo de encontro e colaboración entre as familias e a escola para construír xuntos a mellor contorna educativa.
+    </p>
+  </div>
+</section>
+
+{# ===== ACCESOS DIRECTOS PRINCIPAIS ===== #}
+<section class="home-shortcuts" aria-labelledby="shortcuts-heading">
+  <div class="container">
+    <div class="home-section-header">
+      <h2 id="shortcuts-heading" class="home-section-title">Información para as familias</h2>
+    </div>
+    <div class="home-shortcuts-grid">
+      {# 1. Extraescolares #}
+      <a href="/extraescolares/" class="home-shortcut-card home-shortcut-card--teal">
+        <h3 class="home-shortcut-card__title">Extraescolares</h3>
+        <p class="home-shortcut-card__desc">Consulta a oferta de actividades, horarios e inscricións dispoñibles.</p>
+        <span class="home-shortcut-card__link">Ver actividades <span aria-hidden="true">→</span></span>
+      </a>
+
+      {# 2. Madrugadores #}
+      <a href="/madrugadores/" class="home-shortcut-card home-shortcut-card--yellow">
+        <h3 class="home-shortcut-card__title">Madrugadores</h3>
+        <p class="home-shortcut-card__desc">Consulta a información dispoñible sobre o servizo de madrugadores.</p>
+        <span class="home-shortcut-card__link">Máis información <span aria-hidden="true">→</span></span>
+      </a>
+
+      {# 3. Pagamento do comedor #}
+      <a href="/comedor/" class="home-shortcut-card home-shortcut-card--blue">
+        <h3 class="home-shortcut-card__title">Pagamento do comedor</h3>
+        <p class="home-shortcut-card__desc">Información e instrucións para a tramitación do pagamento do comedor.</p>
+        <span class="home-shortcut-card__link">Guía de pago <span aria-hidden="true">→</span></span>
+      </a>
+
+      {# 4. Consello Escolar #}
+      <a href="/consello-escolar/" class="home-shortcut-card home-shortcut-card--coral">
+        <h3 class="home-shortcut-card__title">Consello Escolar</h3>
+        <p class="home-shortcut-card__desc">Información sobre a representación e participación das familias no centro.</p>
+        <span class="home-shortcut-card__link">Máis información <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
   </div>
 </section>
 
 {# ===== ÚLTIMAS NOVAS ===== #}
-<section class="section container">
-  <div class="section__header">
-    <h2 class="section__title">Últimas novas</h2>
-  </div>
-
-  <div class="posts-grid">
-    {%- for post in collections.posts | limit(6) %}
-    <article class="post-card">
-      <div class="post-card__body">
-        {% if post.data.category %}
-        <span class="post-card__category">{{ post.data.category }}</span>
+<section class="home-news" aria-labelledby="news-heading">
+  <div class="container">
+    <div class="home-section-header">
+      <h2 id="news-heading" class="home-section-title">Últimas novas</h2>
+    </div>
+    <div class="home-news-grid">
+      {%- for post in collections.posts | limit(3) %}
+      <article class="home-news-card">
+        {% if post.data.image %}
+        <div class="home-news-card__img-wrapper">
+          <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="home-news-card__img" loading="lazy">
+        </div>
         {% endif %}
-        <h3 class="post-card__title">
-          <a href="{{ post.url }}">{{ post.data.title }}</a>
-        </h3>
-        <p class="post-card__excerpt">{{ post.content | excerpt }}</p>
-        <div class="post-card__meta">
-          <span class="post-card__date">📅 {{ post.date | dataGalega }}</span>
-          <a href="{{ post.url }}" class="post-card__read">Ler máis →</a>
+        <div class="home-news-card__body">
+          <time class="home-news-card__date" datetime="{{ post.date | isoDate }}">📅 {{ post.date | dataGalega }}</time>
+          <h3 class="home-news-card__title">
+            <a href="{{ post.url }}">{{ post.data.title }}</a>
+          </h3>
+          <p class="home-news-card__excerpt">{{ post.content | excerpt }}</p>
+          <div class="home-news-card__footer">
+            <a href="{{ post.url }}" class="home-news-card__read" aria-label="Ler máis sobre {{ post.data.title }}">Ler máis <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== CONTACTO E AXUDA ===== #}
+<section class="home-contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="home-contact-panel">
+      <div class="home-contact-panel__inner">
+        <div>
+          <h2 id="contact-heading" class="home-contact-panel__title">Contacto e axuda</h2>
+          <p class="home-contact-panel__text">
+            Tes algunha dúbida ou proposta? A directiva da ANPA está á disposición de todas as familias do centro.
+          </p>
+          <div style="margin-top: 1.25rem;">
+            <a href="mailto:{{ site.email }}" class="home-btn home-btn--teal">
+              Enviar correo
+            </a>
+          </div>
+        </div>
+        <div class="home-contact-details">
+          <a href="mailto:{{ site.email }}" class="home-contact-item" aria-label="Enviar correo a {{ site.email }}">
+            <span class="home-contact-item__icon" aria-hidden="true">📧</span>
+            <div>
+              <span class="home-contact-item__label">Correo electrónico</span>
+              <span class="home-contact-item__val">{{ site.email }}</span>
+            </div>
+          </a>
+          <div class="home-contact-item">
+            <span class="home-contact-item__icon" aria-hidden="true">🏫</span>
+            <div>
+              <span class="home-contact-item__label">Centro educativo</span>
+              <span class="home-contact-item__val">CEIP Rabadeira · Oleiros</span>
+            </div>
+          </div>
         </div>
       </div>
-    </article>
-    {%- endfor %}
+    </div>
   </div>
 </section>
