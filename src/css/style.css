@@ -508,6 +508,18 @@ a:hover {
 }
 
 @media (min-width: 900px) {
+  .home-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 58%;
+    background: linear-gradient(90deg, rgba(250, 246, 240, 0.98) 0%, rgba(250, 246, 240, 0.90) 55%, rgba(250, 246, 240, 0) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
   .home-hero__media {
     position: absolute;
     top: 0;
