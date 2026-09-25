@@ -220,15 +220,39 @@ a:hover {
   border: 0;
 }
 
+/* ---------- Skip Link ---------- */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: var(--sp-4);
+  z-index: 999;
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--clr-teal-700);
+  color: #ffffff !important;
+  font-family: var(--ff-body);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  text-decoration: none !important;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: top 0.15s var(--ease);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--clr-yellow-accent);
+  outline-offset: 2px;
+}
+
 /* ---------- Header ---------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid var(--clr-gray-200);
+  border-bottom: 1px solid var(--clr-warm-border);
   height: var(--header-h);
   display: flex;
   align-items: center;
@@ -276,13 +300,13 @@ a:hover {
   font-family: var(--ff-heading);
   font-weight: 700;
   font-size: var(--fs-lg);
-  color: var(--clr-gray-900);
+  color: var(--clr-teal-900);
   white-space: nowrap;
 }
 
 .site-brand__sub {
   font-size: var(--fs-xs);
-  color: var(--clr-gray-500);
+  color: var(--clr-charcoal-500);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -299,16 +323,26 @@ a:hover {
   padding: var(--sp-2) var(--sp-3);
   font-size: var(--fs-sm);
   font-weight: 500;
-  color: var(--clr-gray-700);
+  color: var(--clr-charcoal-700);
   border-radius: var(--radius-sm);
   transition: all var(--duration) var(--ease);
   white-space: nowrap;
 }
 
-.main-nav a:hover,
+.main-nav a:hover {
+  color: var(--clr-teal-800);
+  background: var(--clr-teal-50);
+}
+
 .main-nav a[aria-current="page"] {
-  color: var(--clr-primary-500);
-  background: var(--clr-primary-100);
+  color: var(--clr-teal-900);
+  background: var(--clr-teal-100);
+  font-weight: 600;
+}
+
+.main-nav a:focus-visible {
+  outline: 2px solid var(--clr-teal-600);
+  outline-offset: 2px;
 }
 
 /* Mobile nav toggle */
@@ -318,7 +352,7 @@ a:hover {
   border: none;
   cursor: pointer;
   padding: 10px;
-  color: var(--clr-gray-700);
+  color: var(--clr-charcoal-900);
   min-width: 44px;
   min-height: 44px;
   border-radius: var(--radius-sm);
@@ -331,8 +365,13 @@ a:hover {
   display: block;
 }
 
+.nav-toggle:hover {
+  background-color: var(--clr-teal-50);
+  color: var(--clr-teal-800);
+}
+
 .nav-toggle:focus-visible {
-  outline: 2px solid var(--clr-primary-500);
+  outline: 2px solid var(--clr-teal-600);
   outline-offset: 2px;
 }
 
@@ -355,7 +394,7 @@ a:hover {
     -webkit-overflow-scrolling: touch;
     flex-direction: column;
     background: var(--clr-white);
-    border-bottom: 1px solid var(--clr-gray-200);
+    border-bottom: 1px solid var(--clr-warm-border);
     box-shadow: var(--shadow-lg);
     padding: var(--sp-4);
     gap: var(--sp-1);
@@ -1132,23 +1171,17 @@ a:hover {
 /* ---------- Footer ---------- */
 .site-footer {
   margin-top: auto;
-  background: var(--clr-gray-900);
-  color: var(--clr-gray-300);
-  padding: var(--sp-12) 0 var(--sp-6);
+  background: #f4eee5;
+  border-top: 1px solid #e2d9cc;
+  color: #1a3835;
+  padding: var(--sp-12) 0 0;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: var(--sp-10);
-  margin-bottom: var(--sp-10);
-}
-
-@media (max-width: 700px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
+  padding-bottom: var(--sp-10);
 }
 
 .footer-about h3,
@@ -1157,13 +1190,14 @@ a:hover {
   font-family: var(--ff-heading);
   font-weight: 700;
   font-size: var(--fs-base);
-  color: var(--clr-white);
+  color: var(--clr-teal-900);
   margin-bottom: var(--sp-4);
 }
 
 .footer-about p {
   font-size: var(--fs-sm);
   line-height: 1.7;
+  color: #1a3835;
 }
 
 .footer-links ul {
@@ -1176,29 +1210,107 @@ a:hover {
 
 .footer-links a {
   font-size: var(--fs-sm);
-  color: var(--clr-gray-300);
+  color: #1a3835;
   transition: color var(--duration) var(--ease);
+  text-decoration: none;
 }
 
 .footer-links a:hover {
-  color: var(--clr-accent-400);
+  color: var(--clr-teal-700);
+  text-decoration: underline;
+}
+
+.footer-links a:focus-visible {
+  outline: 2px solid var(--clr-teal-600);
+  outline-offset: 2px;
 }
 
 .footer-contact p {
   font-size: var(--fs-sm);
+  color: #1a3835;
   margin-bottom: var(--sp-2);
 }
 
 .footer-contact a {
-  color: var(--clr-accent-400);
+  color: var(--clr-teal-900);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
 }
 
+.footer-contact a:hover {
+  color: var(--clr-teal-700);
+  text-decoration: underline;
+}
+
+.footer-contact a:focus-visible {
+  outline: 2px solid var(--clr-teal-600);
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding-top: var(--sp-8);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+    padding-bottom: var(--sp-6);
+  }
+
+  .footer-about h3,
+  .footer-links h3,
+  .footer-contact h3 {
+    margin-bottom: var(--sp-2);
+  }
+
+  .footer-links li {
+    margin-bottom: 0;
+  }
+
+  .footer-links a {
+    display: block;
+    padding-block: 6px;
+    line-height: 1.4;
+  }
+
+  .footer-contact p {
+    margin-bottom: var(--sp-1);
+  }
+}
+
+/* Bottom copyright bar — Primary teal family */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: var(--sp-6);
+  background: var(--clr-teal-800);
+  color: #f0f7f6;
+  padding: var(--sp-5) 0;
   text-align: center;
   font-size: var(--fs-xs);
-  color: var(--clr-gray-500);
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #f0f7f6;
+}
+
+.footer-admin-link {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: #d0e6e3;
+  font-size: var(--fs-xs);
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+}
+
+.footer-admin-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-admin-link:focus-visible {
+  outline: 2px solid var(--clr-yellow-accent);
+  outline-offset: 2px;
 }
 
 /* ---------- All Posts page ---------- */

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Saltar ao contido</a>
 
   <header class="site-header">
     <div class="header-inner">
@@ -40,7 +41,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     {{ content | safe }}
   </main>
 
@@ -66,9 +67,11 @@
           <p>🏫 CEIP Rabadeira, Oleiros (A Coruña)</p>
         </div>
       </div>
-      <div class="footer-bottom">
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
         <p>&copy; 2026 {{ site.name }}. Feito con 💙 para a comunidade educativa.</p>
-        <p style="margin-top: 0.5rem;"><a href="/admin/" style="color: var(--clr-gray-500); font-size: 0.75rem;">🔒 Acceso administración</a></p>
+        <p><a href="/admin/" class="footer-admin-link">🔒 Acceso administración</a></p>
       </div>
     </div>
   </footer>
