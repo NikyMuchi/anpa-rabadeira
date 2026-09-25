@@ -482,7 +482,6 @@ a:hover {
 /* ---------- Homepage Hero ---------- */
 .home-hero {
   background-color: var(--clr-cream-surface);
-  border-bottom: 1px solid var(--clr-warm-border);
   position: relative;
   overflow: hidden;
 }
@@ -613,7 +612,6 @@ a:hover {
 .home-intro {
   padding-block: var(--sp-12);
   background-color: var(--clr-cream-bg);
-  border-bottom: 1px solid var(--clr-warm-border);
   text-align: center;
 }
 
@@ -636,7 +634,6 @@ a:hover {
 .home-shortcuts {
   padding-block: var(--sp-12);
   background-color: var(--clr-cream-surface);
-  border-bottom: 1px solid var(--clr-warm-border);
 }
 
 .home-section-header {
@@ -752,7 +749,6 @@ a:hover {
 .home-news {
   padding-block: var(--sp-12);
   background-color: var(--clr-cream-bg);
-  border-bottom: 1px solid var(--clr-warm-border);
 }
 
 .home-news-grid {
