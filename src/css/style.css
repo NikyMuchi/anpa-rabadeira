@@ -1185,10 +1185,41 @@ a:hover {
 }
 
 @media (max-width: 700px) {
+  .site-footer {
+    padding-top: var(--sp-8);
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: var(--sp-8);
-    padding-bottom: var(--sp-8);
+    gap: var(--sp-5);
+    padding-bottom: var(--sp-6);
+  }
+
+  .footer-about h3,
+  .footer-links h3,
+  .footer-contact h3 {
+    margin-bottom: var(--sp-2);
+  }
+
+  .footer-links li {
+    margin-bottom: 0;
+  }
+
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-block: 2px;
+  }
+
+  .footer-contact p {
+    margin-bottom: var(--sp-1);
+  }
+
+  .footer-contact a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
   }
 }
 
