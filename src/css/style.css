@@ -1171,23 +1171,24 @@ a:hover {
 /* ---------- Footer ---------- */
 .site-footer {
   margin-top: auto;
-  background: #e5eee8;
-  border-top: 1px solid #c9d8ce;
-  color: var(--clr-charcoal-700);
-  padding: var(--sp-12) 0 var(--sp-6);
+  background: #f4eee5;
+  border-top: 1px solid #e2d9cc;
+  color: #1a3835;
+  padding: var(--sp-12) 0 0;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: var(--sp-10);
-  margin-bottom: var(--sp-10);
+  padding-bottom: var(--sp-10);
 }
 
 @media (max-width: 700px) {
   .footer-grid {
     grid-template-columns: 1fr;
     gap: var(--sp-8);
+    padding-bottom: var(--sp-8);
   }
 }
 
@@ -1204,7 +1205,7 @@ a:hover {
 .footer-about p {
   font-size: var(--fs-sm);
   line-height: 1.7;
-  color: var(--clr-charcoal-700);
+  color: #1a3835;
 }
 
 .footer-links ul {
@@ -1217,13 +1218,13 @@ a:hover {
 
 .footer-links a {
   font-size: var(--fs-sm);
-  color: var(--clr-charcoal-700);
+  color: #1a3835;
   transition: color var(--duration) var(--ease);
   text-decoration: none;
 }
 
 .footer-links a:hover {
-  color: var(--clr-teal-800);
+  color: var(--clr-teal-700);
   text-decoration: underline;
 }
 
@@ -1234,19 +1235,19 @@ a:hover {
 
 .footer-contact p {
   font-size: var(--fs-sm);
-  color: var(--clr-charcoal-700);
+  color: #1a3835;
   margin-bottom: var(--sp-2);
 }
 
 .footer-contact a {
-  color: var(--clr-teal-800);
+  color: var(--clr-teal-900);
   font-weight: 600;
   text-decoration: none;
   transition: color var(--duration) var(--ease);
 }
 
 .footer-contact a:hover {
-  color: var(--clr-teal-900);
+  color: var(--clr-teal-700);
   text-decoration: underline;
 }
 
@@ -1255,34 +1256,36 @@ a:hover {
   outline-offset: 2px;
 }
 
+/* Bottom copyright bar — Primary teal family */
 .footer-bottom {
-  border-top: 1px solid #c9d8ce;
-  padding-top: var(--sp-6);
+  background: var(--clr-teal-800);
+  color: #f0f7f6;
+  padding: var(--sp-5) 0;
   text-align: center;
   font-size: var(--fs-xs);
-  color: var(--clr-charcoal-500);
 }
 
 .footer-bottom p {
   margin: 0;
+  color: #f0f7f6;
 }
 
 .footer-admin-link {
   display: inline-block;
-  margin-top: 0.5rem;
-  color: var(--clr-charcoal-500);
+  margin-top: 0.35rem;
+  color: #d0e6e3;
   font-size: var(--fs-xs);
   text-decoration: none;
   transition: color var(--duration) var(--ease);
 }
 
 .footer-admin-link:hover {
-  color: var(--clr-teal-900);
+  color: #ffffff;
   text-decoration: underline;
 }
 
 .footer-admin-link:focus-visible {
-  outline: 2px solid var(--clr-teal-600);
+  outline: 2px solid var(--clr-yellow-accent);
   outline-offset: 2px;
 }
 
