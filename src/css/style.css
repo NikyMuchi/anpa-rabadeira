@@ -1171,8 +1171,8 @@ a:hover {
 /* ---------- Footer ---------- */
 .site-footer {
   margin-top: auto;
-  background: var(--clr-cream-surface);
-  border-top: 1px solid var(--clr-warm-border);
+  background: #e5eee8;
+  border-top: 1px solid #c9d8ce;
   color: var(--clr-charcoal-700);
   padding: var(--sp-12) 0 var(--sp-6);
 }
@@ -1223,7 +1223,7 @@ a:hover {
 }
 
 .footer-links a:hover {
-  color: var(--clr-teal-700);
+  color: var(--clr-teal-800);
   text-decoration: underline;
 }
 
@@ -1239,8 +1239,8 @@ a:hover {
 }
 
 .footer-contact a {
-  color: var(--clr-teal-700);
-  font-weight: 500;
+  color: var(--clr-teal-800);
+  font-weight: 600;
   text-decoration: none;
   transition: color var(--duration) var(--ease);
 }
@@ -1256,7 +1256,7 @@ a:hover {
 }
 
 .footer-bottom {
-  border-top: 1px solid var(--clr-warm-border);
+  border-top: 1px solid #c9d8ce;
   padding-top: var(--sp-6);
   text-align: center;
   font-size: var(--fs-xs);
@@ -1277,7 +1277,7 @@ a:hover {
 }
 
 .footer-admin-link:hover {
-  color: var(--clr-teal-800);
+  color: var(--clr-teal-900);
   text-decoration: underline;
 }
 
