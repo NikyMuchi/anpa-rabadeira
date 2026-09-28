@@ -70,32 +70,21 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
   </div>
 </section>
 
-{# ===== ÚLTIMAS NOVAS ===== #}
+{# ===== NOVAS DA ANPA ===== #}
 <section class="home-news" aria-labelledby="news-heading">
   <div class="container">
-    <div class="home-section-header">
-      <h2 id="news-heading" class="home-section-title">Últimas novas</h2>
-    </div>
-    <div class="home-news-grid">
-      {%- for post in collections.posts | limit(3) %}
-      <article class="home-news-card">
-        {% if post.data.image %}
-        <div class="home-news-card__img-wrapper">
-          <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="home-news-card__img" loading="lazy">
-        </div>
-        {% endif %}
-        <div class="home-news-card__body">
-          <time class="home-news-card__date" datetime="{{ post.date | isoDate }}">📅 {{ post.date | dataGalega }}</time>
-          <h3 class="home-news-card__title">
-            <a href="{{ post.url }}">{{ post.data.title }}</a>
-          </h3>
-          <p class="home-news-card__excerpt">{{ post.content | excerpt }}</p>
-          <div class="home-news-card__footer">
-            <a href="{{ post.url }}" class="home-news-card__read" aria-label="Ler máis sobre {{ post.data.title }}">Ler máis <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </article>
-      {%- endfor %}
+    <div class="home-news-panel">
+      <div class="home-section-header">
+        <h2 id="news-heading" class="home-section-title">Novas da ANPA</h2>
+      </div>
+      <p class="home-news-panel__text">
+        Podes consultar todas as publicacións, avisos e novidades da asociación no noso blogue oficial.
+      </p>
+      <div class="home-news-panel__action">
+        <a href="https://anpaensinorabadeira.wordpress.com/" class="home-btn home-btn--teal" target="_blank" rel="noopener noreferrer">
+          Ir ao blogue da ANPA <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
