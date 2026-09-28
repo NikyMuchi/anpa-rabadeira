@@ -9,23 +9,53 @@ showInNav: true
 iconColor: "green"
 ---
 
-O servizo de madrugadores está dispoñible de **7:30 a 8:45** con posibilidade de almorzo, xestionado en colaboración coa empresa Jardanay ([www.jardanay.es](https://www.jardanay.es/)).
+O servizo de madrugadores está dispoñible de **7:30 a 8:45** con posibilidade de almorzo. O servizo é xestionado pola empresa Jardanay ([www.jardanay.es](https://www.jardanay.es/)).
 
-## Información do servizo (Curso 2026-2027)
+## Tarifas do servizo (Curso 2026-2027)
 
-A empresa Jardanay habilitou unha nova plataforma web para a tramitación e xestión do servizo de madrugadores.
+Segundo a guía oficial do servizo para o curso 2026-2027:
 
-Podes consultar a publicación oficial do [Tríptico informativo de Madrugadores no blogue da ANPA](https://anpaensinorabadeira.wordpress.com/2026/06/18/triptico-madrugadores/).
+**Contratación mensual fixa:**
+- Con almorzo: **49,94 € / mes**
+- Sen almorzo: **37,45 € / mes**
 
-Para calquera dúbida sobre o procedemento de inscrición, prazos actualizados, tarifas vixentes ou xestión de días soltos, por favor contacta directamente coa ANPA a través de [anpaensinorabadeira@gmail.com](mailto:anpaensinorabadeira@gmail.com).
+**Días soltos (esporádicos):**
+- Con almorzo: **4,79 € / día**
+- Sen almorzo: **3,75 € / día**
 
-## Alta de socios/as da ANPA
+## Inscrición e funcionamento
 
-Para facervos socios/as da ANPA e acceder ás vantaxes e servizos da asociación, podedes cubrir o formulario oficial:
+A tramitación do servizo realízase a través da plataforma web de Jardanay: [www.comedores.jardanay.es](https://www.comedores.jardanay.es).
 
-<p><a href="https://forms.gle/dUnBLxSe5cRLyLS79" target="_blank" rel="noopener noreferrer" class="btn-action">Alta de socio/a ANPA</a></p>
+- **Usuarios fixos:** É necesario crear o perfil familiar na plataforma web e solicitar o servizo para o alumno/a. As modificacións ou baixas mensuais tramítanse ata o día 26 do mes en curso con efectos para o mes seguinte.
+- **Usuarios esporádicos (días soltos):** Requírese o rexistro previo na plataforma e a compra anticipada do vale dixital a través de [www.vales.jardanay.es](https://www.vales.jardanay.es).
+
+## Documentación informativa
+
+<div class="doc-cards">
+  <div class="doc-card">
+    <div class="doc-card__main">
+      <div class="doc-card__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+        </svg>
+      </div>
+      <div class="doc-card__info">
+        <h3 class="doc-card__title">Tríptico Informativo Madrugadores 2026-2027</h3>
+        <p class="doc-card__meta"><span class="doc-card__badge">PDF</span> Guía oficial de Jardanay: prazos, operativa e tarifas</p>
+      </div>
+    </div>
+    <div class="doc-card__actions">
+      <a href="/docs/triptico_madrugadores_2026-2027.pdf" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn--primary">Abrir PDF</a>
+      <a href="/docs/triptico_madrugadores_2026-2027.pdf" download class="doc-btn doc-btn--secondary">Descargar</a>
+    </div>
+  </div>
+</div>
 
 ## Contacto e axuda
 
-Para calquera consulta ou incidencia co servizo de madrugadores, escribe a [anpaensinorabadeira@gmail.com](mailto:anpaensinorabadeira@gmail.com).
+Para calquera dúbida ou incidencia co servizo de madrugadores, podes contactar con:
+- **ANPA Ensino Rabadeira:** [anpaensinorabadeira@gmail.com](mailto:anpaensinorabadeira@gmail.com)
+- **Oficinas de Jardanay:** Tel. 981 12 66 27 · [comedor@jardanay.es](mailto:comedor@jardanay.es)
+
 
