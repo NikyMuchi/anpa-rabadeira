@@ -57,7 +57,7 @@ E aquí xa podes intruducir os datos da túa tarxeta bancaria e proceder ao paga
 
 ![Paso 11 - Proceder ao pagamento](/img/comedor/paso-11.png)
 
-Unha vez feito o pago, envíase o xustificante en pdf ou jpg o email [comedor.rabadeira@gmail.com](mailto:comedor.rabadeira@gmail.com), indicando o nome e curso do alumno no asunto ou corpo do mensaxe para facilitar o trámite administrativo.
+Unha vez feito o pago, envíase o xustificante en pdf ou jpg o email [comedor.ceip.rabadeira@edu.xunta.gal](mailto:comedor.ceip.rabadeira@edu.xunta.gal), indicando o nome e curso do alumno no asunto ou corpo do mensaxe para facilitar o trámite administrativo.
 
 Outras formas de facer o pagamento é presencialmente na oficina bancaria ou a través da plataforma Abalar.
 
