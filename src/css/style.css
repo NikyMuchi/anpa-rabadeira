@@ -1481,13 +1481,18 @@ a:hover {
 }
 
 .doc-btn--primary {
-  background: var(--clr-primary-500);
+  background: var(--clr-teal-600);
   color: var(--clr-white) !important;
 }
 
 .doc-btn--primary:hover {
-  background: var(--clr-primary-700);
+  background: var(--clr-teal-700);
   color: var(--clr-white) !important;
+}
+
+.doc-btn--primary:focus-visible {
+  outline: 2px solid var(--clr-teal-600);
+  outline-offset: 2px;
 }
 
 .doc-btn--secondary {
@@ -1627,14 +1632,19 @@ a:hover {
 }
 
 .btn-action--primary {
-  background: var(--clr-primary-500);
+  background: var(--clr-teal-600);
   color: var(--clr-white) !important;
-  border-color: var(--clr-primary-500);
+  border-color: var(--clr-teal-600);
 }
 
 .btn-action--primary:hover {
-  background: var(--clr-primary-700);
-  border-color: var(--clr-primary-700);
+  background: var(--clr-teal-700);
+  border-color: var(--clr-teal-700);
+}
+
+.btn-action--primary:focus-visible {
+  outline: 2px solid var(--clr-teal-600);
+  outline-offset: 2px;
 }
 
 /* Action button spacing within content */
