@@ -7,58 +7,42 @@ navLabel: "Comedor"
 navOrder: 4
 showInNav: true
 iconColor: "blue"
+intro: "Para todas aquelas familias que dirixéronse ao ANPA coas dúbidas sobre os trámites para facer o pagamento, os adxuntamos as diferentes vias nas que poderes facelo sen ter que ir ao centro. Tamén tendes instrucións detalladas na web do centro."
+atriga_portal_url: "https://ovt.atriga.gal"
+steps:
+  - description: "No apartado de CIDADÁNS, premes iniciar taxa"
+    image: "/img/comedor/paso-1.png"
+    image_alt: "Paso 1 - Portal ATRIGA"
+  - description: "Candado aberto é para o acceso libre ao servizo. Pechado se tedes certificado dixital"
+    image: "/img/comedor/paso-2.png"
+    image_alt: "Paso 2 - Candados"
+  - description: "Sen certificado dixital podes facer o pago a través da TPV"
+    image: "/img/comedor/paso-3.png"
+    image_alt: "Paso 3 - Opcións de pago TPV"
+  - description: "Tedes que poner estes códigos para o pagamento do comedor:"
+    image: "/img/comedor/paso-4.png"
+    image_alt: "Paso 4 - Códigos do comedor"
+  - description: "Completar os datos requeridos:"
+    image: "/img/comedor/paso-5.png"
+    image_alt: "Paso 5 - Datos persoais"
+  - description: "Premer pagamento telemático:"
+    image: "/img/comedor/paso-6.png"
+    image_alt: "Paso 6 - Pagamento telemático"
+  - description: "Na seguinte pantalla premer continuar co tipo de pagamento «telemático» e modo de pagamento «tarxeta»"
+    image: "/img/comedor/paso-7.png"
+    image_alt: "Paso 7 - Tipo de pagamento"
+  - description: "Sairá esta outra pantalla, e premer ingresar:"
+    image: "/img/comedor/paso-8.png"
+    image_alt: "Paso 8 - Premer ingresar"
+  - description: "Nos sairá esta outra mensaje para continuar co pagamento"
+    image: "/img/comedor/paso-9.png"
+    image_alt: "Paso 9 - Confirmación"
+  - description: "E aquí xa podes intruducir os datos da túa tarxeta bancaria e proceder ao pagamento:"
+    image: "/img/comedor/paso-10.png"
+    image_alt: "Paso 10 - Datos da tarxeta"
+  - description: "Unha vez feito o pago, envíase o xustificante en pdf ou jpg o email comedor.ceip.rabadeira@edu.xunta.gal, indicando o nome e curso do alumno no asunto ou corpo do mensaxe para facilitar o trámite administrativo."
+    image: "/img/comedor/paso-11.png"
+    image_alt: "Paso 11 - Proceder ao pagamento"
+other_methods_note: "Outras formas de facer o pagamento é presencialmente na oficina bancaria ou a través da plataforma Abalar."
+closing_note: "Esperamos que esta guía sea de axuda para todos vós."
 ---
-
-Para todas aquelas familias que dirixéronse ao ANPA coas dúbidas sobre os trámites para facer o pagamento, os adxuntamos as diferentes vias nas que poderes facelo sen ter que ir ao centro. Tamén tendes [instruccións detalladas na web do centro](http://www.edu.xunta.gal/centros/ceiprabadeira/node/268).
-
-## PAGO COMEDOR A TRAVÉS DE ATRIGA (AXENCIA TRIBUTARIA DE GALICIA)
-
-Un deles é a través da Axencia Tributaria de Galicia: [Portal tributario ATRIGA](https://ovt.atriga.gal).
-
-No apartado de CIDADÁNS, premes iniciar taxa
-
-![Paso 1 - Portal ATRIGA](/img/comedor/paso-1.png)
-
-Candado aberto é para o acceso libre ao servizo. Pechado se tedes certificado dixital
-
-![Paso 2 - Candados](/img/comedor/paso-2.png)
-
-Sen certificado dixital podes facer o pago a través da TPV
-
-![Paso 3 - Opcións de pago TPV](/img/comedor/paso-3.png)
-
-Tedes que poner estes códigos para o pagamento do comedor:
-
-![Paso 4 - Códigos do comedor](/img/comedor/paso-4.png)
-
-Completar os datos requeridos:
-
-![Paso 5 - Datos persoais](/img/comedor/paso-5.png)
-
-Premer pagamento telemático:
-
-![Paso 6 - Pagamento telemático](/img/comedor/paso-6.png)
-
-Na seguinte pantalla premer continuar co tipo de pagamento «telemático» e modo de pagamento «tarxeta»
-
-![Paso 7 - Tipo de pagamento](/img/comedor/paso-7.png)
-
-Sairá esta outra pantalla, e premer ingresar:
-
-![Paso 8 - Premer ingresar](/img/comedor/paso-8.png)
-
-Nos sairá esta outra mensaje para continuar co pagamento
-
-![Paso 9 - Confirmación](/img/comedor/paso-9.png)
-
-E aquí xa podes intruducir os datos da túa tarxeta bancaria e proceder ao pagamento:
-
-![Paso 10 - Datos da tarxeta](/img/comedor/paso-10.png)
-
-![Paso 11 - Proceder ao pagamento](/img/comedor/paso-11.png)
-
-Unha vez feito o pago, envíase o xustificante en pdf ou jpg o email [comedor.ceip.rabadeira@edu.xunta.gal](mailto:comedor.ceip.rabadeira@edu.xunta.gal), indicando o nome e curso do alumno no asunto ou corpo do mensaxe para facilitar o trámite administrativo.
-
-Outras formas de facer o pagamento é presencialmente na oficina bancaria ou a través da plataforma Abalar.
-
-Esperamos que esta guía sea de axuda para todos vós.

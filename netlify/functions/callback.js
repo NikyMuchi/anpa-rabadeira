@@ -1,26 +1,57 @@
 /**
  * Netlify Function: /callback
- * Completes GitHub OAuth exchange and transmits the token to Decap CMS via postMessage.
- * Cost: €0 (Zero third-party services, runs on Netlify serverless free tier).
+ * Completes GitHub OAuth token exchange for Decap CMS.
+ * Validates CSRF state parameter and restricts postMessage to verified origin.
  */
 
-exports.handler = async function (event, context) {
-  const code = event.queryStringParameters && event.queryStringParameters.code;
+exports.handler = async function (event) {
+  const query = event.queryStringParameters || {};
+  const code = query.code;
+  const state = query.state;
   const clientId = process.env.GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+
+  const host = event.headers.host || "anpa-rabadeira.netlify.app";
+  const protocol = event.headers["x-forwarded-proto"] || "https";
+  const siteOrigin = `${protocol}://${host}`;
+
+  // Parse cookie for CSRF state validation
+  const cookies = event.headers.cookie || "";
+  const match = cookies.match(/(?:^|;\s*)decap_oauth_state=([^;]+)/);
+  const expectedState = match ? match[1] : null;
+
+  const clearCookieHeader = "decap_oauth_state=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax; Secure";
+
+  // Validate state
+  if (!state || !expectedState || state !== expectedState) {
+    return {
+      statusCode: 403,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Set-Cookie": clearCookieHeader,
+      },
+      body: "<h1>Erro de seguridade (CSRF)</h1><p>O parámetro de estado OAuth non coincide ou caducou. Por favor, inténteo de novo.</p>",
+    };
+  }
 
   if (!code) {
     return {
       statusCode: 400,
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-      body: "<h1>Erro de autenticación</h1><p>Non se recibiu o código de autorización de GitHub.</p>",
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Set-Cookie": clearCookieHeader,
+      },
+      body: "<h1>Erro de autenticación</h1><p>Non se recibiu o código de autorización.</p>",
     };
   }
 
   if (!clientId || !clientSecret) {
     return {
       statusCode: 500,
-      headers: { "Content-Type": "text/html; charset=utf-8" },
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Set-Cookie": clearCookieHeader,
+      },
       body: "<h1>Erro de configuración</h1><p>Credenciais GITHUB_CLIENT_ID ou GITHUB_CLIENT_SECRET non configuradas.</p>",
     };
   }
@@ -42,11 +73,13 @@ exports.handler = async function (event, context) {
     const data = await response.json();
 
     if (data.error || !data.access_token) {
-      const errorMsg = data.error_description || data.error || "Fallo ao obter token de acceso";
       return {
         statusCode: 401,
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-        body: `<h1>Erro de autorización</h1><p>${errorMsg}</p>`,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Set-Cookie": clearCookieHeader,
+        },
+        body: "<h1>Erro de autorización</h1><p>Non foi posible obter o token de acceso de GitHub.</p>",
       };
     }
 
@@ -56,17 +89,22 @@ exports.handler = async function (event, context) {
       provider: "github",
     });
 
+    // Send postMessage strictly to the verified origin
     const html = `<!DOCTYPE html>
 <html lang="gl">
 <head>
   <meta charset="utf-8">
-  <title>Autenticando...</title>
+  <title>Autenticación completada</title>
 </head>
 <body>
   <p>Autenticación completada. Pechando ventá...</p>
   <script>
     (function () {
+      var targetOrigin = ${JSON.stringify(siteOrigin)};
       function receiveMessage(e) {
+        if (e.origin !== targetOrigin && e.origin !== window.location.origin) {
+          return;
+        }
         window.opener.postMessage(
           'authorization:github:success:${postMessagePayload.replace(/'/g, "\\'")}',
           e.origin
@@ -75,7 +113,9 @@ exports.handler = async function (event, context) {
         window.close();
       }
       window.addEventListener("message", receiveMessage, false);
-      window.opener.postMessage("authorizing:github", "*");
+      if (window.opener) {
+        window.opener.postMessage("authorizing:github", "*");
+      }
     })();
   </script>
 </body>
@@ -85,15 +125,19 @@ exports.handler = async function (event, context) {
       statusCode: 200,
       headers: {
         "Content-Type": "text/html; charset=utf-8",
-        "Cache-Control": "no-cache",
+        "Set-Cookie": clearCookieHeader,
+        "Cache-Control": "no-cache, no-store, must-revalidate",
       },
       body: html,
     };
   } catch (err) {
     return {
       statusCode: 500,
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-      body: `<h1>Erro interno</h1><p>${err.message}</p>`,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Set-Cookie": clearCookieHeader,
+      },
+      body: "<h1>Erro interno</h1><p>Produciuse un erro ao procesar a autenticación.</p>",
     };
   }
 };

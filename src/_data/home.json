@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "title": "Benvidas e benvidos á ANPA Ensino Rabadeira",
+    "lead": "Somos a asociación de nais e pais do CEIP Rabadeira. Traballamos xuntos para apoiar as familias, colaborar co centro e dinamizar a comunidade escolar.",
+    "image": "/img/hero-anpa-comunidade.webp",
+    "image_alt": "Comunidade educativa CEIP Rabadeira",
+    "primary_button_text": "Ver extraescolares",
+    "primary_button_url": "/extraescolares/",
+    "secondary_button_text": "Contacta coa ANPA",
+    "secondary_button_url": "mailto:anpaensinorabadeira@gmail.com"
+  },
+  "intro": {
+    "text": "Un espazo de encontro e colaboración entre as familias e a escola para construír xuntos a mellor contorna educativa."
+  },
+  "shortcuts": {
+    "title": "Información para as familias",
+    "items": [
+      {
+        "title": "Extraescolares",
+        "description": "Consulta a oferta de actividades, horarios e inscricións dispoñibles.",
+        "url": "/extraescolares/",
+        "link_text": "Ver actividades",
+        "theme_color": "teal"
+      },
+      {
+        "title": "Madrugadores",
+        "description": "Consulta a información dispoñible sobre o servizo de madrugadores.",
+        "url": "/madrugadores/",
+        "link_text": "Máis información",
+        "theme_color": "yellow"
+      },
+      {
+        "title": "Pagamento do comedor",
+        "description": "Información e instrucións para a tramitación do pagamento do comedor.",
+        "url": "/comedor/",
+        "link_text": "Guía de pago",
+        "theme_color": "blue"
+      },
+      {
+        "title": "Consello Escolar",
+        "description": "Información sobre a representación e participación das familias no centro.",
+        "url": "/consello-escolar/",
+        "link_text": "Máis información",
+        "theme_color": "coral"
+      }
+    ]
+  },
+  "news_section": {
+    "title": "Últimas novas",
+    "more_link_text": "Ver todas as novas",
+    "more_link_url": "/novas/"
+  },
+  "contact_panel": {
+    "title": "Contacto e axuda",
+    "text": "Tes algunha dúbida ou proposta? A directiva da ANPA está á disposición de todas as familias do centro.",
+    "button_text": "Enviar correo",
+    "school_name": "CEIP Rabadeira · Oleiros"
+  }
+}
