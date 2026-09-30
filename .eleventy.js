@@ -30,9 +30,17 @@ module.exports = function (eleventyConfig) {
 
   // navPages: pages visible in nav & quick-access, sorted by navOrder
   eleventyConfig.addCollection("navPages", function (collectionApi) {
+    const seen = new Set();
     return collectionApi
       .getFilteredByGlob(["src/pages/*.md", "src/pages/*.njk"])
-      .filter((p) => p.data.showInNav !== false)
+      .filter((p) => {
+        if (p.data.showInNav === false) return false;
+        if (p.data.pagination && p.data.pagination.pageNumber > 0) return false;
+        const key = p.data.navLabel || p.data.title;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
       .sort((a, b) => (a.data.navOrder || 99) - (b.data.navOrder || 99));
   });
 

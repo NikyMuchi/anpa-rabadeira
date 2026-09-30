@@ -956,6 +956,50 @@ a:hover {
   letter-spacing: 0.04em;
 }
 
+/* ---------- News Pagination ---------- */
+.news-pagination {
+  margin-top: var(--sp-12);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--clr-warm-border);
+}
+
+.news-pagination__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+}
+
+.news-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--clr-teal-700);
+  background: var(--clr-cream-card);
+  border: 1px solid var(--clr-warm-border);
+  border-radius: var(--radius-sm);
+  text-decoration: none !important;
+  transition: all var(--duration) var(--ease);
+}
+
+.news-pagination__btn:hover {
+  background: var(--clr-teal-50);
+  color: var(--clr-teal-900);
+  border-color: var(--clr-teal-500);
+  transform: translateY(-1px);
+}
+
+.news-pagination__info {
+  font-size: var(--fs-sm);
+  color: var(--clr-charcoal-500);
+  font-weight: 500;
+  margin-inline: auto;
+}
+
 /* ---------- Contact & Support (Homepage Scoped) ---------- */
 .home-contact {
   padding-block: var(--sp-12);

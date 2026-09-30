@@ -1,19 +1,25 @@
 ---
 layout: layouts/base.njk
-title: "Novas e Actualidade — ANPA Ensino Rabadeira"
-description: "Arquivo de novas, avisos e actividades da ANPA Ensino Rabadeira (CEIP Rabadeira)."
-permalink: /novas/
-showInNav: false
+title: "Novas da ANPA"
+navLabel: "Novas"
+navOrder: 7
+showInNav: true
+description: "Avisos, actividades e novidades da nosa comunidade."
+pagination:
+  data: collections.posts
+  size: 12
+  alias: posts
+permalink: "{% if pagination.pageNumber > 0 %}novas/page/{{ pagination.pageNumber + 1 }}/index.html{% else %}novas/index.html{% endif %}"
 ---
 
 <div class="news-archive container">
   <header class="news-archive__header">
-    <h1 class="news-archive__title">Novas e actualidade</h1>
-    <p class="news-archive__lead">Consulta todas as publicacións, avisos e actividades da nosa comunidade escolar.</p>
+    <h1 class="news-archive__title">Novas da ANPA</h1>
+    <p class="news-archive__lead">Avisos, actividades e novidades da nosa comunidade.</p>
   </header>
 
   <div class="news-archive__grid">
-    {%- for post in collections.posts %}
+    {%- for post in posts %}
     <article class="home-news-card">
       {% if post.data.image %}
       <div class="home-news-card__img-wrapper">
@@ -38,4 +44,26 @@ showInNav: false
     </article>
     {%- endfor %}
   </div>
+
+  {% if pagination.pages.length > 1 %}
+  <nav class="news-pagination" aria-label="Paxinación de novas">
+    <div class="news-pagination__inner">
+      {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous }}" class="news-pagination__btn" rel="prev">
+        <span aria-hidden="true">←</span> Novas máis recentes
+      </a>
+      {% endif %}
+
+      <span class="news-pagination__info">
+        Páxina {{ pagination.pageNumber + 1 }} de {{ pagination.pages.length }}
+      </span>
+
+      {% if pagination.href.next %}
+      <a href="{{ pagination.href.next }}" class="news-pagination__btn" rel="next">
+        Novas anteriores <span aria-hidden="true">→</span>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
 </div>
