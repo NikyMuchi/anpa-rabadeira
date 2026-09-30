@@ -40,8 +40,9 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
     </div>
     <div class="home-shortcuts-grid">
       {% if home.shortcuts.items and home.shortcuts.items.length > 0 %}
+        {% set approvedColors = ['teal', 'yellow', 'blue', 'coral'] %}
         {% for card in home.shortcuts.items %}
-        <a href="{{ card.url }}" class="home-shortcut-card home-shortcut-card--{{ card.theme_color | default('teal') }}">
+        <a href="{{ card.url }}" class="home-shortcut-card home-shortcut-card--{{ approvedColors[loop.index0 % 4] }}">
           <h3 class="home-shortcut-card__title">{{ card.title }}</h3>
           <p class="home-shortcut-card__desc">{{ card.description }}</p>
           <span class="home-shortcut-card__link">{{ card.link_text | default('Máis información') }} <span aria-hidden="true">→</span></span>

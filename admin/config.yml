@@ -288,10 +288,6 @@ collections:
                   - { label: "Descrición curta", name: "description", widget: "text" }
                   - { label: "URL de destino", name: "url", widget: "string" }
                   - { label: "Texto da ligazón", name: "link_text", widget: "string" }
-                  - label: "Cor do tema"
-                    name: "theme_color"
-                    widget: "select"
-                    options: ["teal", "yellow", "blue", "coral"]
           - label: "Bloque de Novas"
             name: "news_section"
             widget: "object"
