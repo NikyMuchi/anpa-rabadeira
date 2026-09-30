@@ -35,7 +35,7 @@
 
       <nav class="main-nav" aria-label="Menú principal">
         {%- for pg in collections.navPages %}
-        <a href="{{ pg.data.permalink }}"{% if page.url == pg.data.permalink %} aria-current="page"{% endif %}>{{ pg.data.navLabel or pg.data.title }}</a>
+        <a href="{{ pg.url or pg.data.permalink }}"{% if page.url == (pg.url or pg.data.permalink) or ((pg.url or pg.data.permalink) != '/' and page.url.startsWith(pg.url or pg.data.permalink)) %} aria-current="page"{% endif %}>{{ pg.data.navLabel or pg.data.title }}</a>
         {%- endfor %}
       </nav>
     </div>
@@ -57,7 +57,7 @@
           <ul>
             <li><a href="/">Inicio</a></li>
             {%- for pg in collections.navPages %}
-            <li><a href="{{ pg.data.permalink }}">{{ pg.data.title }}</a></li>
+            <li><a href="{{ pg.url or pg.data.permalink }}">{{ pg.data.title }}</a></li>
             {%- endfor %}
           </ul>
         </div>

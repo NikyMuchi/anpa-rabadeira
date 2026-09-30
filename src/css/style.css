@@ -861,6 +861,145 @@ a:hover {
   gap: var(--sp-2);
 }
 
+.home-news-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--clr-teal-700);
+  margin-top: var(--sp-2);
+  text-decoration: none;
+  transition: color var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.home-news-more:hover {
+  color: var(--clr-teal-900);
+  transform: translateX(2px);
+}
+
+/* ---------- News Archive (/novas/) ---------- */
+.news-archive {
+  padding-block: var(--sp-12);
+  min-height: 60vh;
+}
+
+@media (max-width: 768px) {
+  .news-archive {
+    padding-block: var(--sp-8);
+  }
+}
+
+.news-archive__header {
+  margin-bottom: var(--sp-10);
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.news-archive__title {
+  font-family: var(--ff-heading);
+  font-weight: 700;
+  font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
+  color: var(--clr-teal-900);
+  line-height: 1.2;
+  margin-bottom: var(--sp-3);
+}
+
+.news-archive__lead {
+  font-size: var(--fs-base);
+  color: var(--clr-charcoal-700);
+  line-height: 1.6;
+}
+
+.news-archive__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+}
+
+@media (max-width: 960px) {
+  .news-archive__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .news-archive__grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+}
+
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.news-card__meta .home-news-card__date {
+  margin-bottom: 0;
+}
+
+.news-card__category {
+  display: inline-block;
+  padding: 2px var(--sp-3);
+  background: var(--clr-teal-100);
+  color: var(--clr-teal-800);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- News Pagination ---------- */
+.news-pagination {
+  margin-top: var(--sp-12);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--clr-warm-border);
+}
+
+.news-pagination__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+}
+
+.news-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--clr-teal-700);
+  background: var(--clr-cream-card);
+  border: 1px solid var(--clr-warm-border);
+  border-radius: var(--radius-sm);
+  text-decoration: none !important;
+  transition: all var(--duration) var(--ease);
+}
+
+.news-pagination__btn:hover {
+  background: var(--clr-teal-50);
+  color: var(--clr-teal-900);
+  border-color: var(--clr-teal-500);
+  transform: translateY(-1px);
+}
+
+.news-pagination__info {
+  font-size: var(--fs-sm);
+  color: var(--clr-charcoal-500);
+  font-weight: 500;
+  margin-inline: auto;
+}
+
 /* ---------- Contact & Support (Homepage Scoped) ---------- */
 .home-contact {
   padding-block: var(--sp-12);

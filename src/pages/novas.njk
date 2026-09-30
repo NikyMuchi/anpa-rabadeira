@@ -1,0 +1,69 @@
+---
+layout: layouts/base.njk
+title: "Novas da ANPA"
+navLabel: "Novas"
+navOrder: 7
+showInNav: true
+description: "Avisos, actividades e novidades da nosa comunidade."
+pagination:
+  data: collections.posts
+  size: 12
+  alias: posts
+permalink: "{% if pagination.pageNumber > 0 %}novas/page/{{ pagination.pageNumber + 1 }}/index.html{% else %}novas/index.html{% endif %}"
+---
+
+<div class="news-archive container">
+  <header class="news-archive__header">
+    <h1 class="news-archive__title">Novas da ANPA</h1>
+    <p class="news-archive__lead">Avisos, actividades e novidades da nosa comunidade.</p>
+  </header>
+
+  <div class="news-archive__grid">
+    {%- for post in posts %}
+    <article class="home-news-card">
+      {% if post.data.image %}
+      <div class="home-news-card__img-wrapper">
+        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="home-news-card__img" loading="lazy">
+      </div>
+      {% endif %}
+      <div class="home-news-card__body">
+        <div class="news-card__meta">
+          <time class="home-news-card__date" datetime="{{ post.date | isoDate }}">📅 {{ post.date | dataGalega }}</time>
+          {% if post.data.category %}
+          <span class="news-card__category">{{ post.data.category }}</span>
+          {% endif %}
+        </div>
+        <h2 class="home-news-card__title">
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h2>
+        <p class="home-news-card__excerpt">{{ post.content | excerpt }}</p>
+        <div class="home-news-card__footer">
+          <a href="{{ post.url }}" class="home-news-card__read" aria-label="Ler máis sobre {{ post.data.title }}">Ler máis <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+
+  {% if pagination.pages.length > 1 %}
+  <nav class="news-pagination" aria-label="Paxinación de novas">
+    <div class="news-pagination__inner">
+      {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous }}" class="news-pagination__btn" rel="prev">
+        <span aria-hidden="true">←</span> Novas máis recentes
+      </a>
+      {% endif %}
+
+      <span class="news-pagination__info">
+        Páxina {{ pagination.pageNumber + 1 }} de {{ pagination.pages.length }}
+      </span>
+
+      {% if pagination.href.next %}
+      <a href="{{ pagination.href.next }}" class="news-pagination__btn" rel="next">
+        Novas anteriores <span aria-hidden="true">→</span>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
+</div>
