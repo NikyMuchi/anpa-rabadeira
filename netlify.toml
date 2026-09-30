@@ -1,6 +1,18 @@
 [build]
   command = "npx @11ty/eleventy"
   publish = "_site"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
+
+# OAuth Serverless Gatekeeper Routes (Zero Cost)
+[[redirects]]
+  from = "/auth"
+  to = "/.netlify/functions/auth"
+  status = 200
+
+[[redirects]]
+  from = "/callback"
+  to = "/.netlify/functions/callback"
+  status = 200

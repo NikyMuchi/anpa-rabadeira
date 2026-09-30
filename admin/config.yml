@@ -1,6 +1,18 @@
+# Decap CMS Configuration — ANPA Rabadeira
+# Zero-cost Open-Source CMS with GitHub Backend & Two-Person Review Workflow
+
 backend:
-  name: git-gateway
+  name: github
+  repo: NikyMuchi/anpa-rabadeira
   branch: main
+  base_url: https://anpa-rabadeira.netlify.app
+  auth_endpoint: auth
+
+# Enable editorial workflow: creates PRs for drafts and requires review/approval before publishing
+publish_mode: editorial_workflow
+
+# Local development backend support (via `npx decap-server`)
+local_backend: false
 
 locale: "es"
 
@@ -16,6 +28,8 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     sort: "date:desc"
+    editor:
+      preview: true
     fields:
       - label: "Título"
         name: "title"
@@ -43,84 +57,111 @@ collections:
         widget: "image"
         required: false
         hint: "Opcional: imaxe para mostrar co artigo"
+      - label: "Deseño"
+        name: "layout"
+        widget: "hidden"
+        default: "layouts/post.njk"
       - label: "Contido"
         name: "body"
         widget: "markdown"
         hint: "Escriba aquí o contido do artigo. Pode usar negriña, listas, enlaces e subir imaxes."
 
-  # ===== PÁXINAS FIXAS =====
+  # ===== PÁXINAS FIXAS (Rutas estáticas seguras sen colisión) =====
   - name: "pages"
     label: "📄 Páxinas fixas"
     label_singular: "Páxina"
-    folder: "src/pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: "Título"
-        name: "title"
-        widget: "string"
-        hint: "Nome da sección (aparecerá no menú e acceso rápido)"
-      - label: "URL da páxina"
-        name: "permalink"
-        widget: "string"
-        hint: "Ex: /extraescolares/ — debe comezar e rematar con /"
-      - label: "Nome curto (menú)"
-        name: "navLabel"
-        widget: "string"
-        required: false
-        hint: "Opcional: nome máis curto para o menú de arriba. Se non se pon, úsase o título."
-      - label: "Icona (emoji)"
-        name: "icon"
-        widget: "string"
-        hint: "Un emoji para o acceso rápido da portada. Ex: 📝 ⚽ 🌅 🍽️ 📊 🏛️"
-        required: false
-      - label: "Orde no menú"
-        name: "navOrder"
-        widget: "number"
-        value_type: "int"
-        min: 1
-        max: 99
-        default: 10
-        hint: "Número para ordenar no menú (1 = primeiro, 99 = último)"
-      - label: "Mostrar no menú e acceso rápido"
-        name: "showInNav"
-        widget: "boolean"
-        default: true
-        hint: "Desactivar para ocultar esta páxina do menú sen borrala"
-      - label: "Cor da icona"
-        name: "iconColor"
-        widget: "select"
-        options:
-          - { label: "🔵 Azul", value: "blue" }
-          - { label: "🟡 Dourado", value: "gold" }
-          - { label: "🟢 Verde", value: "green" }
-        default: "blue"
-        hint: "Cor de fondo da icona no acceso rápido"
-      - label: "Contido"
-        name: "body"
-        widget: "markdown"
-        hint: "Contido da páxina. Pode usar negriña, listas, enlaces, imaxes e HTML."
-    editor:
-      preview: false
+    delete: false
+    files:
+      - name: "comedor"
+        label: "🍽️ Comedor escolar"
+        file: "src/pages/comedor.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "URL da páxina", name: "permalink", widget: "hidden", default: "/comedor/" }
+          - { label: "Deseño", name: "layout", widget: "hidden", default: "layouts/page.njk" }
+          - { label: "Nome curto (menú)", name: "navLabel", widget: "string", required: false }
+          - { label: "Icona (emoji)", name: "icon", widget: "string", required: false }
+          - { label: "Orde no menú", name: "navOrder", widget: "number", value_type: "int", default: 4 }
+          - { label: "Mostrar no menú", name: "showInNav", widget: "boolean", default: true }
+          - { label: "Cor da icona", name: "iconColor", widget: "select", options: ["blue", "gold", "green"], default: "blue" }
+          - { label: "Contido", name: "body", widget: "markdown" }
 
-  # ===== XESTIÓN EXTRAESCOLARES =====
+      - name: "madrugadores"
+        label: "🌅 Madrugadores"
+        file: "src/pages/madrugadores.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "URL da páxina", name: "permalink", widget: "hidden", default: "/madrugadores/" }
+          - { label: "Deseño", name: "layout", widget: "hidden", default: "layouts/page.njk" }
+          - { label: "Nome curto (menú)", name: "navLabel", widget: "string", required: false }
+          - { label: "Icona (emoji)", name: "icon", widget: "string", required: false }
+          - { label: "Orde no menú", name: "navOrder", widget: "number", value_type: "int", default: 3 }
+          - { label: "Mostrar no menú", name: "showInNav", widget: "boolean", default: true }
+          - { label: "Cor da icona", name: "iconColor", widget: "select", options: ["blue", "gold", "green"], default: "gold" }
+          - { label: "Contido", name: "body", widget: "markdown" }
+
+      - name: "consello_escolar"
+        label: "🏛️ Consello Escolar"
+        file: "src/pages/consello-escolar.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "URL da páxina", name: "permalink", widget: "hidden", default: "/consello-escolar/" }
+          - { label: "Deseño", name: "layout", widget: "hidden", default: "layouts/page.njk" }
+          - { label: "Nome curto (menú)", name: "navLabel", widget: "string", required: false }
+          - { label: "Icona (emoji)", name: "icon", widget: "string", required: false }
+          - { label: "Orde no menú", name: "navOrder", widget: "number", value_type: "int", default: 6 }
+          - { label: "Mostrar no menú", name: "showInNav", widget: "boolean", default: true }
+          - { label: "Cor da icona", name: "iconColor", widget: "select", options: ["blue", "gold", "green"], default: "blue" }
+          - { label: "Contido", name: "body", widget: "markdown" }
+
+      - name: "inscripcion"
+        label: "📝 Alta de Socios ANPA"
+        file: "src/pages/inscripcion.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "URL da páxina", name: "permalink", widget: "hidden", default: "/inscripcion/" }
+          - { label: "Deseño", name: "layout", widget: "hidden", default: "layouts/page.njk" }
+          - { label: "Nome curto (menú)", name: "navLabel", widget: "string", required: false }
+          - { label: "Icona (emoji)", name: "icon", widget: "string", required: false }
+          - { label: "Orde no menú", name: "navOrder", widget: "number", value_type: "int", default: 1 }
+          - { label: "Mostrar no menú", name: "showInNav", widget: "boolean", default: true }
+          - { label: "Cor da icona", name: "iconColor", widget: "select", options: ["blue", "gold", "green"], default: "green" }
+          - { label: "Contido", name: "body", widget: "markdown" }
+
+      - name: "memoria"
+        label: "📊 Memoria de Actividades"
+        file: "src/pages/memoria.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "URL da páxina", name: "permalink", widget: "hidden", default: "/memoria/" }
+          - { label: "Deseño", name: "layout", widget: "hidden", default: "layouts/page.njk" }
+          - { label: "Nome curto (menú)", name: "navLabel", widget: "string", required: false }
+          - { label: "Icona (emoji)", name: "icon", widget: "string", required: false }
+          - { label: "Orde no menú", name: "navOrder", widget: "number", value_type: "int", default: 5 }
+          - { label: "Mostrar no menú", name: "showInNav", widget: "boolean", default: true }
+          - { label: "Cor da icona", name: "iconColor", widget: "select", options: ["blue", "gold", "green"], default: "blue" }
+          - { label: "Contido", name: "body", widget: "markdown" }
+
+  # ===== XESTIÓN COMPLETA EXTRAESCOLARES (18 ACTIVIDADES & ESTRUTURA ÍNTEGRA) =====
   - name: "extraescolares"
     label: "⚽ Actividades Extraescolares"
     delete: false
+    editor:
+      preview: true
     files:
       - name: "config_extraescolares"
         label: "Xestión de Extraescolares"
         file: "src/_data/extraescolares.json"
-        description: "Xestión de curso, horario oficial en imaxe, actividades e ligazóns"
+        description: "Xestión íntegra de curso, horario oficial, 18 actividades, tarifas e cadro de convivencia"
         fields:
           - label: "Curso académico"
             name: "academic_year"
             widget: "string"
-            hint: "Ex: 2026-2027. O título do horario xérase automaticamente a partir deste campo."
+            hint: "Ex: 2026-2027. O título do horario xérase automaticamente."
           - label: "Imaxe do Horario Completo"
             name: "schedule_image"
             widget: "image"
-            hint: "Suba ou substitúa a imaxe oficial completa do cadro de horarios (JPG ou PNG)"
+            hint: "Suba ou substitúa a imaxe oficial do cadro de horarios (JPG ou PNG)"
           - label: "Texto de introdución"
             name: "intro"
             widget: "text"
@@ -143,12 +184,12 @@ collections:
               - { label: "Nota para non socios", name: "non_member_note", widget: "text" }
               - { label: "Texto matrícula non socios", name: "non_member_label", widget: "string" }
               - { label: "Ligazón matrícula non socios", name: "non_member_url", widget: "string" }
-          - label: "Listado de Actividades"
+          - label: "Listado de Actividades (18 actividades)"
             name: "activities"
             widget: "list"
-            summary: "{{fields.name}} - {{fields.stage}} ({{fields.price}})"
+            summary: "{{fields.name}} - {{fields.stage}} ({{fields.price}}) [{{fields.status}}]"
             fields:
-              - { label: "Identificador", name: "id", widget: "string" }
+              - { label: "Identificador (slug)", name: "id", widget: "string" }
               - { label: "Nome da actividade", name: "name", widget: "string" }
               - { label: "Etapa educativa", name: "stage", widget: "string" }
               - { label: "Prezo / mes", name: "price", widget: "string" }
@@ -161,6 +202,59 @@ collections:
                   - { label: "🔴 Completa", value: "full" }
                   - { label: "🟡 Parcialmente completa", value: "partial" }
                 default: "available"
+              - { label: "Etiqueta de estado", name: "status_label", widget: "string", required: false }
               - { label: "Aviso de estado ou descrición curta", name: "status_note", widget: "string", required: false }
+              - label: "Tipo de rexistro"
+                name: "registration_type"
+                widget: "select"
+                required: false
+                options:
+                  - { label: "Google Form", value: "google_form" }
+                  - { label: "PDF Descargable", value: "pdf" }
+                  - { label: "Ligazón Externa", value: "external_url" }
               - { label: "Ligazón de inscrición ou información", name: "registration_url", widget: "string", required: false }
+              - { label: "Email de contacto", name: "contact_email", widget: "string", required: false }
               - { label: "Texto do botón", name: "button_label", widget: "string", required: false }
+          - label: "Cadro de tarifas e cotas"
+            name: "pricing_table"
+            widget: "list"
+            required: false
+            summary: "{{fields.name}} - {{fields.hours}} - {{fields.price}}"
+            fields:
+              - { label: "Actividade", name: "name", widget: "string" }
+              - { label: "Horas semanais", name: "hours", widget: "string" }
+              - { label: "Cota mensual", name: "price", widget: "string" }
+          - label: "Condicións xerais do servizo"
+            name: "general_conditions"
+            widget: "list"
+            required: false
+            summary: "{{fields.number}}. {{fields.title}}"
+            fields:
+              - { label: "Número de orde", name: "number", widget: "number", value_type: "int" }
+              - { label: "Título da condición", name: "title", widget: "string" }
+              - { label: "Parágrafos explicativos", name: "paragraphs", widget: "list", required: false }
+              - { label: "Opcións de selección", name: "options", widget: "list", required: false }
+              - { label: "Texto adicional", name: "extra_text", widget: "string", required: false }
+              - { label: "Subtítulo de réxime", name: "subheading", widget: "string", required: false }
+              - { label: "Elementos de réxime", name: "sub_items", widget: "list", required: false }
+              - { label: "Declaración final", name: "statement", widget: "string", required: false }
+          - label: "Marco Legal de Convivencia (Lei 4/2011)"
+            name: "coexistence_articles"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Título xeral", name: "title", widget: "string" }
+              - label: "Artigo 65 (Condutas graves)"
+                name: "article_65"
+                widget: "object"
+                fields:
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Texto introdutorio", name: "intro", widget: "text" }
+                  - { label: "Puntos / Letras", name: "points", widget: "list" }
+              - label: "Artigo 66 (Condutas leves)"
+                name: "article_66"
+                widget: "object"
+                fields:
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Texto introdutorio", name: "intro", widget: "text" }
+                  - { label: "Puntos / Letras", name: "points", widget: "list" }
