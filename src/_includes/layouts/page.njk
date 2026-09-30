@@ -7,8 +7,154 @@ layout: layouts/base.njk
     <img src="{{ image }}" alt="{{ title }}">
   </div>
   {% endif %}
+
   <h1>{{ title }}</h1>
+
   <div class="post-content">
+    {% if intro %}
+      <p>{{ intro }}</p>
+    {% endif %}
+
+    {# ===== SERVIZO MADRUGADORES (CAMPOS ESTRUTURADOS) ===== #}
+    {% if schedule_hours %}
+      <p>O servizo de madrugadores está dispoñible de <strong>{{ schedule_hours }}</strong> con posibilidade de almorzo. O servizo é xestionado pola empresa {{ provider_name }}{% if provider_url %} (<a href="{{ provider_url }}" target="_blank" rel="noopener noreferrer">{{ provider_url | replace('https://', '') | replace('http://', '') | replace('/', '') }}</a>){% endif %}.</p>
+    {% endif %}
+
+    {% if rates %}
+      <h2>Tarifas do servizo (Curso {{ academic_year | default('2026-2027') }})</h2>
+      <p>Segundo a guía oficial do servizo para o curso {{ academic_year | default('2026-2027') }}:</p>
+
+      <p><strong>Contratación mensual fixa:</strong></p>
+      <ul>
+        <li>Con almorzo: <strong>{{ rates.monthly_breakfast }}</strong></li>
+        <li>Sen almorzo: <strong>{{ rates.monthly_no_breakfast }}</strong></li>
+      </ul>
+
+      <p><strong>Días soltos (esporádicos):</strong></p>
+      <ul>
+        <li>Con almorzo: <strong>{{ rates.daily_breakfast }}</strong></li>
+        <li>Sen almorzo: <strong>{{ rates.daily_no_breakfast }}</strong></li>
+      </ul>
+    {% endif %}
+
+    {% if registration_url or fixed_users_note %}
+      <h2>Inscrición e funcionamento</h2>
+      {% if registration_url %}
+      <p>A tramitación do servizo realízase a través da plataforma web de {{ provider_name | default('Jardanay') }}: <a href="{{ registration_url }}" target="_blank" rel="noopener noreferrer">{{ registration_url | replace('https://', '') | replace('http://', '') }}</a>.</p>
+      {% endif %}
+
+      <ul>
+        {% if fixed_users_note %}
+        <li><strong>Usuarios fixos:</strong> {{ fixed_users_note }}</li>
+        {% endif %}
+        {% if sporadic_users_note %}
+        <li><strong>Usuarios esporádicos (días soltos):</strong> {{ sporadic_users_note }}{% if vouchers_url %} a través de <a href="{{ vouchers_url }}" target="_blank" rel="noopener noreferrer">{{ vouchers_url | replace('https://', '') | replace('http://', '') }}</a>{% endif %}.</li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    {# ===== PASOS GUÍA COMEDOR ===== #}
+    {% if steps and steps.length > 0 %}
+      <h2>PAGO COMEDOR A TRAVÉS DE ATRIGA (AXENCIA TRIBUTARIA DE GALICIA)</h2>
+      {% if atriga_portal_url %}
+      <p>Un deles é a través da Axencia Tributaria de Galicia: <a href="{{ atriga_portal_url }}" target="_blank" rel="noopener noreferrer">Portal tributario ATRIGA</a>.</p>
+      {% endif %}
+
+      {% for st in steps %}
+        <p>{{ st.description }}</p>
+        {% if st.image %}
+        <p>
+          <img src="{{ st.image }}" alt="{{ st.image_alt | default('Paso ' + loop.index) }}">
+        </p>
+        {% endif %}
+      {% endfor %}
+
+      {% if receipt_instructions %}
+        <p>{{ receipt_instructions }}</p>
+      {% endif %}
+
+      {% if other_methods_note %}
+        <p>{{ other_methods_note }}</p>
+      {% endif %}
+
+      {% if closing_note %}
+        <p>{{ closing_note }}</p>
+      {% endif %}
+    {% endif %}
+
+    {# ===== ALTA DE SOCIOS E IBAN ===== #}
+    {% if bank_iban %}
+      {% if membership_fee %}
+      <p>Agradecemos se podedes adxuntar no propio formulario o xustificante de pago ({{ membership_fee }}), tras facelo na conta bancaria:</p>
+      {% endif %}
+
+      <div class="bank-box">
+        <span class="bank-box__label">Número de conta (IBAN)</span>
+        <div class="bank-box__value">
+          <code class="bank-box__iban">{{ bank_iban }}</code>
+        </div>
+      </div>
+
+      {% if transfer_concept_note %}
+      <p><strong>Importante:</strong> {{ transfer_concept_note }}</p>
+      {% endif %}
+
+      {% if registration_form_url %}
+      <p><a href="{{ registration_form_url }}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action--primary">{{ registration_button_label | default('Acceder ao formulario de inscrición') }}</a></p>
+      {% endif %}
+
+      {% if closing_text %}
+      <p>{{ closing_text }}</p>
+      {% endif %}
+    {% endif %}
+
+    {# ===== DOCUMENTACIÓN INFORMATIVA (DOC CARDS) ===== #}
+    {% if documents and documents.length > 0 %}
+      <h2>Documentación informativa</h2>
+      <div class="doc-cards">
+        {% for doc in documents %}
+        <div class="doc-card">
+          <div class="doc-card__main">
+            <div class="doc-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+              </svg>
+            </div>
+            <div class="doc-card__info">
+              <h3 class="doc-card__title">{{ doc.title }}</h3>
+              <p class="doc-card__meta"><span class="doc-card__badge">PDF</span> {{ doc.description }}</p>
+            </div>
+          </div>
+          <div class="doc-card__actions">
+            <a href="{{ doc.file }}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn--primary">Abrir PDF</a>
+            <a href="{{ doc.file }}" download class="doc-btn doc-btn--secondary">Descargar</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ===== CONSELLO ESCOLAR ===== #}
+    {% if blog_url %}
+      <p>No link inferior tendes a información das representantes das familias en dito Consello:</p>
+      <p><a href="{{ blog_url }}" target="_blank" rel="noopener noreferrer">{{ blog_label | default('Blog do Consello Escolar Rabadeira') }}</a></p>
+    {% endif %}
+
+    {# ===== CONTACTO DE PÁXINA ===== #}
+    {% if contact_anpa_email or contact_provider_phone or contact_email %}
+      <h2>Contacto e axuda</h2>
+      <p>Para calquera dúbida ou cuestión, podes contactar con:</p>
+      <ul>
+        {% if contact_anpa_email or contact_email %}
+        <li><strong>ANPA Ensino Rabadeira:</strong> <a href="mailto:{{ contact_anpa_email or contact_email }}">{{ contact_anpa_email or contact_email }}</a></li>
+        {% endif %}
+        {% if contact_provider_phone or contact_provider_email %}
+        <li><strong>Oficinas de {{ provider_name | default('Jardanay') }}:</strong> {% if contact_provider_phone %}Tel. {{ contact_provider_phone }}{% endif %}{% if contact_provider_phone and contact_provider_email %} · {% endif %}{% if contact_provider_email %}<a href="mailto:{{ contact_provider_email }}">{{ contact_provider_email }}</a>{% endif %}</li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    {# Contido Markdown estándar (se existe) #}
     {{ content | safe }}
   </div>
 </div>
