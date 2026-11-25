@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "eleventy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/cms-schema-fidelity.test.js && node tests/oauth.test.js && node tests/production-security-guard.test.js && node tests/flexible-content.test.js && node tests/preview-templates.test.js && node tests/rendered-parity-comparison.js && node tests/site-search.test.js && node tests/admin-help-centre.test.js"
   },
   "keywords": [],
   "author": "",

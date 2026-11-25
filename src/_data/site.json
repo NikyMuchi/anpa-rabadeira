@@ -4,5 +4,6 @@
   "email": "anpaensinorabadeira@gmail.com",
   "description": "Asociación de Nais e Pais de Alumnos do CEIP Rabadeira. Información sobre actividades, extraescolares, servizos e novas do centro.",
   "url": "https://anpa-rabadeira.netlify.app",
-  "locale": "gl_ES"
+  "locale": "gl_ES",
+  "legalPagesEnabled": false
 }

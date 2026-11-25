@@ -8,17 +8,17 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
 <section class="home-hero" aria-label="Benvida á ANPA Ensino Rabadeira">
   <div class="home-hero__container">
     <div class="home-hero__content">
-      <h1 class="home-hero__title">Benvidas e benvidos á ANPA Ensino Rabadeira</h1>
+      <h1 class="home-hero__title">{{ home.hero.title | default("Benvidas e benvidos á ANPA Ensino Rabadeira") }}</h1>
       <p class="home-hero__lead">
-        Somos a asociación de nais e pais do CEIP Rabadeira. Traballamos xuntos para apoiar as familias, colaborar co centro e dinamizar a comunidade escolar.
+        {{ home.hero.lead | default("Somos a asociación de nais e pais do CEIP Rabadeira. Traballamos xuntos para apoiar as familias, colaborar co centro e dinamizar a comunidade escolar.") }}
       </p>
       <div class="home-hero__actions">
-        <a href="/extraescolares/" class="home-btn home-btn--teal">Ver extraescolares</a>
-        <a href="mailto:{{ site.email }}" class="home-btn home-btn--outline">Contacta coa ANPA</a>
+        <a href="{{ home.hero.primary_button_url | default('/extraescolares/') }}" class="home-btn home-btn--teal">{{ home.hero.primary_button_text | default("Ver extraescolares") }}</a>
+        <a href="{{ home.hero.secondary_button_url | default('mailto:' + site.email) }}" class="home-btn home-btn--outline">{{ home.hero.secondary_button_text | default("Contacta coa ANPA") }}</a>
       </div>
     </div>
     <div class="home-hero__media">
-      <img src="/img/hero-anpa-comunidade.webp" alt="" class="home-hero__img" width="1600" height="534" loading="eager" decoding="async">
+      <img src="{{ home.hero.image | default('/img/hero-anpa-comunidade.webp') }}" alt="{{ home.hero.image_alt | default('') }}" class="home-hero__img" width="1600" height="534" loading="eager" decoding="async">
     </div>
   </div>
 </section>
@@ -27,7 +27,7 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
 <section class="home-intro" aria-label="Sobre a ANPA">
   <div class="home-intro__inner">
     <p class="home-intro__text">
-      Un espazo de encontro e colaboración entre as familias e a escola para construír xuntos a mellor contorna educativa.
+      {{ home.intro.text | default("Un espazo de encontro e colaboración entre as familias e a escola para construír xuntos a mellor contorna educativa.") }}
     </p>
   </div>
 </section>
@@ -36,36 +36,47 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
 <section class="home-shortcuts" aria-labelledby="shortcuts-heading">
   <div class="container">
     <div class="home-section-header">
-      <h2 id="shortcuts-heading" class="home-section-title">Información para as familias</h2>
+      <h2 id="shortcuts-heading" class="home-section-title">{{ home.shortcuts.title | default("Información para as familias") }}</h2>
     </div>
     <div class="home-shortcuts-grid">
-      {# 1. Extraescolares #}
-      <a href="/extraescolares/" class="home-shortcut-card home-shortcut-card--teal">
-        <h3 class="home-shortcut-card__title">Extraescolares</h3>
-        <p class="home-shortcut-card__desc">Consulta a oferta de actividades, horarios e inscricións dispoñibles.</p>
-        <span class="home-shortcut-card__link">Ver actividades <span aria-hidden="true">→</span></span>
-      </a>
+      {% if home.shortcuts.items and home.shortcuts.items.length > 0 %}
+        {% set approvedColors = ['teal', 'yellow', 'blue', 'coral'] %}
+        {% for card in home.shortcuts.items %}
+        <a href="{{ card.url }}" class="home-shortcut-card home-shortcut-card--{{ approvedColors[loop.index0 % 4] }}">
+          <h3 class="home-shortcut-card__title">{{ card.title }}</h3>
+          <p class="home-shortcut-card__desc">{{ card.description }}</p>
+          <span class="home-shortcut-card__link">{{ card.link_text | default('Máis información') }} <span aria-hidden="true">→</span></span>
+        </a>
+        {% endfor %}
+      {% else %}
+        {# 1. Extraescolares #}
+        <a href="/extraescolares/" class="home-shortcut-card home-shortcut-card--teal">
+          <h3 class="home-shortcut-card__title">Extraescolares</h3>
+          <p class="home-shortcut-card__desc">Consulta a oferta de actividades, horarios e inscricións dispoñibles.</p>
+          <span class="home-shortcut-card__link">Ver actividades <span aria-hidden="true">→</span></span>
+        </a>
 
-      {# 2. Madrugadores #}
-      <a href="/madrugadores/" class="home-shortcut-card home-shortcut-card--yellow">
-        <h3 class="home-shortcut-card__title">Madrugadores</h3>
-        <p class="home-shortcut-card__desc">Consulta a información dispoñible sobre o servizo de madrugadores.</p>
-        <span class="home-shortcut-card__link">Máis información <span aria-hidden="true">→</span></span>
-      </a>
+        {# 2. Madrugadores #}
+        <a href="/madrugadores/" class="home-shortcut-card home-shortcut-card--yellow">
+          <h3 class="home-shortcut-card__title">Madrugadores</h3>
+          <p class="home-shortcut-card__desc">Consulta a información dispoñible sobre o servizo de madrugadores.</p>
+          <span class="home-shortcut-card__link">Máis información <span aria-hidden="true">→</span></span>
+        </a>
 
-      {# 3. Pagamento do comedor #}
-      <a href="/comedor/" class="home-shortcut-card home-shortcut-card--blue">
-        <h3 class="home-shortcut-card__title">Pagamento do comedor</h3>
-        <p class="home-shortcut-card__desc">Información e instrucións para a tramitación do pagamento do comedor.</p>
-        <span class="home-shortcut-card__link">Guía de pago <span aria-hidden="true">→</span></span>
-      </a>
+        {# 3. Pagamento do comedor #}
+        <a href="/comedor/" class="home-shortcut-card home-shortcut-card--blue">
+          <h3 class="home-shortcut-card__title">Pagamento do comedor</h3>
+          <p class="home-shortcut-card__desc">Información e instrucións para a tramitación do pagamento do comedor.</p>
+          <span class="home-shortcut-card__link">Guía de pago <span aria-hidden="true">→</span></span>
+        </a>
 
-      {# 4. Consello Escolar #}
-      <a href="/consello-escolar/" class="home-shortcut-card home-shortcut-card--coral">
-        <h3 class="home-shortcut-card__title">Consello Escolar</h3>
-        <p class="home-shortcut-card__desc">Información sobre a representación e participación das familias no centro.</p>
-        <span class="home-shortcut-card__link">Máis información <span aria-hidden="true">→</span></span>
-      </a>
+        {# 4. Consello Escolar #}
+        <a href="/consello-escolar/" class="home-shortcut-card home-shortcut-card--coral">
+          <h3 class="home-shortcut-card__title">Consello Escolar</h3>
+          <p class="home-shortcut-card__desc">Información sobre a representación e participación das familias no centro.</p>
+          <span class="home-shortcut-card__link">Máis información <span aria-hidden="true">→</span></span>
+        </a>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -74,8 +85,8 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
 <section class="home-news" aria-labelledby="news-heading">
   <div class="container">
     <div class="home-section-header">
-      <h2 id="news-heading" class="home-section-title">Últimas novas</h2>
-      <a href="/novas/" class="home-news-more">Ver todas as novas <span aria-hidden="true">→</span></a>
+      <h2 id="news-heading" class="home-section-title">{{ home.news_section.title | default("Últimas novas") }}</h2>
+      <a href="{{ home.news_section.more_link_url | default('/novas/') }}" class="home-news-more">{{ home.news_section.more_link_text | default("Ver todas as novas") }} <span aria-hidden="true">→</span></a>
     </div>
     <div class="home-news-grid">
       {%- for post in collections.posts | limit(3) %}
@@ -107,13 +118,13 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
     <div class="home-contact-panel">
       <div class="home-contact-panel__inner">
         <div>
-          <h2 id="contact-heading" class="home-contact-panel__title">Contacto e axuda</h2>
+          <h2 id="contact-heading" class="home-contact-panel__title">{{ home.contact_panel.title | default("Contacto e axuda") }}</h2>
           <p class="home-contact-panel__text">
-            Tes algunha dúbida ou proposta? A directiva da ANPA está á disposición de todas as familias do centro.
+            {{ home.contact_panel.text | default("Tes algunha dúbida ou proposta? A directiva da ANPA está á disposición de todas as familias do centro.") }}
           </p>
           <div style="margin-top: 1.25rem;">
             <a href="mailto:{{ site.email }}" class="home-btn home-btn--teal">
-              Enviar correo
+              {{ home.contact_panel.button_text | default("Enviar correo") }}
             </a>
           </div>
         </div>
@@ -129,7 +140,7 @@ description: "Asociación de Nais e Pais do CEIP Rabadeira (Oleiros). Informaci�
             <span class="home-contact-item__icon" aria-hidden="true">🏫</span>
             <div>
               <span class="home-contact-item__label">Centro educativo</span>
-              <span class="home-contact-item__val">CEIP Rabadeira · Oleiros</span>
+              <span class="home-contact-item__val">{{ home.contact_panel.school_name | default("CEIP Rabadeira · Oleiros") }}</span>
             </div>
           </div>
         </div>

@@ -1,6 +1,18 @@
+# Decap CMS Configuration — ANPA Rabadeira
+# Zero-cost Open-Source CMS with GitHub Backend & Full Site Content Coverage
+
 backend:
-  name: git-gateway
+  name: github
+  repo: NikyMuchi/anpa-rabadeira
   branch: main
+  base_url: https://anpa-rabadeira.netlify.app
+  auth_endpoint: auth
+
+# Enable editorial workflow: creates PRs for drafts and requires review/approval before publishing
+publish_mode: editorial_workflow
+
+# Local development backend support (via `npx decap-server`)
+local_backend: false
 
 locale: "es"
 
@@ -8,25 +20,19 @@ media_folder: "src/img/uploads"
 public_folder: "/img/uploads"
 
 collections:
-  # ===== ARTÍCULOS / NOVAS =====
+  # ===== 1. ARTÍCULOS / NOVAS =====
   - name: "posts"
     label: "📰 Artigos / Novas"
     label_singular: "Artigo"
     folder: "src/posts"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{fields.date}}-{{slug}}"
     sort: "date:desc"
+    editor:
+      preview: true
     fields:
-      - label: "Título"
-        name: "title"
-        widget: "string"
-        hint: "Título do artigo"
-      - label: "Data de publicación"
-        name: "date"
-        widget: "datetime"
-        format: "YYYY-MM-DD"
-        date_format: "DD/MM/YYYY"
-        time_format: false
+      - { label: "Título", name: "title", widget: "string", hint: "Título do artigo" }
+      - { label: "Data de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
       - label: "Categoría"
         name: "category"
         widget: "select"
@@ -38,129 +44,344 @@ collections:
           - "Socios ANPA"
         default: "Novas"
         hint: "Escolla a categoría do artigo"
-      - label: "Imaxe destacada"
-        name: "image"
-        widget: "image"
-        required: false
-        hint: "Opcional: imaxe para mostrar co artigo"
-      - label: "Contido"
-        name: "body"
-        widget: "markdown"
-        hint: "Escriba aquí o contido do artigo. Pode usar negriña, listas, enlaces e subir imaxes."
+      - { label: "Imaxe destacada", name: "image", widget: "image", required: false, hint: "Opcional: imaxe para mostrar co artigo" }
+      - { label: "Deseño", name: "layout", widget: "hidden", default: "layouts/post.njk" }
+      - { label: "Contido", name: "body", widget: "markdown", hint: "Escriba aquí o contido do artigo. Pode usar negriña, listas, enlaces e subir imaxes." }
 
-  # ===== PÁXINAS FIXAS =====
-  - name: "pages"
-    label: "📄 Páxinas fixas"
-    label_singular: "Páxina"
-    folder: "src/pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: "Título"
-        name: "title"
-        widget: "string"
-        hint: "Nome da sección (aparecerá no menú e acceso rápido)"
-      - label: "URL da páxina"
-        name: "permalink"
-        widget: "string"
-        hint: "Ex: /extraescolares/ — debe comezar e rematar con /"
-      - label: "Nome curto (menú)"
-        name: "navLabel"
-        widget: "string"
-        required: false
-        hint: "Opcional: nome máis curto para o menú de arriba. Se non se pon, úsase o título."
-      - label: "Icona (emoji)"
-        name: "icon"
-        widget: "string"
-        hint: "Un emoji para o acceso rápido da portada. Ex: 📝 ⚽ 🌅 🍽️ 📊 🏛️"
-        required: false
-      - label: "Orde no menú"
-        name: "navOrder"
-        widget: "number"
-        value_type: "int"
-        min: 1
-        max: 99
-        default: 10
-        hint: "Número para ordenar no menú (1 = primeiro, 99 = último)"
-      - label: "Mostrar no menú e acceso rápido"
-        name: "showInNav"
-        widget: "boolean"
-        default: true
-        hint: "Desactivar para ocultar esta páxina do menú sen borrala"
-      - label: "Cor da icona"
-        name: "iconColor"
-        widget: "select"
-        options:
-          - { label: "🔵 Azul", value: "blue" }
-          - { label: "🟡 Dourado", value: "gold" }
-          - { label: "🟢 Verde", value: "green" }
-        default: "blue"
-        hint: "Cor de fondo da icona no acceso rápido"
-      - label: "Contido"
-        name: "body"
-        widget: "markdown"
-        hint: "Contido da páxina. Pode usar negriña, listas, enlaces, imaxes e HTML."
-    editor:
-      preview: false
-
-  # ===== XESTIÓN EXTRAESCOLARES =====
+  # ===== 2. XESTIÓN EXTRAESCOLARES (18 ACTIVIDADES & ESTRUTURA ÍNTEGRA) =====
   - name: "extraescolares"
     label: "⚽ Actividades Extraescolares"
     delete: false
+    editor:
+      preview: true
     files:
       - name: "config_extraescolares"
         label: "Xestión de Extraescolares"
         file: "src/_data/extraescolares.json"
-        description: "Xestión de curso, horario oficial en imaxe, actividades e ligazóns"
+        description: "Xestión íntegra de curso, horario oficial, 18 actividades, tarifas e cadro de convivencia"
         fields:
-          - label: "Curso académico"
-            name: "academic_year"
-            widget: "string"
-            hint: "Ex: 2026-2027. O título do horario xérase automaticamente a partir deste campo."
-          - label: "Imaxe do Horario Completo"
-            name: "schedule_image"
-            widget: "image"
-            hint: "Suba ou substitúa a imaxe oficial completa do cadro de horarios (JPG ou PNG)"
-          - label: "Texto de introdución"
-            name: "intro"
-            widget: "text"
-            required: false
-          - label: "Texto de novidades"
-            name: "subintro"
-            widget: "text"
-            required: false
-          - label: "Aviso de prazos e baixas"
-            name: "deadlines_note"
-            widget: "text"
-            required: false
+          - { label: "Curso académico", name: "academic_year", widget: "string", hint: "Ano académico de referencia (ex: 2026-2027)" }
+          - { label: "Imaxe do Horario Completo", name: "schedule_image", widget: "image", hint: "Imaxe oficial do cadro de horarios (JPG ou PNG). Atención: trátase dunha imaxe fixa e non se actualiza automaticamente ao modificar actividades" }
+          - { label: "Texto de introdución xeral", name: "intro", widget: "text", required: false, hint: "Parágrafo inicial de presentación das actividades extraescolares" }
+          - { label: "Texto de novidades do curso", name: "subintro", widget: "text", required: false, hint: "Detalle das novidades e cambios respecto ao curso anterior" }
+          - { label: "Aviso de prazos e baixas", name: "deadlines_note", widget: "text", required: false, hint: "Lembrete de prazos para inscricións, baixas ou modificacións (antes do día 20 do mes anterior)" }
           - label: "Socios e Matrícula"
             name: "membership"
             widget: "object"
+            collapsed: true
             fields:
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Texto de alta de socio", name: "join_label", widget: "string" }
-              - { label: "Ligazón alta de socio", name: "join_url", widget: "string" }
-              - { label: "Nota para non socios", name: "non_member_note", widget: "text" }
-              - { label: "Texto matrícula non socios", name: "non_member_label", widget: "string" }
-              - { label: "Ligazón matrícula non socios", name: "non_member_url", widget: "string" }
-          - label: "Listado de Actividades"
+              - { label: "Título da sección", name: "title", widget: "string", hint: "Título do bloque de socios (ex: Alta de socio/a e cotas de matrícula)" }
+              - { label: "Texto do botón de alta de socio", name: "join_label", widget: "string", hint: "Texto do botón (ex: Alta de socio/a da ANPA)" }
+              - { label: "Ligazón de alta de socio", name: "join_url", widget: "string", hint: "URL do formulario de Google para alta de socios" }
+              - { label: "Nota para non socios", name: "non_member_note", widget: "text", hint: "Explicación sobre a matrícula de 10€ por actividade e menor para non socios" }
+              - { label: "Texto do botón matrícula non socios", name: "non_member_label", widget: "string", hint: "Texto do botón (ex: Abono de matrícula non socios (10€))" }
+              - { label: "Ligazón matrícula non socios", name: "non_member_url", widget: "string", hint: "URL do formulario de Google para matrícula de non socios" }
+          - label: "Listado de Actividades (18 actividades)"
             name: "activities"
             widget: "list"
-            summary: "{{fields.name}} - {{fields.stage}} ({{fields.price}})"
+            collapsed: true
+            summary: "{{fields.name}} ({{fields.stage}}) — {{fields.price}} [{{fields.status}}]"
             fields:
-              - { label: "Identificador", name: "id", widget: "string" }
-              - { label: "Nome da actividade", name: "name", widget: "string" }
-              - { label: "Etapa educativa", name: "stage", widget: "string" }
-              - { label: "Prezo / mes", name: "price", widget: "string" }
-              - { label: "Entidade / Monitor", name: "provider", widget: "string", required: false }
-              - label: "Estado"
+              - { label: "Nome da actividade", name: "name", widget: "string", hint: "Nome visible da actividade (ex: 'Baile moderno', 'Judo')" }
+              - label: "Estado de dispoñibilidade"
                 name: "status"
                 widget: "select"
                 options:
-                  - { label: "Normal (dispoñible segundo formulario)", value: "available" }
-                  - { label: "🔴 Completa", value: "full" }
-                  - { label: "🟡 Parcialmente completa", value: "partial" }
+                  - { label: "🟢 Dispoñible (aberta para inscrición)", value: "available" }
+                  - { label: "🔴 Completa (sen prazas dispoñibles)", value: "full" }
+                  - { label: "🟡 Parcialmente completa (algunha quenda chea)", value: "partial" }
                 default: "available"
-              - { label: "Aviso de estado ou descrición curta", name: "status_note", widget: "string", required: false }
-              - { label: "Ligazón de inscrición ou información", name: "registration_url", widget: "string", required: false }
-              - { label: "Texto do botón", name: "button_label", widget: "string", required: false }
+                hint: "Indica se hai prazas dispoñibles: 'available', 'full' ou 'partial'. Controla os distintivos visuais na páxina"
+              - { label: "Aviso de estado ou descrición curta", name: "status_note", widget: "string", required: false, hint: "Nota explicativa para a tarxeta (ex: 'Actividade completa. Non admite máis alumnado.' ou quendas dispoñibles)" }
+              - { label: "Etiqueta de estado", name: "status_label", widget: "string", required: false, hint: "Campo de compatibilidade de datos preservado. Atención: os distintivos visuais da web ('Completa' / 'Parcialmente completa') xéranse directamente a partir do campo 'Estado' anterior" }
+              - { label: "Prezo / mes", name: "price", widget: "string", hint: "Prezo mensual amosado na tarxeta (ex: '22€ / mes'). Atención: este valor non actualiza o Cadro de tarifas inferior, mantense por separado" }
+              - label: "Tipo de rexistro ou inscrición"
+                name: "registration_type"
+                widget: "select"
+                required: false
+                options:
+                  - { label: "Formulario de Google (Google Form)", value: "google_form" }
+                  - { label: "Ficha en PDF descargable", value: "pdf" }
+                  - { label: "Ligazón web externa", value: "external_url" }
+                hint: "Modalidade de inscrición. Débese deixar baleiro se a actividade está completa"
+              - { label: "Ligazón de inscrición ou información", name: "registration_url", widget: "string", required: false, hint: "Enderezo web do formulario de Google, ruta ao ficheiro PDF (/docs/...) ou ligazón externa" }
+              - { label: "Texto do botón", name: "button_label", widget: "string", required: false, hint: "Texto do botón (ex: 'Inscrición', 'Ficha de inscrición (PDF)'). Se se deixa baleiro amosará 'Inscrición'" }
+              - { label: "Email de contacto", name: "contact_email", widget: "string", required: false, hint: "Enderezo de correo opcional (ex: 'portobellow11@yahoo.es'). Amosará un botón secundario de 'Contactar por email' na tarxeta da actividade; non envía correos de maneira automática" }
+              - { label: "Etapa educativa", name: "stage", widget: "string", hint: "Cursos recomendados (ex: 'Infantil e Primaria', 'Primaria', 'Infantil')" }
+              - { label: "Entidade / Monitor", name: "provider", widget: "string", required: false, hint: "Nome da entidade colaboradora ou monitor/a (ex: 'Sadanza', 'Judo Hércules', 'Portobello')" }
+              - { label: "Identificador (slug)", name: "id", widget: "string", hint: "Identificador técnico interno (ex: 'baile-moderno'). Usado para as ligazóns internas e áncoras da páxina. Cambiar o nome da actividade non require cambiar o seu ID. Se engade unha nova actividade, debe asignarlle un ID único" }
+          - label: "Cadro de tarifas e cotas"
+            name: "pricing_table"
+            widget: "list"
+            required: false
+            collapsed: true
+            summary: "{{fields.name}} — {{fields.hours}} — {{fields.price}}"
+            hint: "Cadro resumo de tarifas ao pé da páxina. Atención: mantense de forma independente e separada dos prezos de cada actividade"
+            fields:
+              - { label: "Actividade", name: "name", widget: "string", hint: "Nome da actividade no cadro" }
+              - { label: "Horas semanais", name: "hours", widget: "string", hint: "Carga horaria (ex: 2 horas/semana)" }
+              - { label: "Cota mensual", name: "price", widget: "string", hint: "Prezo mensual (ex: 22€ / mes)" }
+          - label: "Condicións xerais do servizo"
+            name: "general_conditions"
+            widget: "list"
+            required: false
+            collapsed: true
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Título da condición", name: "title", widget: "string" }
+              - label: "Contido da condición"
+                name: "body"
+                widget: "markdown"
+                modes: ["rich_text", "raw"]
+                buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"]
+          - label: "Marco Legal de Convivencia (Lei 4/2011)"
+            name: "coexistence_articles"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Título xeral", name: "title", widget: "string" }
+              - label: "Artigo 65 (Condutas graves)"
+                name: "article_65"
+                widget: "object"
+                fields:
+                  - { label: "Título", name: "title", widget: "string" }
+                  - label: "Contido (introdución e puntos / letras)"
+                    name: "body"
+                    widget: "markdown"
+                    modes: ["rich_text", "raw"]
+                    buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"]
+              - label: "Artigo 66 (Condutas leves)"
+                name: "article_66"
+                widget: "object"
+                fields:
+                  - { label: "Título", name: "title", widget: "string" }
+                  - label: "Contido (introdución e puntos / letras)"
+                    name: "body"
+                    widget: "markdown"
+                    modes: ["rich_text", "raw"]
+                    buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"]
+          - { label: "Imaxe Plan Corresponsables (opcional)", name: "corresponsables_image", widget: "image", required: false, hint: "Imaxe ao pé da páxina de Extraescolares. Para substituíla por outra, prema en 'Elegir una imagen'. Se se deixa este campo baleiro, restaurarase automaticamente a imaxe institucional predeterminada (/img/extraescolares-corresponsables.jpg)." }
+          - { label: "Texto alternativo da imaxe (Alt)", name: "corresponsables_image_alt", widget: "string", required: false, hint: "Texto descritivo de accesibilidade para a imaxe. Se se deixa baleiro, aplicarase o texto predeterminado ('Plan Corresponsables - Xunta de Galicia')." }
+
+  # ===== 3. PÁXINAS DE INFORMACIÓN (CAMPOS ESTRUTURADOS E BLOQUES FLEXIBLES) =====
+  - name: "pages"
+    label: "📄 Páxinas de Información"
+    delete: false
+    editor:
+      preview: true
+    files:
+      # --- MADRUGADORES (EDITOR DE DOCUMENTO SIMPLE) ---
+      - name: "madrugadores"
+        label: "🌅 Servizo de Madrugadores"
+        file: "src/pages/madrugadores.md"
+        fields:
+          - { label: "Título da páxina", name: "title", widget: "string" }
+          - { label: "Imaxe destacada (opcional)", name: "image", widget: "image", required: false, hint: "Imaxe opcional de cabeceira da páxina" }
+          - { label: "Texto alternativo da imaxe (Alt)", name: "image_alt", widget: "string", required: false }
+          - label: "Contido da páxina"
+            name: "body"
+            widget: "markdown"
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+            modes: ["rich_text", "raw"]
+            hint: "Escriba aquí todo o contido da páxina (horarios, tarifas, instrucións e contacto). Admite cabeceiras, listas, negriña e ligazóns."
+          - label: "Documentos / PDF (opcional)"
+            name: "documents"
+            widget: "list"
+            required: false
+            summary: "{{fields.title}} (PDF)"
+            fields:
+              - { label: "Título do documento", name: "title", widget: "string" }
+              - { label: "Ficheiro PDF", name: "file", widget: "file" }
+              - { label: "Descrición breve", name: "description", widget: "string", required: false }
+
+      # --- COMEDOR ESCOLAR (GUÍA ILUSTRADA DE PAGO) ---
+      - name: "comedor"
+        label: "🍽️ Pago do Comedor"
+        file: "src/pages/comedor.md"
+        fields:
+          - { label: "Título da páxina", name: "title", widget: "string" }
+          - { label: "Imaxe destacada (opcional)", name: "image", widget: "image", required: false, hint: "Imaxe opcional de cabeceira da páxina" }
+          - { label: "Texto alternativo da imaxe (Alt)", name: "image_alt", widget: "string", required: false }
+          - label: "Texto introdutorio"
+            name: "intro"
+            widget: "markdown"
+            required: false
+            buttons: ["bold", "italic", "link"]
+            modes: ["rich_text", "raw"]
+            hint: "Explicación xeral sobre o pagamento do comedor. Seleccione texto e use a icona 🔗 para crear ou editar ligazóns web ou emails."
+          - label: "Información de pagamento (ATRIGA)"
+            name: "atriga_info"
+            widget: "markdown"
+            required: false
+            buttons: ["bold", "italic", "link", "heading-two"]
+            modes: ["rich_text", "raw"]
+            hint: "Título, explicación e ligazón ao Portal Tributario ATRIGA. Pode editar o texto e usar a icona 🔗 para modificar a ligazón."
+          - label: "Pasos da guía ilustrada (11 pasos)"
+            name: "steps"
+            widget: "list"
+            required: false
+            summary: "Paso: {{fields.description}}"
+            fields:
+              - { label: "Texto explicativo", name: "description", widget: "text", required: false, hint: "Texto e indicacións que acompañan a esta captura" }
+              - { label: "Imaxe do paso", name: "image", widget: "image", required: false, hint: "Prema para subir ou substituír a captura (JPG ou PNG)" }
+              - { label: "Descrición da imaxe (accesibilidade)", name: "image_alt", widget: "string", required: false, hint: "Breve descrición do que aparece na imaxe" }
+          - label: "Información final e xustificantes"
+            name: "closing_info"
+            widget: "markdown"
+            required: false
+            buttons: ["bold", "italic", "link"]
+            modes: ["rich_text", "raw"]
+            hint: "Instrucións de xustificante con email, outras formas de pago e mensaxe final. Seleccione o enderezo de correo e use a icona 🔗 para configurar o enlace de email (ex: mailto:comedor.ceip.rabadeira@edu.xunta.gal)."
+          - label: "Documentos / PDF (opcional)"
+            name: "documents"
+            widget: "list"
+            required: false
+            summary: "{{fields.title}} (PDF)"
+            fields:
+              - { label: "Título do documento", name: "title", widget: "string" }
+              - { label: "Ficheiro PDF", name: "file", widget: "file" }
+              - { label: "Descrición breve", name: "description", widget: "string", required: false }
+
+      # --- INSCRICIÓN / ALTA DE SOCIOS ---
+      - name: "inscripcion"
+        label: "📝 Alta de Socios / Inscrición"
+        file: "src/pages/inscripcion.md"
+        fields:
+          - { label: "Título da páxina", name: "title", widget: "string" }
+          - { label: "Imaxe destacada (opcional)", name: "image", widget: "image", required: false, hint: "Imaxe opcional de cabeceira da páxina" }
+          - { label: "Texto alternativo da imaxe (Alt)", name: "image_alt", widget: "string", required: false }
+          - { label: "Texto explicativo", name: "intro", widget: "text", required: false, hint: "Información e prazo de alta de socios" }
+          - { label: "Cota anual de socio", name: "membership_fee", widget: "string", required: false, hint: "Ex: 25€/familia" }
+          - { label: "Número de conta bancaria (IBAN)", name: "bank_iban", widget: "string", required: false, hint: "Conta onde realizar a transferencia" }
+          - { label: "Instrución de concepto da transferencia", name: "transfer_concept_note", widget: "string", required: false }
+          - { label: "Formulario de inscrición (Google Forms URL)", name: "registration_form_url", widget: "string", required: false }
+          - { label: "Texto do botón de inscrición", name: "registration_button_label", widget: "string", required: false }
+          - { label: "Mensaxe final", name: "closing_text", widget: "string", required: false }
+          - label: "Documentos / PDF (opcional)"
+            name: "documents"
+            widget: "list"
+            required: false
+            summary: "{{fields.title}} (PDF)"
+            fields:
+              - { label: "Título do documento", name: "title", widget: "string" }
+              - { label: "Ficheiro PDF", name: "file", widget: "file" }
+              - { label: "Descrición breve", name: "description", widget: "string", required: false }
+
+      # --- MEMORIA ANUAL (EDITOR DE DOCUMENTO SIMPLE) ---
+      - name: "memoria"
+        label: "📊 Memoria de Actividades"
+        file: "src/pages/memoria.md"
+        fields:
+          - { label: "Título da páxina", name: "title", widget: "string" }
+          - { label: "Imaxe destacada (opcional)", name: "image", widget: "image", required: false, hint: "Imaxe opcional de cabeceira da páxina" }
+          - { label: "Texto alternativo da imaxe (Alt)", name: "image_alt", widget: "string", required: false }
+          - label: "Contido da páxina"
+            name: "body"
+            widget: "markdown"
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+            modes: ["rich_text", "raw"]
+            hint: "Escriba aquí todo o contido da páxina (resumo, actividades e contacto). Admite cabeceiras, listas, negriña e ligazóns."
+          - label: "Documentos / PDF (opcional)"
+            name: "documents"
+            widget: "list"
+            required: false
+            summary: "{{fields.title}} (PDF)"
+            fields:
+              - { label: "Título do documento", name: "title", widget: "string" }
+              - { label: "Ficheiro PDF", name: "file", widget: "file" }
+              - { label: "Descrición breve", name: "description", widget: "string", required: false }
+
+      # --- CONSELLO ESCOLAR (EDITOR DE DOCUMENTO SIMPLE) ---
+      - name: "consello_escolar"
+        label: "🏛️ Consello Escolar"
+        file: "src/pages/consello-escolar.md"
+        fields:
+          - { label: "Título da páxina", name: "title", widget: "string" }
+          - { label: "Imaxe destacada (opcional)", name: "image", widget: "image", required: false, hint: "Imaxe opcional de cabeceira da páxina" }
+          - { label: "Texto alternativo da imaxe (Alt)", name: "image_alt", widget: "string", required: false }
+          - label: "Contido da páxina"
+            name: "body"
+            widget: "markdown"
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+            modes: ["rich_text", "raw"]
+            hint: "Escriba aquí todo o contido da páxina (explicación, ligazón ao blog e contacto). Admite cabeceiras, listas, negriña e ligazóns."
+          - label: "Documentos / PDF (opcional)"
+            name: "documents"
+            widget: "list"
+            required: false
+            summary: "{{fields.title}} (PDF)"
+            fields:
+              - { label: "Título do documento", name: "title", widget: "string" }
+              - { label: "Ficheiro PDF", name: "file", widget: "file" }
+              - { label: "Descrición breve", name: "description", widget: "string", required: false }
+
+  # ===== 4. PORTADA / INICIO =====
+  - name: "home"
+    label: "🏠 Páxina de Inicio (Portada)"
+    delete: false
+    files:
+      - name: "home_content"
+        label: "Contido da Portada"
+        file: "src/_data/home.json"
+        fields:
+          - label: "Bloque Principal (Hero)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Título principal", name: "title", widget: "string" }
+              - { label: "Texto de benvida (Lead)", name: "lead", widget: "text" }
+              - { label: "Imaxe destacada de comunidade", name: "image", widget: "image" }
+              - { label: "Texto alternativo da imaxe (Alt)", name: "image_alt", widget: "string", required: false }
+              - { label: "Texto botón principal", name: "primary_button_text", widget: "string" }
+              - { label: "Ligazón botón principal", name: "primary_button_url", widget: "string" }
+              - { label: "Texto botón secundario", name: "secondary_button_text", widget: "string" }
+              - { label: "Ligazón botón secundario", name: "secondary_button_url", widget: "string" }
+          - label: "Mensaxe da Comunidade (Intro)"
+            name: "intro"
+            widget: "object"
+            fields:
+              - { label: "Texto destacado", name: "text", widget: "text" }
+          - label: "Accesos Directos (4 Tarxetas)"
+            name: "shortcuts"
+            widget: "object"
+            fields:
+              - { label: "Título da sección", name: "title", widget: "string" }
+              - label: "Listado de tarxetas"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Descrición curta", name: "description", widget: "text" }
+                  - { label: "URL de destino", name: "url", widget: "string" }
+                  - { label: "Texto da ligazón", name: "link_text", widget: "string" }
+          - label: "Bloque de Novas"
+            name: "news_section"
+            widget: "object"
+            fields:
+              - { label: "Título do bloque", name: "title", widget: "string" }
+              - { label: "Texto de ver máis", name: "more_link_text", widget: "string" }
+              - { label: "Ligazón ao arquivo", name: "more_link_url", widget: "string" }
+          - label: "Panel de Contacto"
+            name: "contact_panel"
+            widget: "object"
+            fields:
+              - { label: "Título do panel", name: "title", widget: "string" }
+              - { label: "Texto de axuda", name: "text", widget: "text" }
+              - { label: "Texto do botón", name: "button_text", widget: "string" }
+              - { label: "Nome do centro educativo", name: "school_name", widget: "string" }
+
+  # ===== 5. CONFIGURACIÓN XERAL DO SITIO =====
+  - name: "site_settings"
+    label: "⚙️ Datos Xerais da ANPA"
+    delete: false
+    files:
+      - name: "site_data"
+        label: "Identidade e Contacto Xeral"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Nome curto da asociación", name: "name", widget: "string" }
+          - { label: "Nome oficial completo", name: "fullName", widget: "string" }
+          - { label: "Email oficial de contacto", name: "email", widget: "string" }
+          - { label: "Descrición xeral (para buscadores)", name: "description", widget: "text" }
+          - { label: "URL do sitio web", name: "url", widget: "string" }

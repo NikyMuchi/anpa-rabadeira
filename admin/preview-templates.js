@@ -1,0 +1,760 @@
+/**
+ * Decap CMS Custom Preview Templates
+ * ANPA Ensino Rabadeira — Warm Cream & Teal Design System
+ */
+
+(function () {
+  const globalObj = typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this);
+  const h = (typeof globalObj.h === 'function') ? globalObj.h : function (tag, props, ...children) {
+    return { tag, props: props || {}, children: children.flat ? children.flat() : children };
+  };
+  const createClass = (typeof globalObj.createClass === 'function') ? globalObj.createClass : function (spec) {
+    function Component(props) {
+      this.props = props || {};
+    }
+    if (spec) {
+      for (const key in spec) {
+        if (Object.prototype.hasOwnProperty.call(spec, key)) {
+          Component.prototype[key] = spec[key];
+        }
+      }
+    }
+    return Component;
+  };
+
+  function hasField(props, fieldName) {
+    if (!props) return false;
+    const candidates = [];
+    if (props.fields) candidates.push(props.fields);
+    if (props.collection) {
+      const colFields = typeof props.collection.get === 'function'
+        ? props.collection.get('fields')
+        : props.collection.fields;
+      if (colFields) candidates.push(colFields);
+    }
+
+    for (let i = 0; i < candidates.length; i++) {
+      const list = candidates[i];
+      if (!list) continue;
+
+      if (typeof list.some === 'function') {
+        const found = list.some(function (f) {
+          if (!f) return false;
+          if (typeof f.get === 'function') return f.get('name') === fieldName;
+          return f.name === fieldName;
+        });
+        if (found) return true;
+      }
+
+      if (Array.isArray(list)) {
+        const found = list.some(function (f) {
+          if (!f) return false;
+          if (typeof f.get === 'function') return f.get('name') === fieldName;
+          return f.name === fieldName;
+        });
+        if (found) return true;
+      }
+
+      if (typeof list.toJS === 'function') {
+        try {
+          const jsList = list.toJS();
+          if (Array.isArray(jsList)) {
+            const found = jsList.some(function (f) { return f && f.name === fieldName; });
+            if (found) return true;
+          }
+        } catch (e) {
+          // ignore toJS error
+        }
+      }
+    }
+
+    return false;
+  }
+
+  const mesesGalego = [
+    "xaneiro", "febreiro", "marzo", "abril", "maio", "xuño",
+    "xullo", "agosto", "setembro", "outubro", "novembro", "decembro"
+  ];
+
+  function formatGalicianDate(dateValue) {
+    if (!dateValue) return "";
+    const d = new Date(dateValue);
+    if (isNaN(d.getTime())) return String(dateValue);
+    return `${d.getDate()} de ${mesesGalego[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
+  /**
+   * Resolves an asset for Decap CMS preview templates.
+   * Handles:
+   * 1. Newly uploaded pending media in browser session (Decap stores in-memory File/Blob
+   *    in Redux state.medias under repo path "src/img/uploads/...").
+   * 2. Existing static assets (/img/comedor/paso-X.png, /img/uploads/..., etc.).
+   * 3. External or blob/data URLs.
+   * 4. Missing or null assets (returns null gracefully).
+   */
+  function resolveAsset(getAsset, imagePath) {
+    if (!imagePath) return null;
+    if (typeof imagePath !== 'string' && typeof imagePath !== 'object') return null;
+
+    if (typeof getAsset !== 'function') {
+      return imagePath;
+    }
+
+    if (typeof imagePath === 'object') {
+      try {
+        const resolved = getAsset(imagePath);
+        return resolved || imagePath;
+      } catch (e) {
+        return imagePath;
+      }
+    }
+
+    const trimmed = imagePath.trim();
+    if (!trimmed) return null;
+
+    if (trimmed.startsWith('blob:') || trimmed.startsWith('data:') || /^https?:\/\//i.test(trimmed)) {
+      return trimmed;
+    }
+
+    if (trimmed.startsWith('/img/uploads/') || trimmed.startsWith('img/uploads/') || trimmed.startsWith('src/img/uploads/')) {
+      const filename = trimmed.replace(/^\/?(src\/)?img\/uploads\//, '');
+      if (filename) {
+        const repoPath = 'src/img/uploads/' + filename;
+        try {
+          const pendingAsset = getAsset(repoPath);
+          if (pendingAsset) {
+            const urlStr = typeof pendingAsset.toString === 'function' ? pendingAsset.toString() : String(pendingAsset.url || '');
+            const hasBlobOrData = urlStr.startsWith('blob:') || urlStr.startsWith('data:');
+            const hasFileObj = Boolean(pendingAsset.fileObj);
+            if (hasBlobOrData || hasFileObj) {
+              return pendingAsset;
+            }
+          }
+        } catch (e) {
+          // Ignore and fall back to standard lookup
+        }
+      }
+    }
+
+    try {
+      const asset = getAsset(trimmed);
+      return asset || trimmed;
+    } catch (e) {
+      return trimmed;
+    }
+  }
+
+  /**
+   * Creates a draft-aware getAsset resolver for Decap CMS ImageControl.
+   * Intercepts queries under /img/uploads/ and checks the repository path (src/img/uploads/...)
+   * where Decap CMS stores in-memory File/Blob assets and authenticated draft media.
+   */
+  function createDraftAwareGetAsset(originalGetAsset) {
+    return function (path, field) {
+      if (!path) return null;
+      if (typeof path === 'string') {
+        const trimmed = path.trim();
+        if (!trimmed) return null;
+        if (trimmed.startsWith('/img/uploads/') || trimmed.startsWith('img/uploads/') || trimmed.startsWith('src/img/uploads/')) {
+          const filename = trimmed.replace(/^\/?(src\/)?img\/uploads\//, '');
+          if (filename && typeof originalGetAsset === 'function') {
+            try {
+              const repoPath = 'src/img/uploads/' + filename;
+              const asset = originalGetAsset(repoPath, field);
+              if (asset) {
+                const urlStr = typeof asset.toString === 'function' ? asset.toString() : String(asset.url || '');
+                if (urlStr.startsWith('blob:') || urlStr.startsWith('data:') || asset.fileObj) {
+                  return asset;
+                }
+              }
+            } catch (e) {
+              // Ignore lookup error and fall through
+            }
+          }
+        }
+        return typeof originalGetAsset === 'function' ? originalGetAsset(trimmed, field) : trimmed;
+      }
+      return typeof originalGetAsset === 'function' ? originalGetAsset(path, field) : path;
+    };
+  }
+
+  /**
+   * Subclasses Decap CMS's built-in FileControl (ImageControl) directly.
+   * Preserves 100% of native lifecycle: controlID generation, shouldComponentUpdate,
+   * componentDidUpdate, mediaPaths, and onChange propagation.
+   * Provides draft-aware getAsset strictly during renderImages() for the thumbnail.
+   */
+  function createSubclassImageControl(BuiltinControl) {
+    if (!BuiltinControl || typeof BuiltinControl !== 'function') return null;
+
+    class SubclassImageControl extends BuiltinControl {
+      constructor(props) {
+        super(props);
+        const originalRenderImages = this.renderImages;
+        if (typeof originalRenderImages === 'function') {
+          this.renderImages = () => {
+            const originalGetAsset = this.props.getAsset;
+            const draftGetAsset = createDraftAwareGetAsset(originalGetAsset);
+            this._patchedProps = Object.assign({}, this.props, { getAsset: draftGetAsset });
+            try {
+              return originalRenderImages.call(this);
+            } finally {
+              this._patchedProps = null;
+            }
+          };
+        }
+      }
+
+      get props() {
+        return this._patchedProps || this._realProps;
+      }
+
+      set props(val) {
+        this._realProps = val;
+      }
+    }
+
+    return SubclassImageControl;
+  }
+
+  function renderInlineMarkdown(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  }
+
+  function formatMarkdown(text) {
+    if (!text || typeof text !== 'string') return null;
+    const trimmed = text.trim();
+    if (!trimmed) return null;
+    const blocks = trimmed.split(/\n\s*\n/).filter(Boolean);
+    if (blocks.length === 0) return null;
+
+    return blocks.map((blk, bIdx) => {
+      const lines = blk.split('\n');
+      const firstLine = lines[0].trim();
+      // HTML block (e.g. <p class="conditions-statement">)
+      if (firstLine.startsWith('<p') || firstLine.startsWith('<div')) {
+        return h('div', { key: bIdx, dangerouslySetInnerHTML: { __html: blk } });
+      }
+      // Heading 2
+      if (firstLine.startsWith('## ')) {
+        return h('h2', { key: bIdx, style: { marginTop: '1.5rem', marginBottom: '0.75rem', color: '#13406a' } }, firstLine.replace(/^##\s+/, ''));
+      }
+      // Heading 3
+      if (firstLine.startsWith('### ')) {
+        return h('h3', { key: bIdx, style: { marginTop: '1.25rem', marginBottom: '0.5rem', color: '#13406a' } }, firstLine.replace(/^###\s+/, ''));
+      }
+      // List
+      if (lines.every(l => l.trim().startsWith('- ') || l.trim().startsWith('* '))) {
+        return h('ul', { key: bIdx, style: { paddingLeft: '1.5rem', marginBottom: '1rem', lineHeight: '1.7' } },
+          lines.map((l, lIdx) => h('li', { key: lIdx, dangerouslySetInnerHTML: { __html: renderInlineMarkdown(l.trim().replace(/^[-*]\s+/, '')) } }))
+        );
+      }
+      // Blockquote
+      if (firstLine.startsWith('> ')) {
+        return h('blockquote', { key: bIdx, style: { borderLeft: '4px solid #0d9488', paddingLeft: '1rem', margin: '1rem 0', color: '#475569', fontStyle: 'italic' } },
+          lines.map((line, lIdx) => h('p', { key: lIdx, style: { margin: '0.25rem 0' }, dangerouslySetInnerHTML: { __html: renderInlineMarkdown(line.replace(/^>\s*/, '')) } }))
+        );
+      }
+      // Paragraph
+      return h('p', { key: bIdx, style: { marginBottom: '0.75rem', lineHeight: '1.6' } },
+        lines.map((line, lIdx) => h('span', {
+          key: lIdx,
+          dangerouslySetInnerHTML: { __html: renderInlineMarkdown(line) + (lIdx < lines.length - 1 ? '<br/>' : '') }
+        }))
+      );
+    });
+  }
+
+  // ===== POST / NOTICIA PREVIEW =====
+  const PostPreview = createClass({
+    render: function () {
+      const entry = this.props.entry;
+      if (!entry) return null;
+      const title = entry.getIn(['data', 'title']) || 'Título da nova';
+      const date = entry.getIn(['data', 'date']);
+      const category = entry.getIn(['data', 'category']) || 'Novas';
+      const image = entry.getIn(['data', 'image']);
+      const imageAsset = image ? resolveAsset(this.props.getAsset, image) : null;
+      const imageSrc = (imageAsset && typeof imageAsset.toString === 'function') ? imageAsset.toString() : (imageAsset || '');
+      const formattedDate = date ? formatGalicianDate(date) : '';
+
+      return h('div', { className: 'preview-root' },
+        h('article', { className: 'post-single container' },
+          h('a', { href: '#', className: 'post-single__back', onClick: (e) => e.preventDefault() }, '← Voltar a Novas'),
+          h('header', null,
+            category ? h('span', { className: 'post-single__category' }, category) : null,
+            h('h1', null, title),
+            formattedDate ? h('time', { className: 'post-single__date' }, `📅 ${formattedDate}`) : null,
+            imageSrc ? h('img', { src: imageSrc, alt: title, className: 'post-single__image' }) : null
+          ),
+          h('div', { className: 'post-content' }, (hasField(this.props, 'body') && this.props.widgetFor) ? this.props.widgetFor('body') : (entry.getIn(['data', 'body']) ? formatMarkdown(entry.getIn(['data', 'body'])) : null))
+        )
+      );
+    }
+  });
+
+  // ===== EXTRAESCOLARES PREVIEW =====
+  const ExtraescolaresPreview = createClass({
+    render: function () {
+      const entry = this.props.entry;
+      if (!entry) return null;
+      const data = entry.getIn(['data']) ? entry.getIn(['data']).toJS() : {};
+      const academicYear = data.academic_year || '2026-2027';
+      const scheduleAsset = data.schedule_image ? resolveAsset(this.props.getAsset, data.schedule_image) : null;
+      const scheduleImg = (scheduleAsset && typeof scheduleAsset.toString === 'function') ? scheduleAsset.toString() : (scheduleAsset || '');
+      const activities = data.activities || [];
+      const membership = data.membership || {};
+      const pricingTable = data.pricing_table || [];
+      const generalConditions = data.general_conditions || [];
+      const coexistence = data.coexistence_articles || null;
+      const corresponsablesRaw = data.corresponsables_image;
+      const corresponsablesAsset = corresponsablesRaw ? (this.props.getAsset ? this.props.getAsset(corresponsablesRaw) : corresponsablesRaw) : '/img/extraescolares-corresponsables.jpg';
+      const corresponsablesSrc = (corresponsablesAsset && typeof corresponsablesAsset.toString === 'function') ? corresponsablesAsset.toString() : (corresponsablesAsset || '/img/extraescolares-corresponsables.jpg');
+      const corresponsablesAlt = (typeof data.corresponsables_image_alt === 'string' && data.corresponsables_image_alt.trim()) ? data.corresponsables_image_alt : 'Plan Corresponsables - Xunta de Galicia';
+
+      return h('div', { className: 'preview-root container' },
+        h('h1', { style: { marginTop: '1.5rem', marginBottom: '1rem', color: '#13406a' } }, `Actividades Extraescolares ${academicYear}`),
+        data.intro ? h('p', null, data.intro) : null,
+        data.subintro ? h('p', null, data.subintro) : null,
+
+        // Horario oficial
+        scheduleImg ? h('div', { className: 'schedule-card', style: { margin: '2rem 0' } },
+          h('div', { className: 'schedule-card__header' },
+            h('h3', { className: 'schedule-card__title' }, `Horario Xeral Extraescolares (${academicYear})`)
+          ),
+          h('div', { className: 'schedule-card__scroll' },
+            h('img', { src: scheduleImg, alt: `Horario ${academicYear}`, className: 'schedule-card__img' })
+          )
+        ) : null,
+
+        data.deadlines_note ? h('p', null, data.deadlines_note) : null,
+
+        // Alta de socio
+        membership.title ? h('div', { className: 'callout-box', style: { margin: '2rem 0' } },
+          h('h3', null, membership.title),
+          membership.non_member_note ? h('p', null, membership.non_member_note) : null,
+          h('div', { className: 'callout-box__actions' },
+            membership.join_label ? h('span', { className: 'btn-action' }, membership.join_label) : null,
+            membership.non_member_label ? h('span', { className: 'btn-action' }, membership.non_member_label) : null
+          )
+        ) : null,
+
+        // Listado de actividades
+        h('h2', { style: { marginTop: '2rem', marginBottom: '1rem' } }, `Listado de actividades (${activities.length})`),
+        h('div', { className: 'activity-cards' },
+          activities.map((act, index) => {
+            let badge = null;
+            if (act.status === 'full') {
+              badge = h('span', { className: 'status-badge status-badge--full' }, 'Completa');
+            } else if (act.status === 'partial') {
+              badge = h('span', { className: 'status-badge status-badge--partial' }, 'Parcialmente completa');
+            }
+
+            return h('article', { key: act.id || index, className: 'activity-card' },
+              h('div', { className: 'activity-card__header' },
+                h('h3', { className: 'activity-card__title' }, act.name || 'Actividade'),
+                badge
+              ),
+              h('div', { className: 'activity-card__details' },
+                h('span', { className: 'activity-card__detail-item' }, h('strong', null, 'Etapa: '), act.stage || ''),
+                h('span', { className: 'activity-card__detail-item' }, h('strong', null, 'Prezo: '), act.price || ''),
+                act.provider ? h('span', { className: 'activity-card__detail-item' }, h('strong', null, 'Imparte: '), act.provider) : null
+              ),
+              act.status_note ? h('p', { className: 'activity-card__note' }, act.status_note) : null,
+              (() => {
+                const hasReg = act.status !== 'full' && act.registration_url;
+                const emailStr = typeof act.contact_email === 'string' ? act.contact_email.trim() : '';
+                const hasEmail = emailStr && emailStr.includes('@') && !emailStr.includes(' ');
+                if (!hasReg && !hasEmail) return null;
+
+                const actions = [];
+                if (hasReg) {
+                  actions.push(h('span', { key: 'reg', className: 'btn-action' }, act.button_label || 'Inscrición'));
+                }
+                if (hasEmail) {
+                  actions.push(h('span', { key: 'email', className: 'btn-action btn-action--secondary' }, 'Contactar por email'));
+                }
+                return h('div', { className: 'activity-card__actions' }, actions);
+              })()
+            );
+          })
+        ),
+
+        // Cadro de tarifas
+        pricingTable.length > 0 ? h('div', { style: { marginTop: '2.5rem' } },
+          h('h2', null, `Cadro de tarifas e cotas (${academicYear})`),
+          h('p', null,
+            'É necesaria a alta como socio/a da ANPA para acceder a estas tarifas. As actividades de carácter xeral teñen un prezo de ',
+            h('strong', null, '22 € / 2 horas semanais'),
+            ', agás aquelas con custos específicos de material ou monitores homologados.'
+          ),
+          h('div', { className: 'pricing-table-container' },
+            h('table', { className: 'pricing-table' },
+              h('thead', null,
+                h('tr', null,
+                  h('th', null, 'Actividade'),
+                  h('th', null, 'Horas'),
+                  h('th', null, 'Cota mensual')
+                )
+              ),
+              h('tbody', null,
+                pricingTable.map((item, idx) =>
+                  h('tr', { key: idx },
+                    h('td', null, h('strong', null, item.name)),
+                    h('td', null, item.hours),
+                    h('td', null, item.price)
+                  )
+                )
+              )
+            )
+          )
+        ) : null,
+
+        // Condicións xerais e réxime de convivencia
+        (generalConditions.length > 0 || coexistence) ? h('div', { style: { marginTop: '2.5rem' } },
+          h('h2', null, 'Condicións xerais e réxime de convivencia'),
+
+          // Acordeón 1: Condicións xerais do servizo
+          generalConditions.length > 0 ? h('details', { className: 'conditions-accordion' },
+            h('summary', null, 'Condicións xerais do servizo de actividades extraescolares'),
+            h('div', { className: 'conditions-accordion__content' },
+              h('ol', null,
+                generalConditions.map((cond, idx) => {
+                  const items = [];
+                  if (cond.title) {
+                    items.push(h('strong', { key: 'title' }, `${cond.title}: `));
+                  }
+
+                  if (cond.body) {
+                    items.push(h('div', { key: 'body', className: 'condition-body' }, formatMarkdown(cond.body)));
+                  } else {
+                    // Fallback para datos legados
+                    if (Array.isArray(cond.paragraphs) && cond.paragraphs.length > 0) {
+                      cond.paragraphs.forEach((p, pIdx) => {
+                        if (pIdx === 0) {
+                          items.push(p);
+                        } else {
+                          items.push(h('p', { key: `p-${pIdx}`, className: 'conditions-subtext' }, p));
+                        }
+                      });
+                    } else if (cond.text) {
+                      items.push(cond.text);
+                    }
+
+                    if (Array.isArray(cond.options) && cond.options.length > 0) {
+                      items.push(h('ul', { key: 'opts', className: 'conditions-options' },
+                        cond.options.map((opt, oIdx) => h('li', { key: oIdx }, opt))
+                      ));
+                    }
+
+                    if (cond.extra_text) {
+                      items.push(h('p', { key: 'extra', className: 'conditions-extra-text' }, cond.extra_text));
+                    }
+
+                    if (cond.subheading) {
+                      items.push(h('p', { key: 'subhead', className: 'conditions-subheading' },
+                        h('strong', null, cond.subheading)
+                      ));
+                    }
+
+                    if (Array.isArray(cond.sub_items) && cond.sub_items.length > 0) {
+                      items.push(h('ul', { key: 'subitems', className: 'conditions-sub-items' },
+                        cond.sub_items.map((sub, sIdx) => h('li', { key: sIdx }, sub))
+                      ));
+                    }
+
+                    if (cond.statement) {
+                      items.push(h('p', { key: 'statement', className: 'conditions-statement' },
+                        h('strong', null, cond.statement)
+                      ));
+                    }
+                  }
+
+                  return h('li', { key: cond.id || idx }, items);
+                })
+              )
+            )
+          ) : null,
+
+          // Acordeón 2: Marco Legal de Convivencia
+          coexistence ? h('details', { className: 'conditions-accordion' },
+            h('summary', null, coexistence.title || 'Marco Legal de Convivencia (Lei 4/2011)'),
+            h('div', { className: 'conditions-accordion__content' },
+              coexistence.article_65 ? h('div', null,
+                coexistence.article_65.title ? h('h4', null, coexistence.article_65.title) : null,
+                coexistence.article_65.body ? formatMarkdown(coexistence.article_65.body) : (
+                  // Fallback legado
+                  h('div', null,
+                    coexistence.article_65.intro ? h('p', null, coexistence.article_65.intro) : null,
+                    Array.isArray(coexistence.article_65.points) && coexistence.article_65.points.length > 0 ? h('ul', null,
+                      coexistence.article_65.points.map((pt, pIdx) => h('li', { key: pIdx }, pt))
+                    ) : null
+                  )
+                )
+              ) : null,
+              coexistence.article_66 ? h('div', null,
+                coexistence.article_66.title ? h('h4', null, coexistence.article_66.title) : null,
+                coexistence.article_66.body ? formatMarkdown(coexistence.article_66.body) : (
+                  // Fallback legado
+                  h('div', null,
+                    coexistence.article_66.intro ? h('p', null, coexistence.article_66.intro) : null,
+                    Array.isArray(coexistence.article_66.points) && coexistence.article_66.points.length > 0 ? h('ul', null,
+                      coexistence.article_66.points.map((pt, pIdx) => h('li', { key: pIdx }, pt))
+                    ) : null
+                  )
+                )
+              ) : null
+            )
+          ) : null
+        ) : null,
+
+        // Imaxe Plan Corresponsables
+        corresponsablesSrc ? h('p', { style: { marginTop: '2rem' } },
+          h('img', { src: corresponsablesSrc, alt: corresponsablesAlt, style: { maxWidth: '100%', height: 'auto', borderRadius: '4px' } })
+        ) : null
+      );
+    }
+  });
+
+  // ===== PÁXINAS DE INFORMACIÓN (FLEXIBLE PREVIEW) =====
+  function renderBlocks(blocks, getAsset) {
+    if (!blocks || !Array.isArray(blocks)) return null;
+    return blocks.map((blk, idx) => {
+      if (!blk) return null;
+      const type = blk.type;
+      const title = blk.title;
+      const rawText = blk.body || blk.content || blk.text || '';
+
+      if (type === 'text_block' || type === 'text') {
+        return h('div', { key: idx, style: { margin: '1.5rem 0' } },
+          title ? h('h2', { style: { marginTop: '1.25rem', marginBottom: '0.75rem', color: '#13406a' } }, title) : null,
+          rawText ? formatMarkdown(rawText) : null
+        );
+      }
+      if (type === 'callout_block' || type === 'callout') {
+        return h('div', { key: idx, className: `callout-box callout-box--${blk.style || 'info'}`, style: { margin: '1.5rem 0' } },
+          title ? h('h3', null, title) : null,
+          rawText ? formatMarkdown(rawText) : null,
+          blk.url && blk.url_label ? h('p', { style: { marginTop: '0.75rem' } },
+            h('span', { className: 'btn-action' }, blk.url_label)
+          ) : null
+        );
+      }
+      if (type === 'image_block' || type === 'image') {
+        const imgAsset = blk.image ? resolveAsset(getAsset, blk.image) : null;
+        const imgSrc = (imgAsset && typeof imgAsset.toString === 'function') ? imgAsset.toString() : (imgAsset || '');
+        if (!imgSrc) return null;
+        return h('figure', { key: idx, style: { margin: '1.5rem 0' } },
+          h('img', { src: imgSrc, alt: blk.image_alt || '', style: { maxWidth: '100%', borderRadius: '8px' } }),
+          blk.caption ? h('figcaption', { style: { fontSize: '0.875rem', color: '#64748b', textAlign: 'center', marginTop: '0.5rem' } }, blk.caption) : null
+        );
+      }
+      if (type === 'document_block' || type === 'document') {
+        return h('div', { key: idx, className: 'doc-card', style: { margin: '1.25rem 0' } },
+          h('div', { className: 'doc-card__main' },
+            h('div', { className: 'doc-card__icon' },
+              h('span', { style: { fontSize: '1.5rem' } }, '📄')
+            ),
+            h('div', { className: 'doc-card__info' },
+              h('h3', { className: 'doc-card__title' }, title || 'Documento PDF'),
+              blk.description ? h('p', { className: 'doc-card__meta' }, h('span', { className: 'doc-card__badge' }, 'PDF'), ' ', blk.description) : null
+            )
+          ),
+          h('div', { className: 'doc-card__actions' },
+            h('span', { className: 'doc-btn doc-btn--primary' }, blk.button_label || 'Abrir PDF')
+          )
+        );
+      }
+      if (type === 'button_block' || type === 'button') {
+        return h('div', { key: idx, style: { margin: '1.5rem 0' } },
+          h('span', { className: 'btn-action btn-action--primary' }, blk.label || 'Botón de acción'),
+          blk.note ? h('p', { style: { fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem' } }, blk.note) : null
+        );
+      }
+      return null;
+    });
+  }
+
+  const PagePreview = createClass({
+    render: function () {
+      const entry = this.props.entry;
+      if (!entry) return null;
+      const data = entry.getIn(['data']) ? entry.getIn(['data']).toJS() : {};
+      const title = data.title || 'Título da páxina';
+      const getAsset = this.props.getAsset;
+      const imageAsset = data.image ? resolveAsset(getAsset, data.image) : null;
+      const imageSrc = (imageAsset && typeof imageAsset.toString === 'function') ? imageAsset.toString() : (imageAsset || '');
+      const imageAlt = typeof data.image_alt === 'string' ? data.image_alt : '';
+      const hasBody = hasField(this.props, 'body');
+
+      return h('div', { className: 'preview-root container page-content' },
+        imageSrc ? h('div', { className: 'post-single__image' },
+          h('img', { src: imageSrc, alt: imageAlt })
+        ) : null,
+        h('h1', { style: { marginTop: '1.5rem', marginBottom: '1rem', color: '#13406a' } }, title),
+        h('div', { className: 'post-content' },
+          data.intro && data.intro.trim() ? formatMarkdown(data.intro) : null,
+
+          // 1. Top flexible sections
+          renderBlocks(data.top_sections, getAsset),
+
+          // Primary Markdown body (for document pages like Madrugadores, Memoria, Consello Escolar)
+          (!data.steps && !data.bank_iban && !data.blog_url) ? (
+            (hasBody && this.props.widgetFor) ? this.props.widgetFor('body') : (data.body ? formatMarkdown(data.body) : null)
+          ) : null,
+
+          // 3. Comedor Steps
+          data.steps && data.steps.length > 0 ? h('div', null,
+            data.atriga_info ? (formatMarkdown(data.atriga_info) || h('div', null, data.atriga_info)) : (
+              h('div', null,
+                h('h2', null, 'PAGO COMEDOR A TRAVÉS DE ATRIGA (AXENCIA TRIBUTARIA DE GALICIA)'),
+                data.atriga_portal_url ? h('p', null, 'Un deles é a través da Axencia Tributaria de Galicia: ', h('a', { href: data.atriga_portal_url, target: '_blank', rel: 'noopener noreferrer' }, 'Portal tributario ATRIGA'), '.') : null
+              )
+            ),
+            data.steps.map((st, idx) => {
+              const stepAsset = st.image ? resolveAsset(getAsset, st.image) : null;
+              const stepImg = (stepAsset && typeof stepAsset.toString === 'function') ? stepAsset.toString() : (stepAsset || '');
+              // Ensure receipt instructions never appear before step 11 screenshot
+              const isReceiptText = st.description && st.description.toLowerCase().includes('unha vez feito o pago');
+              const stepDesc = isReceiptText ? null : st.description;
+              return h('div', { key: idx, style: { margin: '1rem 0' } },
+                stepDesc ? h('p', null, stepDesc) : null,
+                stepImg ? h('img', { src: stepImg, alt: st.image_alt || '', style: { maxWidth: '100%', borderRadius: '8px' } }) : null
+              );
+            }),
+            data.closing_info ? (formatMarkdown(data.closing_info) || h('div', null, data.closing_info)) : (
+              h('div', null,
+                (() => {
+                  let receiptText = data.receipt_instructions;
+                  if (!receiptText && data.steps) {
+                    const found = data.steps.find(st => st.description && st.description.toLowerCase().includes('unha vez feito o pago'));
+                    if (found) receiptText = found.description;
+                  }
+                  if (!receiptText) return null;
+                  return formatMarkdown(receiptText) || h('p', null, receiptText);
+                })(),
+                data.other_methods_note ? (formatMarkdown(data.other_methods_note) || h('p', null, data.other_methods_note)) : null,
+                data.closing_note ? (formatMarkdown(data.closing_note) || h('p', null, data.closing_note)) : null
+              )
+            )
+          ) : null,
+
+          // 4. Inscrición Bank Box
+          data.bank_iban ? h('div', null,
+            data.membership_fee ? h('p', null, `Agradecemos se podedes adxuntar no propio formulario o xustificante de pago (${data.membership_fee}), tras facelo na conta bancaria:`) : null,
+            h('div', { className: 'bank-box', style: { margin: '1.5rem 0' } },
+              h('span', { className: 'bank-box__label' }, 'Número de conta (IBAN)'),
+              h('div', { className: 'bank-box__value' },
+                h('code', { className: 'bank-box__iban' }, data.bank_iban)
+              )
+            ),
+            data.transfer_concept_note ? h('p', null, h('strong', null, 'Importante: '), data.transfer_concept_note) : null,
+            data.registration_form_url ? h('p', { style: { margin: '1.5rem 0' } },
+              h('span', { className: 'btn-action btn-action--primary' }, data.registration_button_label || 'Acceder ao formulario de inscrición')
+            ) : null,
+            data.closing_text ? h('p', null, data.closing_text) : null
+          ) : null,
+
+          // 5. Documents list
+          data.documents && data.documents.length > 0 ? h('div', null,
+            h('h2', null, 'Documentación informativa'),
+            h('div', { className: 'doc-cards' },
+              data.documents.map((doc, idx) => h('div', { key: idx, className: 'doc-card', style: { margin: '1rem 0' } },
+                h('div', { className: 'doc-card__main' },
+                  h('div', { className: 'doc-card__icon' },
+                    h('span', { style: { fontSize: '1.5rem' } }, '📄')
+                  ),
+                  h('div', { className: 'doc-card__info' },
+                    h('h3', { className: 'doc-card__title' }, doc.title || 'Documento'),
+                    doc.description ? h('p', { className: 'doc-card__meta' }, h('span', { className: 'doc-card__badge' }, 'PDF'), ' ', doc.description) : null
+                  )
+                ),
+                h('div', { className: 'doc-card__actions' },
+                  h('span', { className: 'doc-btn doc-btn--primary' }, 'Abrir PDF'),
+                  h('span', { className: 'doc-btn doc-btn--secondary' }, 'Descargar')
+                )
+              ))
+            )
+          ) : null,
+
+          // 6. Consello Escolar
+          data.blog_url ? h('div', null,
+            h('p', null, 'No link inferior tendes a información das representantes das familias en dito Consello:'),
+            h('p', null, h('span', { className: 'btn-action' }, data.blog_label || 'Blog do Consello Escolar Rabadeira'))
+          ) : null,
+
+          // 7. Bottom flexible sections
+          renderBlocks(data.sections, getAsset),
+
+          // 8. Contact
+          data.contact_anpa_email || data.contact_email || data.contact_provider_phone ? h('div', null,
+            h('h2', null, 'Contacto e axuda'),
+            h('p', null, 'Para calquera dúbida ou cuestión, podes contactar con:'),
+            h('ul', null,
+              (data.contact_anpa_email || data.contact_email) ? h('li', null, h('strong', null, 'ANPA Ensino Rabadeira: '), data.contact_anpa_email || data.contact_email) : null,
+              (data.contact_provider_phone || data.contact_provider_email) ? h('li', null, h('strong', null, `Oficinas de ${data.provider_name || 'Jardanay'}: `), data.contact_provider_phone ? `Tel. ${data.contact_provider_phone}` : '', (data.contact_provider_phone && data.contact_provider_email) ? ' · ' : '', data.contact_provider_email || '') : null
+            )
+          ) : null,
+
+          // Trailing Markdown body (for structured pages with trailing markdown)
+          (data.steps || data.bank_iban || data.blog_url) ? (
+            (hasBody && this.props.widgetFor) ? this.props.widgetFor('body') : (data.body ? formatMarkdown(data.body) : null)
+          ) : null
+        )
+      );
+    }
+  });
+
+  // Rexistrar estilos e compoñentes no CMS
+  if (typeof window !== 'undefined' && window.CMS) {
+    CMS.registerPreviewStyle('/css/style.css');
+    CMS.registerPreviewTemplate('posts', PostPreview);
+    CMS.registerPreviewTemplate('extraescolares', ExtraescolaresPreview);
+    CMS.registerPreviewTemplate('config_extraescolares', ExtraescolaresPreview);
+    CMS.registerPreviewTemplate('pages', PagePreview);
+    CMS.registerPreviewTemplate('madrugadores', PagePreview);
+    CMS.registerPreviewTemplate('comedor', PagePreview);
+    CMS.registerPreviewTemplate('inscripcion', PagePreview);
+    CMS.registerPreviewTemplate('memoria', PagePreview);
+    CMS.registerPreviewTemplate('consello_escolar', PagePreview);
+
+    // Subclass Image Control: extends Decap's built-in FileControl directly
+    // Preserves native controlID, mediaPaths, and onChange lifecycle while resolving draft thumbnails
+    if (typeof CMS.getWidget === 'function') {
+      try {
+        const existingImageWidget = CMS.getWidget('image');
+        if (existingImageWidget && existingImageWidget.control) {
+          const SubclassControl = createSubclassImageControl(existingImageWidget.control);
+          if (SubclassControl) {
+            CMS.registerWidget('image', SubclassControl, existingImageWidget.preview);
+          }
+        }
+      } catch (e) {
+        // Safe fallback if widget wrapping encounters an unexpected environment
+      }
+    }
+  }
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+      hasField,
+      formatGalicianDate,
+      renderInlineMarkdown,
+      formatMarkdown,
+      resolveAsset,
+      createDraftAwareGetAsset,
+      createSubclassImageControl,
+      PostPreview,
+      ExtraescolaresPreview,
+      PagePreview
+    };
+  }
+})();
