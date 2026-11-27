@@ -470,6 +470,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/docs");
+  eleventyConfig.addPassthroughCopy("src/fonts");
   eleventyConfig.addPassthroughCopy("emails");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy({ "docs/manual/img": "admin/manual/img" });
