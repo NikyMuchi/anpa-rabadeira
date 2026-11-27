@@ -1,23 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="gl">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Panel de Administración — ANPA Ensino Rabadeira</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link rel="icon" type="image/jpeg" href="/img/logo-anpa.jpg">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-header {
+      flex-shrink: 0;
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 0.4rem 1.25rem;
+      z-index: 999999;
+      border-bottom: 1px solid #cbd5e1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .admin-header__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .admin-header__brand-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .admin-header__brand-title {
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .admin-header__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: #0d9488;
+      color: #ffffff;
+      padding: 0.2rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+    }
+
+    .admin-header__link:hover,
+    .admin-header__link:focus-visible {
+      background-color: #0f766e;
+      color: #ffffff;
+      outline: 2px solid #0f766e;
+      outline-offset: 1px;
+    }
+
+    .admin-header__icon {
+      flex-shrink: 0;
+    }
+
+    #nc-root {
+      flex: 1 1 auto;
+      position: relative;
+      height: 0;
+      min-height: 0;
+      overflow: hidden;
+    }
+  </style>
   <script>
-    window.addEventListener('load', function () {
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.init({ locale: 'es' });
-      }
-    });
+    /* Safeguard: Strictly restrict production-writing Decap CMS to the canonical production hostname */
+    (function () {
+      try {
+        var host = window.location.hostname;
+        var isCanonicalProd = (host === "anpa-rabadeira.netlify.app");
+
+        // The canonical production hostname is the ONLY hostname permitted to initialise the production-writing CMS
+        if (!isCanonicalProd) {
+          // Clear any stored authentication tokens to prevent previews or local sessions from using production credentials
+          try {
+            localStorage.removeItem("decap-cms-user");
+            localStorage.removeItem("netlify-cms-user");
+          } catch (e) {}
+
+          // Prevent Decap CMS from auto-initialising against the production repository
+          window.CMS_MANUAL_INIT = true;
+
+          window.addEventListener("DOMContentLoaded", function () {
+            var root = document.getElementById("nc-root");
+            if (root) {
+              var isLocal = (host === "localhost" || host === "127.0.0.1");
+              var title = isLocal
+                ? "🔒 Acceso CMS local bloqueado cara ao repositorio de produción"
+                : "🔒 Acceso CMS restrinxido en vistas previas";
+              var description = isLocal
+                ? "Por seguridade, o panel de administración en localhost non pode inicializar o CMS conectado directamente ao repositorio real de produción. Para probas locais debe empregarse unha configuración illada ou un proxy local (local_backend)."
+                : "Por motivos de seguridade e protección do repositorio de produción, a xestión editorial de contidos non está dispoñible nas contornas Deploy Preview.";
+
+              root.innerHTML = '<div style="padding: 3rem 1.5rem; text-align: center; font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;">' +
+                '<div style="max-width: 580px; margin: 0 auto; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">' +
+                '<h2 style="color: #92400e; font-size: 1.25rem; margin-top: 0;">' + title + '</h2>' +
+                '<p style="color: #4b5563; line-height: 1.6; font-size: 0.95rem;">' + description + '</p>' +
+                '<p style="margin-top: 1.5rem;"><a href="https://anpa-rabadeira.netlify.app/admin/" style="display: inline-block; background-color: #0d9488; color: #ffffff; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Acceder ao panel oficial en produción</a></p>' +
+                '</div></div>';
+            }
+          });
+        }
+      } catch (err) {}
+    })();
   </script>
 </head>
 
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <header class="admin-header" role="banner">
+    <div class="admin-header__brand">
+      <img src="/img/logo-anpa.jpg" alt="" class="admin-header__brand-logo" width="22" height="22">
+      <span class="admin-header__brand-title">ANPA Ensino Rabadeira · Panel de Administración</span>
+    </div>
+    <a href="/admin/manual/" class="admin-header__link" target="_blank" rel="noopener" aria-label="Abrir o Centro de Axuda e Manual de Administración nunha nova pestana">
+      <svg class="admin-header__icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      <span>Centro de Axuda / Manual</span>
+    </a>
+  </header>
+  <div id="nc-root"></div>
+  <!-- Decap CMS Core (Open-Source) -->
+  <script src="https://unpkg.com/decap-cms@^3.1.0/dist/decap-cms.js"></script>
+  <!-- Custom Preview Templates & Warm Theme Integration -->
+  <script src="/admin/preview-templates.js"></script>
 </body>
 
 </html>

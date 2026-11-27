@@ -1,14 +1,208 @@
 ---
 layout: layouts/base.njk
 ---
+{% macro render_flexible_block(block) %}
+  {% if block.type == "text_block" or block.type == "text" %}
+    {% if block.title %}<h2>{{ block.title }}</h2>{% endif %}
+    {% if block.body %}{{ block.body | md | safe }}{% elif block.content %}{{ block.content | md | safe }}{% elif block.text %}{{ block.text | md | safe }}{% endif %}
+
+  {% elif block.type == "callout_block" or block.type == "callout" %}
+    {% if block.title or block.text or block.body %}
+    <div class="callout-box{% if block.style %} callout-box--{{ block.style }}{% endif %}">
+      {% if block.title %}<h3>{{ block.title }}</h3>{% endif %}
+      {% if block.text %}{{ block.text | md | safe }}{% elif block.body %}{{ block.body | md | safe }}{% endif %}
+      {% if block.url and block.url_label %}
+      <p style="margin-top: 0.75rem;"><a href="{{ block.url }}" target="_blank" rel="noopener noreferrer" class="btn-action">{{ block.url_label }}</a></p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  {% elif block.type == "image_block" or block.type == "image" %}
+    {% if block.image %}
+    <figure class="page-figure" style="margin: 1.75rem 0;">
+      <img src="{{ block.image }}" alt="{{ block.image_alt | default('') }}" style="max-width: 100%; border-radius: var(--radius-sm, 8px);">
+      {% if block.caption %}<figcaption style="font-size: var(--fs-sm, 0.875rem); color: var(--clr-gray-600, #64748b); margin-top: 0.5rem; text-align: center;">{{ block.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endif %}
+
+  {% elif block.type == "document_block" or block.type == "document" %}
+    {% if block.file and block.title %}
+    <div class="doc-card" style="margin: 1.25rem 0;">
+      <div class="doc-card__main">
+        <div class="doc-card__icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+          </svg>
+        </div>
+        <div class="doc-card__info">
+          <h3 class="doc-card__title">{{ block.title }}</h3>
+          {% if block.description %}<p class="doc-card__meta"><span class="doc-card__badge">PDF</span> {{ block.description }}</p>{% endif %}
+        </div>
+      </div>
+      <div class="doc-card__actions">
+        <a href="{{ block.file }}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn--primary">{{ block.button_label | default('Abrir PDF') }}</a>
+        <a href="{{ block.file }}" download class="doc-btn doc-btn--secondary">Descargar</a>
+      </div>
+    </div>
+    {% endif %}
+
+  {% elif block.type == "button_block" or block.type == "button" %}
+    {% if block.url and block.label %}
+    <div class="page-cta" style="margin: 1.75rem 0;">
+      <a href="{{ block.url }}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action--primary">{{ block.label }}</a>
+      {% if block.note %}<p style="font-size: var(--fs-sm, 0.875rem); color: var(--clr-gray-600, #64748b); margin-top: 0.5rem;">{{ block.note }}</p>{% endif %}
+    </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
 <div class="page-content container">
   {% if image %}
   <div class="post-single__image">
-    <img src="{{ image }}" alt="{{ title }}">
+    <img src="{{ image }}" alt="{{ image_alt | escape | default('') }}">
   </div>
   {% endif %}
+
   <h1>{{ title }}</h1>
+
   <div class="post-content">
-    {{ content | safe }}
+    {% if intro and intro | trim %}
+      {{ intro | md | safe }}
+    {% endif %}
+
+    {# ===== 1. SECCIÓNS SUPERIORES FLEXIBLES ===== #}
+    {% if top_sections and top_sections.length > 0 %}
+      {% for blk in top_sections %}
+        {{ render_flexible_block(blk) }}
+      {% endfor %}
+    {% endif %}
+
+    {# ===== CONTIDO MARKDOWN PRINCIPAL (Para páxinas de documento simple como Madrugadores) ===== #}
+    {% if content and not (steps or bank_iban or blog_url) %}
+      {{ content | safe }}
+    {% endif %}
+
+    {# ===== 3. PASOS GUÍA COMEDOR ===== #}
+    {% if steps and steps.length > 0 %}
+      {% if atriga_info %}
+        {{ atriga_info | md | safe }}
+      {% else %}
+        <h2>PAGO COMEDOR A TRAVÉS DE ATRIGA (AXENCIA TRIBUTARIA DE GALICIA)</h2>
+        {% if atriga_portal_url %}
+        <p>Un deles é a través da Axencia Tributaria de Galicia: <a href="{{ atriga_portal_url }}" target="_blank" rel="noopener noreferrer">Portal tributario ATRIGA</a>.</p>
+        {% endif %}
+      {% endif %}
+
+      {% for st in steps %}
+        {% if st.description %}<p>{{ st.description }}</p>{% endif %}
+        {% if st.image %}
+        <p>
+          <img src="{{ st.image }}" alt="{{ st.image_alt | default('Paso ' + loop.index) }}">
+        </p>
+        {% endif %}
+      {% endfor %}
+
+      {% if closing_info %}
+        {{ closing_info | md | safe }}
+      {% else %}
+        {% if receipt_instructions %}
+          {{ receipt_instructions | md | safe }}
+        {% endif %}
+
+        {% if other_methods_note %}
+          <p>{{ other_methods_note }}</p>
+        {% endif %}
+
+        {% if closing_note %}
+          <p>{{ closing_note }}</p>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
+    {# ===== 4. ALTA DE SOCIOS E IBAN ===== #}
+    {% if bank_iban %}
+      {% if membership_fee %}
+      <p>Agradecemos se podedes adxuntar no propio formulario o xustificante de pago ({{ membership_fee }}), tras facelo na conta bancaria:</p>
+      {% endif %}
+
+      <div class="bank-box">
+        <span class="bank-box__label">Número de conta (IBAN)</span>
+        <div class="bank-box__value">
+          <code class="bank-box__iban">{{ bank_iban }}</code>
+        </div>
+      </div>
+
+      {% if transfer_concept_note %}
+      <p><strong>Importante:</strong> {{ transfer_concept_note }}</p>
+      {% endif %}
+
+      {% if registration_form_url %}
+      <p><a href="{{ registration_form_url }}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action--primary">{{ registration_button_label | default('Acceder ao formulario de inscrición') }}</a></p>
+      {% endif %}
+
+      {% if closing_text %}
+      <p>{{ closing_text }}</p>
+      {% endif %}
+    {% endif %}
+
+    {# ===== 5. DOCUMENTACIÓN INFORMATIVA (DOC CARDS) ===== #}
+    {% if documents and documents.length > 0 %}
+      <h2>Documentación informativa</h2>
+      <div class="doc-cards">
+        {% for doc in documents %}
+        {% if doc.file and doc.title %}
+        <div class="doc-card">
+          <div class="doc-card__main">
+            <div class="doc-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+              </svg>
+            </div>
+            <div class="doc-card__info">
+              <h3 class="doc-card__title">{{ doc.title }}</h3>
+              {% if doc.description %}<p class="doc-card__meta"><span class="doc-card__badge">PDF</span> {{ doc.description }}</p>{% endif %}
+            </div>
+          </div>
+          <div class="doc-card__actions">
+            <a href="{{ doc.file }}" target="_blank" rel="noopener noreferrer" class="doc-btn doc-btn--primary">Abrir PDF</a>
+            <a href="{{ doc.file }}" download class="doc-btn doc-btn--secondary">Descargar</a>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ===== 6. CONSELLO ESCOLAR ===== #}
+    {% if blog_url %}
+      <p>No link inferior tendes a información das representantes das familias en dito Consello:</p>
+      <p><a href="{{ blog_url }}" target="_blank" rel="noopener noreferrer">{{ blog_label | default('Blog do Consello Escolar Rabadeira') }}</a></p>
+    {% endif %}
+
+    {# ===== 7. SECCIÓNS ADICIONAIS FLEXIBLES (Reordenables) ===== #}
+    {% if sections and sections.length > 0 %}
+      {% for blk in sections %}
+        {{ render_flexible_block(blk) }}
+      {% endfor %}
+    {% endif %}
+
+    {# ===== 8. CONTACTO DE PÁXINA ===== #}
+    {% if contact_anpa_email or contact_provider_phone or contact_email or contact_provider_email %}
+      <h2>Contacto e axuda</h2>
+      <p>Para calquera dúbida ou cuestión, podes contactar con:</p>
+      <ul>
+        {% if contact_anpa_email or contact_email %}
+        <li><strong>ANPA Ensino Rabadeira:</strong> <a href="mailto:{{ contact_anpa_email or contact_email }}">{{ contact_anpa_email or contact_email }}</a></li>
+        {% endif %}
+        {% if contact_provider_phone or contact_provider_email %}
+        <li><strong>Oficinas de {{ provider_name | default('Jardanay') }}:</strong> {% if contact_provider_phone %}Tel. {{ contact_provider_phone }}{% endif %}{% if contact_provider_phone and contact_provider_email %} · {% endif %}{% if contact_provider_email %}<a href="mailto:{{ contact_provider_email }}">{{ contact_provider_email }}</a>{% endif %}</li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    {# ===== 9. CONTIDO LIBRE MARKDOWN ADICIONAL (Para páxinas estruturadas) ===== #}
+    {% if content and (steps or bank_iban or blog_url) %}
+      {{ content | safe }}
+    {% endif %}
   </div>
 </div>
